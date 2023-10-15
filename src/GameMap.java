@@ -14,9 +14,9 @@ class gameMap{
             for(int i=0;i<mapSize; i++){
                 for(int j=0;j<mapSize; j++){
                     if(i==Player.getXLocation()&&j==Player.getYLocation()){
-                    System.out.print("O ");
+                    System.out.print("O  ");
                 } else {
-                    System.out.print(map[i][j]+ " ");
+                    System.out.print(map[i][j]+ "  ");
                     }
                 }
             System.out.println();
