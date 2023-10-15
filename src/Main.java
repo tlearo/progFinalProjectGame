@@ -14,7 +14,6 @@ public class Main{
 
         //Moving switch statement
         while(true) {
-            clearScreen();
             gameMap.printMap(player);
             System.out.println("Health: " + player.getCurrentHealth());
             System.out.println("Attack Power: " + player.getAttackDamage());
@@ -23,37 +22,52 @@ public class Main{
             boolean invalidMove = false;
             switch(move) {
                 case "n":
-                    if(player.getXLocation() > 0)
+                    if(player.getXLocation() > 0) {
                         player.setXLocation(player.getXLocation()-1);
+                        clearScreen();
+                    }
                     else {
                         invalidMove = true;
+                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "w":
-                    if(player.getYLocation() > 0)
+                    if(player.getYLocation() > 0) {
                         player.setYLocation(player.getYLocation()-1);
+                        clearScreen();
+                    }
                     else {
                         invalidMove = true;
+                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "s":
-                    if(player.getXLocation() < gameMap.mapSize -1)
+                    if(player.getXLocation() < gameMap.mapSize -1) {
                         player.setXLocation(player.getXLocation()+1);
+                        clearScreen();
+                    }
                     else {
                         invalidMove = true;
+                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "e":
-                    if(player.getYLocation() < gameMap.mapSize -1)
+                    if(player.getYLocation() < gameMap.mapSize -1) {
                         player.setYLocation(player.getYLocation()+1);
+                        clearScreen();
+                    }
                     else {
                         invalidMove = true;
+                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
+                default:
+                    clearScreen();
+                    System.out.println("Invalid command entered.");
             }
         }
     }
