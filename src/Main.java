@@ -7,13 +7,14 @@ public class Main{
         Random random = new Random();
 
         // Creating character
-        Player player = new Player("Millie", 100, 100, 10, 2, 1);
+        Player player = new Player("Millie", 100, 100, 10, 1, 2);
         Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0);
         Player suitor = new Player("Suitor", 80, 80, 5, 3, 4);
         Player troll = new Player("Troll", 200, 200, 8, 4, 1);
 
         //Moving switch statement
         while(true) {
+            clearScreen();
             gameMap.printMap(player);
             System.out.println("Health: " + player.getCurrentHealth());
             System.out.println("Attack Power: " + player.getAttackDamage());
@@ -26,7 +27,7 @@ public class Main{
                         player.setXLocation(player.getXLocation()-1);
                     else {
                         invalidMove = true;
-                        System.out.println("The path is too treacherous that way..");
+                        System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "w":
@@ -34,7 +35,7 @@ public class Main{
                         player.setYLocation(player.getYLocation()-1);
                     else {
                         invalidMove = true;
-                        System.out.println("The path is too treacherous that way..");
+                        System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "s":
@@ -42,7 +43,7 @@ public class Main{
                         player.setXLocation(player.getXLocation()+1);
                     else {
                         invalidMove = true;
-                        System.out.println("The path is too treacherous that way..");
+                        System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "e":
@@ -50,10 +51,15 @@ public class Main{
                         player.setYLocation(player.getYLocation()+1);
                     else {
                         invalidMove = true;
-                        System.out.println("The path is too treacherous that way..");
+                        System.out.println("The path is too treacherous that way...");
                     }
                     break;
             }
+        }
+    }
+    static void clearScreen(){
+        for(int i=1; i<=10; i++) {
+            System.out.println("");
         }
     }
 }
