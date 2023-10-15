@@ -15,8 +15,10 @@ public class Main{
         //Moving switch statement
         while(true) {
             gameMap.printMap(player);
-            System.out.println("Health: " + player.getCurrentHealth());
-            System.out.println("Attack Power: " + player.getAttackDamage());
+            Display.name(player);
+            Display.health(player);
+            Display.attack(player);
+            Display.location(player);
             System.out.println("Where would you like to move? (N/E/S/W): ");
             String move = userInput.next();
             boolean invalidMove = false;
