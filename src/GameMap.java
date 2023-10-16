@@ -10,7 +10,11 @@ class gameMap{
                 map[i][j]= '-';
                 }
             }
+            //Events at specific coordinates
+            map[1][1] = 'F';
+            map[3][2] = 'S';
         }
+
 
         //Positioning player on the Map
         public void printMap(Player Player){
