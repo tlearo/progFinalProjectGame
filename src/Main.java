@@ -17,19 +17,19 @@ public class Main{
 
         // Getting player name
         String playerName;
+        String playerClass = "Class";
         do {
             System.out.println("Please enter your name, Adventurer!");
             playerName = userInput.next();
             System.out.println("Your name is " + playerName + ", correct?");
             System.out.println("1. Yes");
             System.out.println("2. No");
-            int nameConfirm = readInt("-> ", 2);
+            int nameConfirm = readInt("", 2);
             if (nameConfirm == 1)
                 nameSet = true;
         } while (!nameSet);
 
         //Choosing your class
-        String playerClass;
         int currentHealth = 100;
         int maxHealth = 100;
         int attackDamage = 10;
@@ -37,29 +37,27 @@ public class Main{
             System.out.println("What kind of adventurer are you?");
             System.out.println("1. Guardian (High health, low attack)");
             System.out.println("2. Assassin (Low health, high attack");
-            playerClass = userInput.next();
-            if(playerClass.equals(1)) {
-                playerClass = "Guardian";
-            } else if (playerClass.equals(2)) {
-                playerClass = "Assassin";
-            }
-            System.out.println("Your class is " + playerClass + ", correct?");
-            System.out.println("1. Yes");
-            System.out.println("2. No");
-            int nameConfirm = readInt("-> ", 2);
-            if (nameConfirm == 1){
+            System.out.println("3. Warrior (Average health, average attack)");
+            int chooseClass = readInt("", 3);
+            if(chooseClass == 1) {
                 playerClass = "Guardian";
                 currentHealth = 150;
                 maxHealth = 150;
                 attackDamage = 10;
                 classSet = true;
-            } else if (nameConfirm == 2){
+            } else if (chooseClass == 2) {
                 playerClass = "Assassin";
                 currentHealth = 80;
                 maxHealth = 80;
                 attackDamage = 20;
                 classSet = true;
-            }
+            } else if (chooseClass == 3) {
+            playerClass = "Warrior";
+            currentHealth = 120;
+            maxHealth = 120;
+            attackDamage = 15;
+            classSet = true;
+        }
 
         } while (!classSet);
 
