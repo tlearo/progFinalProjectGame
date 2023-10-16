@@ -11,7 +11,7 @@ public class Main{
         Inventory inventory = new Inventory(); //Initialising inventory
 
         //Start Introduction
-        StoryLore.Introduction();
+//        StoryLore.Introduction();
 
         // Getting player name
         String playerName;
@@ -39,7 +39,7 @@ public class Main{
             if(playerClass.equals(1)) {
                 playerClass = "Guardian";
             } else if (playerClass.equals(2)) {
-                    playerClass = "Assassin";
+                playerClass = "Assassin";
             }
             System.out.println("Your class is " + playerClass + ", correct?");
             System.out.println("1. Yes");
