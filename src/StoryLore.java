@@ -3,7 +3,8 @@ import java.util.concurrent.TimeUnit;
 
 //Stores methods to print out parts of the story
 public class StoryLore {
-    //To separate texts
+
+    //To separate texts, create a FOR loop
     public static void Separator(int n){
         for (int i = 0; i < n; i++)
             System.out.println();

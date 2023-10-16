@@ -1,4 +1,5 @@
 import java.util.Scanner;
+//Player Logic
 public class Player{
     // Access identifiers
     private int currentHealth;
