@@ -2,12 +2,18 @@ import java.util.Scanner;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 public class Main{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         gameMap gameMap = new gameMap();
         Scanner userInput = new Scanner(System.in);
         Random random = new Random();
         boolean nameSet = false;
         boolean classSet = false;
+
+        //Initialising items
+        Inventory inventory = new Inventory();
+
+        //Start Introduction
+        StoryLore.Introduction();
 
         // Getting player name
         String playerName;
