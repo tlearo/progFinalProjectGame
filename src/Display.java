@@ -19,6 +19,6 @@ public class Display {
 
     //Print Player location
     public static void location(Player player) {
-        System.out.println("Location: X" + player.getXLocation() + "-Y" + player.getYLocation());
+        System.out.println("Location: X" + player.getYLocation() + "-Y" + player.getXLocation());
     }
 }

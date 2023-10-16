@@ -10,10 +10,10 @@ public class Event{
             case 'F':
                 handleFairyCircle(player);
                 break;
-            case 'S':
-                handleSpikeTrap(player);
+            case 'Q':
+                handleQuickSand(player);
                 break;
-            // Add more cases for other event symbols
+
             default:
                 handleDefaultEvent(player);
                 break;
@@ -21,12 +21,14 @@ public class Event{
     }
 
     private static void handleFairyCircle(Player player) {
-        //Fairy Circle events
+        System.out.print("testing Fairy circle");
     }
 
-    private static void handleSpikeTrap(Player player) {
-        //Spike Trap events
+    private static void handleQuickSand(Player player) {
+
     }
+
+
     private static void handleDefaultEvent(Player player) {
         System.out.println("You've encountered an unknown area.");
     }
