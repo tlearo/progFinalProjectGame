@@ -6,6 +6,7 @@ public class Main{
         Scanner userInput = new Scanner(System.in);
         Random random = new Random();
         boolean nameSet = false;
+        boolean classSet = false;
 
         // Getting player name
         String playerName;
@@ -20,8 +21,43 @@ public class Main{
                 nameSet = true;
         } while (!nameSet);
 
+        //Choosing your class
+        String playerClass;
+        int currentHealth = 100;
+        int maxHealth = 100;
+        int attackDamage = 10;
+        do {
+            System.out.println("What kind of adventurer are you?");
+            System.out.println("1. Guardian (High health, low attack)");
+            System.out.println("2. Assassin (Low health, high attack");
+            playerClass = userInput.next();
+            if(playerClass.equals(1)) {
+                playerClass = "Guardian";
+            } else if (playerClass.equals(2)) {
+                    playerClass = "Assassin";
+            }
+            System.out.println("Your class is " + playerClass + ", correct?");
+            System.out.println("1. Yes");
+            System.out.println("2. No");
+            int nameConfirm = readInt("-> ", 2);
+            if (nameConfirm == 1){
+                playerClass = "Guardian";
+                currentHealth = 150;
+                maxHealth = 150;
+                attackDamage = 10;
+                classSet = true;
+            } else if (nameConfirm == 2){
+                playerClass = "Assassin";
+                currentHealth = 80;
+                maxHealth = 80;
+                attackDamage = 20;
+                classSet = true;
+            }
+
+        } while (!classSet);
+
         // Creating character
-        Player player = new Player(playerName, 100, 100, 10, 1, 2);
+        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2);
         Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0);
         Player suitor = new Player("Suitor", 80, 80, 5, 3, 4);
         Player troll = new Player("Troll", 200, 200, 8, 4, 1);
@@ -31,6 +67,7 @@ public class Main{
         while (true) {
             gameMap.printMap(player);
             Display.name(player);
+            System.out.println("Class: "+playerClass);
             Display.health(player);
             Display.attack(player);
             Display.location(player);
