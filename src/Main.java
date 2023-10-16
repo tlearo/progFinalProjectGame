@@ -12,6 +12,9 @@ public class Main{
         Player suitor = new Player("Suitor", 80, 80, 5, 3, 4);
         Player troll = new Player("Troll", 200, 200, 8, 4, 1);
 
+        // Getting player name
+
+
         //Moving switch statement
         while(true) {
             gameMap.printMap(player);
@@ -69,7 +72,7 @@ public class Main{
                     break;
                 default:
                     clearScreen();
-                    System.out.println("Invalid command entered.");
+                    System.out.println("The atmosphere must be getting to you! You can only enter N/E/S/W");
             }
         }
     }
