@@ -4,6 +4,21 @@ public class Event{
         //Tamara, Monica and Millie Event.java
         Scanner myInput = new Scanner(System.in);
         String nl = "\n";
+
+        gameMap gameMap = new gameMap();
+
+        // Start your game loop
+        while (true) {
+            gameMap.printMap(player);
+            // Other game logic...
+
+            // Get the event symbol based on the player's coordinates
+            char eventSymbol = gameMap.getEventSymbol(player.getXLocation(), player.getYLocation());
+            handleEvent(player, eventSymbol);
+
+            // Handle player input and other game mechanics
+            // ...
+        }
     }
     public static void handleEvent(Player player, char eventSymbol) {
         switch (eventSymbol) {
