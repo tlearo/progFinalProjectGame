@@ -1,26 +1,13 @@
 import java.util.Scanner;
-public class Event{
-    public static void main(String[] args) {
-        //Tamara, Monica and Millie Event.java
-        Scanner myInput = new Scanner(System.in);
-        String nl = "\n";
 
-        gameMap gameMap = new gameMap();
+public class Event {
+    private Player player;
 
-        // Start your game loop
-        while (true) {
-            gameMap.printMap(player);
-            // Other game logic...
-
-            // Get the event symbol based on the player's coordinates
-            char eventSymbol = gameMap.getEventSymbol(player.getXLocation(), player.getYLocation());
-            handleEvent(player, eventSymbol);
-
-            // Handle player input and other game mechanics
-            // ...
-        }
+    public Event(Player player) {
+        this.player = player;
     }
-    public static void handleEvent(Player player, char eventSymbol) {
+
+    public void handleEvent(char eventSymbol) {
         switch (eventSymbol) {
             case 'F':
                 handleFairyCircle(player);
@@ -35,16 +22,15 @@ public class Event{
         }
     }
 
-    private static void handleFairyCircle(Player player) {
+    private void handleFairyCircle(Player player) {
         System.out.print("testing Fairy circle");
     }
 
-    private static void handleQuickSand(Player player) {
-
+    private void handleQuickSand(Player player) {
+        // Implement your logic here
     }
 
-
-    private static void handleDefaultEvent(Player player) {
+    private void handleDefaultEvent(Player player) {
         System.out.println("You've encountered an unknown area.");
     }
 }

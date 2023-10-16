@@ -1,7 +1,9 @@
 import java.util.Scanner;
 import java.util.Random;
+import static java.lang.System.exit;
 import java.util.concurrent.TimeUnit;
 public class Main{
+    private static Player player;
     public static void main(String[] args) throws InterruptedException {
         gameMap gameMap = new gameMap(); //initialising gameMap
         Scanner userInput = new Scanner(System.in); //implementing new scanner
@@ -63,6 +65,7 @@ public class Main{
 
         // Creating character
         Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2);
+        Event event = new Event(player);
         Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0);
         Player suitor = new Player("Suitor", 80, 80, 5, 3, 4);
         Player troll = new Player("Troll", 200, 200, 8, 4, 1);
@@ -70,13 +73,15 @@ public class Main{
 
         //Moving switch statement
         while (true) {
+            char eventSymbol = gameMap.getEventSymbol(player.getXLocation(), player.getYLocation());
+            event.handleEvent(eventSymbol);
             gameMap.printMap(player);
             Display.name(player);
             System.out.println("Class: "+playerClass);
             Display.health(player);
             Display.attack(player);
             Display.location(player);
-            System.out.println("Where would you like to move? (N/E/S/W): ");
+            System.out.println("Where would you like to move? N/E/S/W (Type 'Q' to quit): ");
             String move = userInput.next();
             boolean invalidMove = false;
             switch (move) {
@@ -120,6 +125,8 @@ public class Main{
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
+                case "q":
+                    System.exit(0);
                 default:
                     clearScreen();
                     System.out.println("The atmosphere must be getting to you! You can only enter N/E/S/W");
