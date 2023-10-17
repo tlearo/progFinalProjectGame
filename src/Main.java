@@ -1,18 +1,16 @@
 import java.util.Scanner;
-import java.util.Random;
 
-public class Main{
+public class Main {
     private static Player player;
+
     public static void main(String[] args) throws InterruptedException {
-        gameMap gameMap = new gameMap(); //initialising gameMap
-        Scanner userInput = new Scanner(System.in); //implementing new scanner
-        Random random = new Random(); //random class
+        gameMap gameMap = new gameMap(); // Initializing gameMap
+        Scanner userInput = new Scanner(System.in); // Implementing a new scanner
         boolean nameSet = false;
         boolean classSet = false;
-        Inventory inventory = new Inventory(); //Initialising inventory
 
-        //Start Introduction
-//        StoryLore.Introduction();
+        // Start Introduction
+        // StoryLore.Introduction();
 
         // Getting player name
         String playerName;
@@ -28,7 +26,7 @@ public class Main{
                 nameSet = true;
         } while (!nameSet);
 
-        //Choosing your class
+        // Choosing your class
         int currentHealth = 100;
         int maxHealth = 100;
         int attackDamage = 10;
@@ -38,7 +36,7 @@ public class Main{
             System.out.println("2. Assassin (Low health, high attack");
             System.out.println("3. Warrior (Average health, average attack)");
             int chooseClass = readInt("", 3);
-            if(chooseClass == 1) {
+            if (chooseClass == 1) {
                 playerClass = "Guardian";
                 currentHealth = 150;
                 maxHealth = 150;
@@ -56,29 +54,28 @@ public class Main{
                 maxHealth = 120;
                 attackDamage = 15;
                 classSet = true;
-        }
+            }
 
         } while (!classSet);
 
-        // Creating character
-        Inventory playerInventory = new Inventory();
-        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2, playerInventory);
+        // Creating a character
+        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2);
         Event event = new Event(player);
-//        Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0, inventory);
-//        Player suitor = new Player("Suitor", 80, 80, 5, 3, 4, inventory);
-//        Player troll = new Player("Troll", 200, 200, 8, 4, 1, inventory);
+        // Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0, inventory);
+        // Player suitor = new Player("Suitor", 80, 80, 5, 3, 4, inventory);
+        // Player troll = new Player("Troll", 200, 200, 8, 4, 1, inventory);
 
-
-        //Moving switch statement
+        // Moving switch statement
         while (true) {
             char eventSymbol = gameMap.getEventSymbol(player.getXLocation(), player.getYLocation());
             event.handleEvent(eventSymbol);
             gameMap.printMap(player);
             Display.name(player);
-            System.out.println("Class: "+playerClass);
+            System.out.println("Class: " + playerClass);
             Display.health(player);
             Display.attack(player);
             Display.location(player);
+            player.printInventory();
             System.out.println("Where would you like to move? N/E/S/W (Type 'Q' to quit): ");
             String move = userInput.next();
             boolean invalidMove = false;
@@ -131,24 +128,25 @@ public class Main{
             }
         }
     }
-    static void clearScreen(){
-        for(int i=1; i<=10; i++) {
+
+    static void clearScreen() {
+        for (int i = 1; i <= 10; i++) {
             System.out.println("");
         }
     }
 
-    public static int readInt(String prompt, int userChoices){
+    public static int readInt(String prompt, int userChoices) {
         Scanner userInput = new Scanner(System.in);
         int input;
-        do{
+        do {
             System.out.println(prompt);
-            try{
+            try {
                 input = Integer.parseInt(userInput.next());
-            }catch(Exception e){
+            } catch (Exception e) {
                 input = -1;
                 System.out.println("Please enter a number!");
             }
-        }while(input < 1 || input > userChoices);
+        } while (input < 1 || input > userChoices);
         return input;
     }
 }
