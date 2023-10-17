@@ -12,8 +12,12 @@ public class Player{
 
     private Inventory inventory;
 
+//    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation) {
+//        this(playerName, maxHealth, currentHealth, attackDamage, xLocation, yLocation, new Inventory());
+//    }
+
     // Constructors
-    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation,Inventory inventory) {
+    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation, Inventory inventory) {
         this.playerName = playerName;
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
@@ -33,6 +37,7 @@ public class Player{
     public String getPlayerName() {
         return playerName;
     }
+
     public int getMaxHealth() {
         return maxHealth;
     }

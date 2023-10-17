@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.Random;
-import static java.lang.System.exit;
-import java.util.concurrent.TimeUnit;
+
 public class Main{
     private static Player player;
     public static void main(String[] args) throws InterruptedException {
@@ -62,11 +61,12 @@ public class Main{
         } while (!classSet);
 
         // Creating character
-        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2);
+        Inventory playerInventory = new Inventory();
+        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2, playerInventory);
         Event event = new Event(player);
-        Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0);
-        Player suitor = new Player("Suitor", 80, 80, 5, 3, 4);
-        Player troll = new Player("Troll", 200, 200, 8, 4, 1);
+//        Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0, inventory);
+//        Player suitor = new Player("Suitor", 80, 80, 5, 3, 4, inventory);
+//        Player troll = new Player("Troll", 200, 200, 8, 4, 1, inventory);
 
 
         //Moving switch statement

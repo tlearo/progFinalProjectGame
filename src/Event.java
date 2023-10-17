@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Event {
     private Player player;
+    private Inventory inventory;
 
     public Event(Player player) {
         this.player = player;

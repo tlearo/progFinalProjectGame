@@ -26,7 +26,11 @@ import java.util.List;
                 return items;
             }
 
-            public class Item {
+    public ArrayList getInventory() {
+                return (ArrayList) items;
+    }
+
+    public class Item {
                 private String name;
                 private String description;
 
