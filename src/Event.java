@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Event {
+    Scanner userInput = new Scanner(System.in);
     private Player player;
     private Inventory inventory;
 
@@ -62,10 +63,22 @@ public class Event {
     private void handleFairyCircle(Player player) {
         System.out.println("testing Fairy circle");
     }
-    private void handleGetSword(Player player) {
-        System.out.println("testing sword");
-        player.addItemToInventory("Sword", "A sharp and shiny sword");
 
+    public boolean haveSword = false;
+    private void handleGetSword(Player player) {
+        while (haveSword == false) {
+            System.out.println("testing sword");
+            System.out.println("You see a sword. Would you like to take it?");
+            System.out.println("1. Yes");
+            System.out.println("2. No");
+            int swordAnswer = userInput.nextInt();
+            if (swordAnswer == 1) {
+                player.addItemToInventory("Sword", "A sharp and shiny sword");
+                haveSword = true;
+            } else if (swordAnswer == 2) {
+                System.out.println("You left the sword where it lay.");
+            }
+        }
     }
 
     private void handleRiver(Player player) {

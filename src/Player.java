@@ -82,8 +82,10 @@ public class Player {
 
     public void printInventory() {
         List<Inventory.Item> items = inventory.getItems();
+        System.out.println("\nInventory:");
+        System.out.println("----------");
         for (Inventory.Item item : items) {
-            System.out.println(item.getName() + " - " + item.getDescription());
+            System.out.println(item.getName() + " - " + item.getDescription()+"\n");
         }
     }
 

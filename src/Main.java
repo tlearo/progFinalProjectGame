@@ -68,13 +68,13 @@ public class Main {
         // Moving switch statement
         while (true) {
             char eventSymbol = gameMap.getEventSymbol(player.getXLocation(), player.getYLocation());
-            event.handleEvent(eventSymbol);
             gameMap.printMap(player);
             Display.name(player);
             System.out.println("Class: " + playerClass);
             Display.health(player);
             Display.attack(player);
             Display.location(player);
+            event.handleEvent(eventSymbol);
             player.printInventory();
             System.out.println("Where would you like to move? N/E/S/W (Type 'Q' to quit): ");
             String move = userInput.next();
