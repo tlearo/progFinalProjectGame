@@ -127,7 +127,7 @@ public class Main{
                     System.exit(0);
                 default:
                     clearScreen();
-                    System.out.println("The atmosphere must be getting to you! You can only enter N/E/S/W");
+                    System.out.println("The atmosphere must be getting to you! You can only enter N/E/S/W, or Q to quit!");
             }
         }
     }
