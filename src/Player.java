@@ -56,6 +56,10 @@ public class Player {
         return yLocation;
     }
 
+    public void addItemToInventory(String itemName, String itemDescription) {
+        inventory.addItem(itemName, itemDescription);
+    }
+
     public Inventory getInventory() {
         return inventory;
     }

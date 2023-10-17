@@ -64,7 +64,10 @@ public class Event {
     }
     private void handleGetSword(Player player) {
         System.out.println("testing sword");
+        player.addItemToInventory("Sword", "A sharp and shiny sword");
+
     }
+
     private void handleRiver(Player player) {
         System.out.println("testing river");
     }
