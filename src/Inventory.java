@@ -34,7 +34,7 @@ import java.util.List;
                     this.name = name;
                     this.description = description;
                 }
-
+                //getters
                 public String getName() {
                     return name;
                 }
