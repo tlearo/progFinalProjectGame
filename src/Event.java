@@ -92,7 +92,7 @@ public class Event {
                 Display.health(player);
                 Display.attack(player);
                 Display.location(player);
-                System.out.println("\nYou left the sword where it lay.");
+                System.out.println("\nYou leave the sword where it lays.");
                 break;
             }
         }
