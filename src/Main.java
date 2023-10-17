@@ -51,11 +51,11 @@ public class Main{
                 attackDamage = 20;
                 classSet = true;
             } else if (chooseClass == 3) {
-            playerClass = "Warrior";
-            currentHealth = 120;
-            maxHealth = 120;
-            attackDamage = 15;
-            classSet = true;
+                playerClass = "Warrior";
+                currentHealth = 120;
+                maxHealth = 120;
+                attackDamage = 15;
+                classSet = true;
         }
 
         } while (!classSet);

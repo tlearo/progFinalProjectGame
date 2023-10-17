@@ -1,5 +1,8 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
+
 //Player Logic
 public class Player{
     // Access identifiers
@@ -9,12 +12,34 @@ public class Player{
     private int xLocation;
     private int yLocation;
     private int attackDamage;
-
     private Inventory inventory;
+    @Override
+    public String toString() {
+        return "Inventory: " + inventory;
+    }
+
+
+
 
 //    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation) {
 //        this(playerName, maxHealth, currentHealth, attackDamage, xLocation, yLocation, new Inventory());
 //    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public void setAttackDamage(int attackDamage) {
+        this.attackDamage = attackDamage;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 
     // Constructors
     public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation, Inventory inventory) {
@@ -62,12 +87,38 @@ public class Player{
         return yLocation;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
     // Health increase/health potion
     public void healPlayer(int healthPotion) {
         if (this.currentHealth + healthPotion > this.maxHealth) {
             this.currentHealth = maxHealth;
         } else {
             this.currentHealth += healthPotion;
+        }
+    }
+    public class Inventory {
+        private List<String> items;
+
+        public Inventory() {
+            items = new ArrayList<>();
+        }
+
+        public void addItem(String item) {
+            items.add(item);
+        }
+
+        public List<String> getItems() {
+            return items;
+        }
+
+        public void printInventory() {
+            List<String> items = inventory.getItems();
+            for (int i = 0; i < items.size(); i++) {
+                System.out.println(items.get(i));
+            }
         }
     }
 }
