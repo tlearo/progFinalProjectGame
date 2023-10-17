@@ -68,28 +68,36 @@ public class Event {
     private void handleGetSword(Player player) {
         gameMap gameMap = new gameMap(); // Initializing gameMap
         while (haveSword == false) {
-            System.out.println("\nYou see a sword. Would you like to take it?");
+            System.out.println("\nYou see the hilt of a sword protruding from a crack in a large boulder.\nWould you like to pull it out?");
             System.out.println("1. Yes");
             System.out.println("2. No");
             int swordAnswer = userInput.nextInt();
             if (swordAnswer == 1) {
                 gameMap.printMap(player);
                 Display.name(player);
+                Display.playerClass(player);
                 Display.health(player);
                 Display.attack(player);
                 Display.location(player);
-                System.out.println("\nThe sword was added to your inventory!");
-                player.addItemToInventory("Sword", "A sharp and shiny sword of excellent quality");
+                System.out.println("\nWith one swift, strong motion you free the sword from it's stone!");
+                System.out.println("---Elven Sword was added to your inventory---");
+                player.addItemToInventory("Elven Sword", "A sharp and shiny sword of excellent quality");
                 haveSword = true;
+                player.setAttackDamage(player.getAttackDamage()+10);
+                break;
             } else if (swordAnswer == 2) {
                 gameMap.printMap(player);
                 Display.name(player);
+                Display.playerClass(player);
                 Display.health(player);
                 Display.attack(player);
                 Display.location(player);
                 System.out.println("\nYou left the sword where it lay.");
                 break;
             }
+        }
+        if (haveSword == true) {
+            System.out.println("\nBefore you stands the large boulder from where you removed the sword");
         }
     }
 

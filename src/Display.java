@@ -22,6 +22,9 @@ public class Display {
         System.out.println("Location: X" + player.getYLocation() + "-Y" + player.getXLocation());
     }
 
+    public static void playerClass(Player player) {
+        System.out.println("Class: "+player.getPlayerClass());
+    }
 
 //    public static void inventory(Inventory inventory) {
 //

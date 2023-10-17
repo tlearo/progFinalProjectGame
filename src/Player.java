@@ -8,9 +8,10 @@ public class Player {
     private int xLocation;
     private int yLocation;
     private int attackDamage;
+    private String playerClass;
     private Inventory inventory;
 
-    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation) {
+    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation, String playerClass) {
         this.playerName = playerName;
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
@@ -18,6 +19,7 @@ public class Player {
         this.xLocation = xLocation;
         this.yLocation = yLocation;
         this.inventory = new Inventory();
+        this.playerClass = playerClass;
     }
 
     public void setCurrentHealth(int currentHealth) {
@@ -54,6 +56,9 @@ public class Player {
 
     public int getYLocation() {
         return yLocation;
+    }
+    public String getPlayerClass() {
+        return playerClass;
     }
 
     public void addItemToInventory(String itemName, String itemDescription) {

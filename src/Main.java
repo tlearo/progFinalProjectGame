@@ -59,7 +59,7 @@ public class Main {
         } while (!classSet);
 
         // Creating a character
-        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2);
+        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2, playerClass);
         Event event = new Event(player);
         // Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0, inventory);
         // Player suitor = new Player("Suitor", 80, 80, 5, 3, 4, inventory);
@@ -71,7 +71,7 @@ public class Main {
             gameMap.printMap(player);
             System.out.println("");
             Display.name(player);
-            System.out.println("Class: " + playerClass);
+            Display.playerClass(player);
             Display.health(player);
             Display.attack(player);
             Display.location(player);
