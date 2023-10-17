@@ -84,47 +84,38 @@ public class Main {
                 case "n":
                     if (player.getXLocation() > 0) {
                         player.setXLocation(player.getXLocation() - 1);
-//                        clearScreen();
                     } else {
                         invalidMove = true;
-//                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "w":
                     if (player.getYLocation() > 0) {
                         player.setYLocation(player.getYLocation() - 1);
-//                        clearScreen();
                     } else {
                         invalidMove = true;
-//                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "s":
                     if (player.getXLocation() < gameMap.mapSize - 1) {
                         player.setXLocation(player.getXLocation() + 1);
-//                        clearScreen();
                     } else {
                         invalidMove = true;
-//                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "e":
                     if (player.getYLocation() < gameMap.mapSize - 1) {
                         player.setYLocation(player.getYLocation() + 1);
-//                        clearScreen();
                     } else {
                         invalidMove = true;
-//                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "q":
                     System.exit(0);
                 default:
-//                    clearScreen();
                     System.out.println("The atmosphere must be getting to you! You can only enter N/E/S/W, or Q to quit!");
             }
         }
@@ -150,4 +141,13 @@ public class Main {
         } while (input < 1 || input > userChoices);
         return input;
     }
+//    public static void displayPlayerInfo(Player player) {
+//        System.out.println("");
+//        System.out.println("Name: " + player.getPlayerName());
+//        Display.playerClass(player);
+//        Display.health(player);
+//        Display.attack(player);
+//        Display.location(player);
+//        player.printInventory();
+//    }
 }

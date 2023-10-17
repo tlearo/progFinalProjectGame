@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Event {
     Scanner userInput = new Scanner(System.in);
-    private static Player player;
+    private Player player;
     private Inventory inventory;
 
     public Event(Player player) {
@@ -71,7 +71,7 @@ public class Event {
             System.out.println("\nYou see the hilt of a sword protruding from a crack in a large boulder.\nWould you like to pull it out?");
             System.out.println("1. Yes");
             System.out.println("2. No");
-            int swordAnswer = userInput.nextInt();
+            int swordAnswer = Main.readInt("", 2);
             if (swordAnswer == 1) {
                 gameMap.printMap(player);
                 Display.name(player);
@@ -97,15 +97,38 @@ public class Event {
             }
         }
         if (haveSword == true) {
-            System.out.println("\nBefore you stands the large boulder from where you removed the sword");
+            System.out.println("\nBefore you stands the large boulder from whence you removed the sword.");
         }
     }
 
     private void handleRiver(Player player) {
-        System.out.println("testing river");
+        System.out.println("\nA swiftly flowing river surges in front of you.\nIt would be far too dangerous to try and swim across.");
     }
     private void handleCottage(Player player) {
-        System.out.println("testing cottage");
+        gameMap gameMap = new gameMap(); // Initializing gameMap
+        System.out.println("\nYou see a quaint, cozy cottage. It looks to be abandoned.\nPerhaps you could rest here to recover your strength.");
+        System.out.println("\nWould you like to rest?");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+        int cottageAnswer = Main.readInt("", 2);
+        if (cottageAnswer == 1) {
+            player.setCurrentHealth(player.getMaxHealth());
+            gameMap.printMap(player);
+            Display.name(player);
+            Display.playerClass(player);
+            Display.health(player);
+            Display.attack(player);
+            Display.location(player);
+            System.out.println("\n---You are fully healed---");
+        } else if (cottageAnswer == 2) {
+            gameMap.printMap(player);
+            Display.name(player);
+            Display.playerClass(player);
+            Display.health(player);
+            Display.attack(player);
+            Display.location(player);
+            System.out.println("\nYou decide against resting in the cottage.");
+        }
     }
     private void handleSpikeTrap(Player player) {
         System.out.println("testing spikes");
@@ -113,7 +136,7 @@ public class Event {
     private void handleForest(Player player) {
         System.out.println("testing forest"); }
     private void handleStartLocation(Player player) {
-        System.out.println("testing start location");
+        System.out.println("\nYou stand in a plain, grassy field.");
     }
     private void handleMountain(Player player) {
         System.out.println("testing mountain");
