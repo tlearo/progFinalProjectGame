@@ -4,10 +4,7 @@ import java.util.List;
 
 //Player Inventory Logic
     public class Inventory {
-        public static void main(String[] args) {
-            Scanner myInput = new Scanner(System.in);
-            String nl = "\n";
-        }
+
             private List<Item> items;
             private int maxSize = 10;
 
