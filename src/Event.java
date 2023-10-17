@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Event {
     Scanner userInput = new Scanner(System.in);
-    private Player player;
+    private static Player player;
     private Inventory inventory;
 
     public Event(Player player) {
@@ -66,17 +66,29 @@ public class Event {
 
     public boolean haveSword = false;
     private void handleGetSword(Player player) {
+        gameMap gameMap = new gameMap(); // Initializing gameMap
         while (haveSword == false) {
-            System.out.println("testing sword");
-            System.out.println("You see a sword. Would you like to take it?");
+            System.out.println("\nYou see a sword. Would you like to take it?");
             System.out.println("1. Yes");
             System.out.println("2. No");
             int swordAnswer = userInput.nextInt();
             if (swordAnswer == 1) {
-                player.addItemToInventory("Sword", "A sharp and shiny sword");
+                gameMap.printMap(player);
+                Display.name(player);
+                Display.health(player);
+                Display.attack(player);
+                Display.location(player);
+                System.out.println("\nThe sword was added to your inventory!");
+                player.addItemToInventory("Sword", "A sharp and shiny sword of excellent quality");
                 haveSword = true;
             } else if (swordAnswer == 2) {
-                System.out.println("You left the sword where it lay.");
+                gameMap.printMap(player);
+                Display.name(player);
+                Display.health(player);
+                Display.attack(player);
+                Display.location(player);
+                System.out.println("\nYou left the sword where it lay.");
+                break;
             }
         }
     }

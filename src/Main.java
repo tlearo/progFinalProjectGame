@@ -31,7 +31,7 @@ public class Main {
         int maxHealth = 100;
         int attackDamage = 10;
         do {
-            System.out.println("What kind of adventurer are you?");
+            System.out.println("\nWhat kind of adventurer are you?");
             System.out.println("1. Guardian (High health, low attack)");
             System.out.println("2. Assassin (Low health, high attack");
             System.out.println("3. Warrior (Average health, average attack)");
@@ -69,6 +69,7 @@ public class Main {
         while (true) {
             char eventSymbol = gameMap.getEventSymbol(player.getXLocation(), player.getYLocation());
             gameMap.printMap(player);
+            System.out.println("");
             Display.name(player);
             System.out.println("Class: " + playerClass);
             Display.health(player);
@@ -76,54 +77,54 @@ public class Main {
             Display.location(player);
             event.handleEvent(eventSymbol);
             player.printInventory();
-            System.out.println("Where would you like to move? N/E/S/W (Type 'Q' to quit): ");
+            System.out.println("\nWhere would you like to move? N/E/S/W (Type 'Q' to quit): ");
             String move = userInput.next();
             boolean invalidMove = false;
             switch (move) {
                 case "n":
                     if (player.getXLocation() > 0) {
                         player.setXLocation(player.getXLocation() - 1);
-                        clearScreen();
+//                        clearScreen();
                     } else {
                         invalidMove = true;
-                        clearScreen();
+//                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "w":
                     if (player.getYLocation() > 0) {
                         player.setYLocation(player.getYLocation() - 1);
-                        clearScreen();
+//                        clearScreen();
                     } else {
                         invalidMove = true;
-                        clearScreen();
+//                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "s":
                     if (player.getXLocation() < gameMap.mapSize - 1) {
                         player.setXLocation(player.getXLocation() + 1);
-                        clearScreen();
+//                        clearScreen();
                     } else {
                         invalidMove = true;
-                        clearScreen();
+//                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "e":
                     if (player.getYLocation() < gameMap.mapSize - 1) {
                         player.setYLocation(player.getYLocation() + 1);
-                        clearScreen();
+//                        clearScreen();
                     } else {
                         invalidMove = true;
-                        clearScreen();
+//                        clearScreen();
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
                 case "q":
                     System.exit(0);
                 default:
-                    clearScreen();
+//                    clearScreen();
                     System.out.println("The atmosphere must be getting to you! You can only enter N/E/S/W, or Q to quit!");
             }
         }
