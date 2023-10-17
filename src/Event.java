@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Event {
@@ -59,6 +60,7 @@ public class Event {
 
     private void handleFairyCircle(Player player) {
         System.out.println("testing Fairy circle");
+        inventory.addItem("Extra Item", "Description for Extra Item");
     }
     private void handleGetSword(Player player) {
         System.out.println("testing sword");

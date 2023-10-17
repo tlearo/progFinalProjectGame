@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 //Player Logic
 public class Player{
@@ -9,14 +10,17 @@ public class Player{
     private int yLocation;
     private int attackDamage;
 
+    private ArrayList inventory;
+
     // Constructors
-    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation) {
+    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation, ArrayList inventory) {
         this.playerName = playerName;
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
         this.attackDamage = attackDamage;
         this.xLocation = xLocation;
         this.yLocation = yLocation;
+        this.inventory = inventory;
     }
 //    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation) {
 //        this(playerName, maxHealth, currentHealth, attackDamage, xLocation, yLocation);
