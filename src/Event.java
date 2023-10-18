@@ -225,7 +225,6 @@ public class Event {
     }
 
     //Merchant's shop event
-// Merchant's shop event
     private void handleShop(Player player) {
         // Create an instance of the inventory for the shop
         Inventory shopInventory = new Inventory();
@@ -248,8 +247,7 @@ public class Event {
 
         while (true) {
             System.out.println("Your Gold: " + player.getGold());
-            System.out.println("Enter the item number you want to buy (or 0 to exit):");
-            int choice = userInput.nextInt();
+            int choice = Main.readInt("Enter the item number you want to buy (or 0 to exit):", shopItems.size());
 
             if (choice == 0) {
                 System.out.println("Thank you for visiting the shop!");
@@ -267,6 +265,9 @@ public class Event {
                     // Add the purchased item to the player's inventory
                     player.addItemToInventory(selectedItem.getName(), selectedItem.getDescription());
 
+                    // Remove the purchased item from the shop's inventory
+                    shopInventory.removeItem(selectedItem);
+
                     System.out.println("You bought " + selectedItem.getName() + " for " + cost + " gold.");
                 } else {
                     System.out.println("You don't have enough gold to buy this item.");
@@ -276,6 +277,7 @@ public class Event {
             }
         }
     }
+
 
 
     //Suitor event
