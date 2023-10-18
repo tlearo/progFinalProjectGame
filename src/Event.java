@@ -305,7 +305,6 @@ public class Event {
         System.out.println("--------------------");
         Display.name(enemy);
         Display.health(enemy);
-        Display.attack(enemy);
     }
 
     //Ogre event
