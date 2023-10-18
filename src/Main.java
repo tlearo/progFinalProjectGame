@@ -59,6 +59,9 @@ public class Main {
 
         } while (!classSet);
 
+        Thread.sleep(500);
+        StoryLore.Separator(5);
+
         // Creating a character
         Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2, playerClass);
         Event event = new Event(player);
