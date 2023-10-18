@@ -298,13 +298,47 @@ public class Event {
     }
 
     //Battle stats method
-    public void BattleStats() {
+    public void BattleStats(Enemy enemy) {
         Display.name(player);
         Display.health(player);
         Display.attack(player);
         System.out.println("-----------------");
         Display.name(enemy);
         Display.health(enemy);
+    }
+
+    //getter
+
+    public void battle(Enemy enemy){
+        System.out.println("You attacked the monster and gave "+player.getAttackDamage()+" damage!");
+
+        enemy.setCurrentHealth(enemy.getCurrentHealth() -  player.getAttackDamage());
+        BattleStats(enemy);
+
+        if (enemy.getCurrentHealth()<1){
+            System.out.println("WIN");
+//            win();
+        }
+        if (enemy.getCurrentHealth()>0){
+            int EnemyDamage;
+            EnemyDamage = (enemy.getAttackDamage() + (new java.util.Random().nextInt(10)));
+            System.out.println("The monster attacked "+EnemyDamage+"!");
+            player.setCurrentHealth(player.getCurrentHealth() - EnemyDamage);
+
+            if(player.getCurrentHealth()<1) {
+                System.out.println("DEAD");
+//                dead
+            } else if (player.getCurrentHealth()>0){
+                System.out.println("Do you want to keep attacking"+enemy.getEnemyName()+"?");
+                System.out.println("1. Continue fighting!\n2. Run away!");
+                int ContinueFight = Main.readInt("", 2);
+                if (ContinueFight == 1) {
+                    battle(enemy);
+                }else if (ContinueFight == 2) {
+                    System.out.println("RUN");
+                }
+            }
+    }
     }
 
     //Ogre event
@@ -315,6 +349,17 @@ public class Event {
                 "\nWhen the dust settles you see an enormous green Ogre standing before you. It towers over you, and it's eyes gleam with bloodlust." +
                 "\nA greedy smile creeps across it's face, and then it lets out a bellowing roar!" +
                 "\n\nPrepare for battle, or run!");
+        System.out.println("1. Prepare for battle!");
+        System.out.println("2. Run!");
+        int ogreFight = Main.readInt("", 2);
+        if (ogreFight == 1) {
+            System.out.print("LETS GO TO BATTLE");
+            battle(enemy);
+        } else if (ogreFight == 2) {
+            System.out.print("RUN");
+        }
+
+
 
     }
 
