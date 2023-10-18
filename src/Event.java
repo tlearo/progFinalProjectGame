@@ -258,13 +258,13 @@ public class Event {
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
                                 System.out.println("\nYou gained " + hpGranted + " HP.\n");
                                 Thread.sleep(1000);
-                                displayPlayerInfo(player);
+                                Display.gold(player);
                             } else {
                                 // Add the purchased item to the player's inventory (e.g., Potion or Boat)
                                 player.addItemToInventory(selectedItem.getName(), selectedItem.getDescription());
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
                                 Thread.sleep(1000);
-                                displayPlayerInfo(player);
+                                Display.gold(player);
                             }
                         } else {
                             System.out.println("\nYou don't have enough gold to buy this item.\n");
