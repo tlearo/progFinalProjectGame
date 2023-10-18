@@ -69,6 +69,7 @@ public class Main {
         // Player suitor = new Player("Suitor", 80, 80, 5, 3, 4, inventory);
         // Player troll = new Player("Troll", 200, 200, 8, 4, 1, inventory);
 
+
         // Moving switch statement
         while (true) {
             char eventSymbol = gameMap.getEventSymbol(player.getXLocation(), player.getYLocation());
@@ -110,7 +111,7 @@ public class Main {
                     }
                     break;
                 case "s":
-                    if (eventSymbol == '~' || eventSymbol == 'E') {
+                    if (eventSymbol == '~' || eventSymbol == 'E' || eventSymbol == '9') {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }
