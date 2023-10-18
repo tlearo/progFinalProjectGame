@@ -63,7 +63,7 @@ public class Main {
         StoryLore.Separator(5);
 
         // Creating a character
-        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2, playerClass);
+        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2, playerClass, 100);
         Event event = new Event(player);
         // Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0, inventory);
         // Player suitor = new Player("Suitor", 80, 80, 5, 3, 4, inventory);
@@ -79,6 +79,7 @@ public class Main {
             Display.playerClass(player);
             Display.health(player);
             Display.attack(player);
+            Display.gold(player);
             Display.location(player);
             player.printInventory();
             event.handleEvent(eventSymbol);
@@ -95,7 +96,7 @@ public class Main {
                         player.setXLocation(player.getXLocation() - 1);
                     } else {
                         invalidMove = true;
-                        System.out.println("The path is too treacherous that way...");
+                        System.out.println("\nThe path is too treacherous that way...\n");
                     }
                     break;
                 case "a":
@@ -107,7 +108,7 @@ public class Main {
                         player.setYLocation(player.getYLocation() - 1);
                     } else {
                         invalidMove = true;
-                        System.out.println("The path is too treacherous that way...");
+                        System.out.println("\nThe path is too treacherous that way...\n");
                     }
                     break;
                 case "s":
@@ -119,7 +120,7 @@ public class Main {
                         player.setXLocation(player.getXLocation() + 1);
                     } else {
                         invalidMove = true;
-                        System.out.println("The path is too treacherous that way...");
+                        System.out.println("\nhe path is too treacherous that way...\n");
                     }
                     break;
                 case "d":
@@ -131,13 +132,13 @@ public class Main {
                         player.setYLocation(player.getYLocation() + 1);
                     } else {
                         invalidMove = true;
-                        System.out.println("The path is too treacherous that way...");
+                        System.out.println("\nThe path is too treacherous that way...\n");
                     }
                     break;
                 case "q":
                     System.exit(0);
                 default:
-                    System.out.println("The atmosphere must be getting to you! You can only enter W/A/S/D, or Q to quit!");
+                    System.out.println("\nThe atmosphere must be getting to you! You can only enter W/A/S/D, or Q to quit!\n");
             }
         }
     }
@@ -157,7 +158,7 @@ public class Main {
                 input = Integer.parseInt(userInput.next());
             } catch (Exception e) {
                 input = -1;
-                System.out.println("Please enter a number!");
+                System.out.println("\nPlease enter a number!\n");
             }
         } while (input < 1 || input > userChoices);
         return input;

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -12,7 +11,7 @@ public class Player {
     private String playerClass;
     private Inventory inventory;
 
-    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation, String playerClass) {
+    public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation, String playerClass, int gold) {
         this.playerName = playerName;
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
@@ -21,7 +20,7 @@ public class Player {
         this.yLocation = yLocation;
         this.inventory = new Inventory();
         this.playerClass = playerClass;
-        this.gold = 100;
+        this.gold = gold;
     }
     public int getGold() {
         return gold;

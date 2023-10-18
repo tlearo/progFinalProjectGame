@@ -93,6 +93,7 @@ public class Event {
         Display.playerClass(player);
         Display.health(player);
         Display.attack(player);
+        Display.gold(player);
         Display.location(player);
         player.printInventory();
     }
@@ -209,7 +210,7 @@ public class Event {
     // Create an instance of the inventory for the shop (outside the method)
     Inventory shopInventory = new Inventory();
 
-    public void handleShop(Player player) {
+    public void handleShop(Player player) throws InterruptedException {
         // Add items to the shop's inventory with costs (you can do this once at initialization)
         if (shopInventory.getItems().isEmpty()) {
             shopInventory.addItem("Potion", "Restores some health", 20);
@@ -219,7 +220,7 @@ public class Event {
 
         // Display the shop's inventory
         List<Inventory.Item> shopItems = shopInventory.getItems();
-        System.out.println("Welcome to the shop! Here's what's available for purchase:");
+        System.out.println("\nWelcome to the shop!\nHere's what's available for purchase:");
 
         for (int i = 0; i < shopItems.size(); i++) {
             Inventory.Item item = shopItems.get(i);
@@ -229,12 +230,13 @@ public class Event {
         boolean inShop = true; // Flag to track if the player is in the shop
 
         while (inShop) {
-            System.out.println("Your Gold: " + player.getGold());
             System.out.println("Enter the item number you want to buy (or 0 to exit): ");
             String choiceInput = userInput.next();
 
             if (choiceInput.equals("0")) {
-                System.out.println("Thank you for visiting the shop!");
+                System.out.println("\nThank you for visiting the shop!\n");
+                Thread.sleep(1000);
+                displayPlayerInfo(player);
                 inShop = false; // Exit the shop loop
             } else {
                 try {
@@ -253,21 +255,28 @@ public class Event {
                                 // Increase the player's health by the HP granted
                                 player.setCurrentHealth(player.getCurrentHealth() + hpGranted);
 
-                                System.out.println("You bought " + selectedItem.getName() + " for " + cost + " gold.");
-                                System.out.println("You gained " + hpGranted + " HP.");
+                                System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
+                                System.out.println("\nYou gained " + hpGranted + " HP.\n");
+                                Thread.sleep(1000);
+                                displayPlayerInfo(player);
                             } else {
                                 // Add the purchased item to the player's inventory (e.g., Potion or Boat)
                                 player.addItemToInventory(selectedItem.getName(), selectedItem.getDescription());
-                                System.out.println("You bought " + selectedItem.getName() + " for " + cost + " gold.");
+                                System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
+                                Thread.sleep(1000);
+                                displayPlayerInfo(player);
                             }
                         } else {
-                            System.out.println("You don't have enough gold to buy this item.");
+                            System.out.println("\nYou don't have enough gold to buy this item.\n");
+                            Thread.sleep(1000);
                         }
                     } else {
-                        System.out.println("Invalid choice. Please enter a valid item number.");
+                        System.out.println("\nInvalid choice. Please enter a valid item number.\n");
+                        Thread.sleep(1000);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Please enter a valid item number or 0 to exit.");
+                    System.out.println("\nInvalid input. Please enter a valid item number or 0 to exit.\n");
+                    Thread.sleep(1000);
                 }
             }
         }
@@ -347,8 +356,8 @@ public class Event {
                     System.out.println("The trigger went off and a hidden arrow had shot you... \nAt least you've obtained the book!");
                     Thread.sleep(2500);
                     player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship");
-                    displayPlayerInfo(player);
                     System.out.println("---Ruined Book was added to your inventory---");
+                    displayPlayerInfo(player);
                     haveBook = true;
                     break;
                 }
@@ -379,10 +388,14 @@ public class Event {
 
             if (quickSandAnswer == 1) {
                 StoryLore.Separator(5);
-                System.out.println("You manage to push through and escape, but the quicksand crushes your body as you do so, and you take 20 damage.");
+                System.out.println("You manage to push through and escape, but the quicksand crushes your body as you do so, and you take 20 damage.\n");
+                Thread.sleep(1000);
+                displayPlayerInfo(player);
             } else if (quickSandAnswer == 2) {
                 StoryLore.Separator(5);
-                System.out.println("You carefully crawl across the surface of the quicksand and escape, avoiding any bodily harm.");
+                System.out.println("You carefully crawl across the surface of the quicksand and escape, avoiding any bodily harm.\n");
+                Thread.sleep(1000);
+                displayPlayerInfo(player);
             }
             enteredQuickSand = true;
             firstVisitQuickSand = false;
