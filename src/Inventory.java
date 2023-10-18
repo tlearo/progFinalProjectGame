@@ -6,14 +6,20 @@ public class Inventory {
         private String name;
         private String description;
         private int cost;
+        private int hp;
         public Item(String name, String description, int cost) {
             this.name = name;
             this.description = description;
             this.cost = cost;
+            this.hp = hp;
         }
         public Item(String name, String description) {
             this.name = name;
             this.description = description;
+        }
+
+        public int getHp() {
+            return hp;
         }
 
         public String getName() {

@@ -206,14 +206,16 @@ public class Event {
         System.out.println("\nYou stand in a plain, grassy field.");
     }
 
-    //Merchant's shop event
-    private void handleShop(Player player) {
-        // Create an instance of the inventory for the shop
-        Inventory shopInventory = new Inventory();
+    // Create an instance of the inventory for the shop (outside the method)
+    Inventory shopInventory = new Inventory();
 
-        // Add items to the shop's inventory with costs
-        shopInventory.addItem("Potion", "Restores some health", 20);
-        shopInventory.addItem("Armor", "Provides extra defense", 50);
+    public void handleShop(Player player) {
+        // Add items to the shop's inventory with costs (you can do this once at initialization)
+        if (shopInventory.getItems().isEmpty()) {
+            shopInventory.addItem("Potion", "Restores some health", 20);
+            shopInventory.addItem("Armor", "Provides extra defense", 50);
+            shopInventory.addItem("Boat", "Can be used to cross a flowing river", 100);
+        }
 
         // Display the shop's inventory
         List<Inventory.Item> shopItems = shopInventory.getItems();
@@ -224,38 +226,49 @@ public class Event {
             System.out.println((i + 1) + ". " + item.getName() + " - " + item.getDescription() + " (Cost: " + item.getCost() + " gold)");
         }
 
-        // Allow the player to interact with the shop and buy items for gold
-        Scanner userInput = new Scanner(System.in);
+        boolean inShop = true; // Flag to track if the player is in the shop
 
-        while (true) {
+        while (inShop) {
             System.out.println("Your Gold: " + player.getGold());
-            int choice = Main.readInt("Enter the item number you want to buy (or 0 to exit):", shopItems.size());
+            System.out.println("Enter the item number you want to buy (or 0 to exit): ");
+            String choiceInput = userInput.next();
 
-            if (choice == 0) {
+            if (choiceInput.equals("0")) {
                 System.out.println("Thank you for visiting the shop!");
-                break;
-            }
-
-            if (choice > 0 && choice <= shopItems.size()) {
-                Inventory.Item selectedItem = shopItems.get(choice - 1);
-                int cost = selectedItem.getCost();
-
-                if (player.getGold() >= cost) {
-                    // Deduct the cost from the player's gold
-                    player.subtractGold(cost);
-
-                    // Add the purchased item to the player's inventory
-                    player.addItemToInventory(selectedItem.getName(), selectedItem.getDescription());
-
-                    // Remove the purchased item from the shop's inventory
-                    shopInventory.removeItem(selectedItem);
-
-                    System.out.println("You bought " + selectedItem.getName() + " for " + cost + " gold.");
-                } else {
-                    System.out.println("You don't have enough gold to buy this item.");
-                }
+                inShop = false; // Exit the shop loop
             } else {
-                System.out.println("Invalid choice. Please enter a valid item number.");
+                try {
+                    int choice = Integer.parseInt(choiceInput);
+                    if (choice > 0 && choice <= shopItems.size()) {
+                        Inventory.Item selectedItem = shopItems.get(choice - 1);
+                        int cost = selectedItem.getCost();
+                        int hpGranted = selectedItem.getHp(); // Get HP granted by the item
+
+                        if (player.getGold() >= cost) {
+                            // Deduct the cost from the player's gold
+                            player.subtractGold(cost);
+
+                            // Check if the item grants HP (Armor)
+                            if (hpGranted > 0) {
+                                // Increase the player's health by the HP granted
+                                player.setCurrentHealth(player.getCurrentHealth() + hpGranted);
+
+                                System.out.println("You bought " + selectedItem.getName() + " for " + cost + " gold.");
+                                System.out.println("You gained " + hpGranted + " HP.");
+                            } else {
+                                // Add the purchased item to the player's inventory (e.g., Potion or Boat)
+                                player.addItemToInventory(selectedItem.getName(), selectedItem.getDescription());
+                                System.out.println("You bought " + selectedItem.getName() + " for " + cost + " gold.");
+                            }
+                        } else {
+                            System.out.println("You don't have enough gold to buy this item.");
+                        }
+                    } else {
+                        System.out.println("Invalid choice. Please enter a valid item number.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid item number or 0 to exit.");
+                }
             }
         }
     }
@@ -451,6 +464,6 @@ public class Event {
     //Default event, in case cases no catch
     private void handleDefaultEvent(Player player) throws InterruptedException {
         System.out.println("\nYou've encountered an unknown area.\n");
-                Thread.sleep(2500);
+        Thread.sleep(2500);
     }
 }
