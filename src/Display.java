@@ -25,6 +25,9 @@ public class Display {
     public static void playerClass(Player player) {
         System.out.println("Class: "+player.getPlayerClass());
     }
+    public static void gold(Player player) {
+        System.out.println("Gold: "+player.getGold());
+    }
 
 //    public static void inventory(Inventory inventory) {
 //
