@@ -10,7 +10,7 @@ public class Main {
         boolean classSet = false;
 
         // Start Introduction
-         StoryLore.Introduction();
+//         StoryLore.Introduction();
 
         // Getting player name
         String playerName;
@@ -86,6 +86,10 @@ public class Main {
             boolean invalidMove = false;
             switch (move) {
                 case "n":
+                    if (eventSymbol == 'D' || eventSymbol == 'E') {
+                        System.out.println("\nYou can't go that way!\n");
+                        break;
+                    }
                     if (player.getXLocation() > 0) {
                         player.setXLocation(player.getXLocation() - 1);
                     } else {
@@ -94,6 +98,10 @@ public class Main {
                     }
                     break;
                 case "w":
+                    if (eventSymbol == '7' || eventSymbol == '@' || eventSymbol == '~') {
+                        System.out.println("\nYou can't go that way!\n");
+                        break;
+                    }
                     if (player.getYLocation() > 0) {
                         player.setYLocation(player.getYLocation() - 1);
                     } else {
@@ -102,6 +110,10 @@ public class Main {
                     }
                     break;
                 case "s":
+                    if (eventSymbol == '~' || eventSymbol == 'E') {
+                        System.out.println("\nYou can't go that way!\n");
+                        break;
+                    }
                     if (player.getXLocation() < gameMap.mapSize - 1) {
                         player.setXLocation(player.getXLocation() + 1);
                     } else {
@@ -110,6 +122,10 @@ public class Main {
                     }
                     break;
                 case "e":
+                    if (eventSymbol == '~' || eventSymbol == 'E') {
+                        System.out.println("\nYou can't go that way!\n");
+                        break;
+                    }
                     if (player.getYLocation() < gameMap.mapSize - 1) {
                         player.setYLocation(player.getYLocation() + 1);
                     } else {
