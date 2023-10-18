@@ -99,7 +99,7 @@ public class Main {
                     }
                     break;
                 case "w":
-                    if (eventSymbol == '7' || eventSymbol == '@' || eventSymbol == '~') {
+                    if (eventSymbol == '7' || eventSymbol == '@' /*|| eventSymbol == '~'*/) {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }
@@ -111,7 +111,7 @@ public class Main {
                     }
                     break;
                 case "s":
-                    if (eventSymbol == '~' || eventSymbol == 'E' || eventSymbol == '9') {
+                    if (/*eventSymbol == '~' ||*/ eventSymbol == 'E' || eventSymbol == '9') {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }
@@ -123,7 +123,7 @@ public class Main {
                     }
                     break;
                 case "e":
-                    if (eventSymbol == '~' || eventSymbol == 'E') {
+                    if (/*eventSymbol == '~' ||*/ eventSymbol == 'E' || eventSymbol == '4') {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }

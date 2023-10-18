@@ -61,10 +61,10 @@ public class Event {
                 handleSandyPlain(player);
                 break;
             case '4':
-                handleGreenFieldNorth(player);
+                handleGreenFieldSouth(player);
                 break;
             case '5':
-                handleGreenFieldSouth(player);
+                handleGreenFieldNorth(player);
                 break;
             case '6':
                 handleMountainEntrance(player);
@@ -278,7 +278,16 @@ public class Event {
         }
     }
 
-
+    //Method to display stuff
+    public static void displayPlayerInfo(Player player){
+        gameMap gameMap = new gameMap();
+        gameMap.printMap(player);
+        Display.name(player);
+        Display.playerClass(player);
+        Display.health(player);
+        Display.attack(player);
+        Display.location(player);
+    }
 
     //Suitor event
     private void handleSuitor(Player player) {
@@ -291,57 +300,164 @@ public class Event {
     }
 
     //Enchanted book cavern event
-    private void handleCavern(Player player) {
-        System.out.println("testing cavern");
+//Enchanted book cavern event
+    //Enchanted book cavern event
+    public Boolean haveBook = false;
+    private void handleCavern(Player player) throws InterruptedException {
+        gameMap gameMap = new gameMap(); // Initializing gameMap
+        while (haveBook == false) {
+            System.out.println("\nYou walk towards the dark dingy cave and stumble upon a library, illuminated by flowing wisps.");
+            Thread.sleep(1000);
+            System.out.println("Straight ahead you see a podium enclosing a ruined book. \nIt looks like the book that you threw when the dragon and you had an argument this one time...");
+            Thread.sleep(1000);
+            System.out.println("You want to grab it as; although it held a dark memory, the book has been intertwined in both of your lives and you feel as though the Dragon would appreciate it");
+            Thread.sleep(2000);
+            System.out.println("Before you reach for the book, your sense heightens and you feel a cold breeze blow in through the cave. \nIs there something waiting for you?");
+            Thread.sleep(1000);
+            System.out.println("\nWould you like to reach for the book?");
+            System.out.println("1. Yes");
+            System.out.println("2. No");
+            System.out.println("3. Inspect the podium");
+            int bookAnswer = Main.readInt("", 3);
+            if (bookAnswer == 1) {
+                System.out.println("\nYou grab the book off the podium and hear a trigger!");
+                //take damage
+                player.setCurrentHealth(player.getCurrentHealth() - 20);
+                Thread.sleep(1000);
+                System.out.println("OOF!");
+                Thread.sleep(500);
+                System.out.println("You have been hit with a hidden arrow and taken 20 damage\nThrough the pain, you have obtained the book!");
+                Thread.sleep(2500);
+                player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship");
+                displayPlayerInfo(player);
+                System.out.println("---Ruined Book was added to your inventory---");
+                haveBook = true;
+                break;
+            } else if (bookAnswer == 2) {
+                System.out.println("\nYou leave the book alone, feeling a sense of sadness wash over you.\nThe book would help win the Dragon's heart over...");
+            } else if (bookAnswer == 3) {
+                StoryLore.Separator(5);
+                System.out.println("\nAs you look closer into the podium, you realise the book is on top of a pressure plate.\nIf you had lifted the book, it would trigger a trap!");
+                Thread.sleep(1000);
+                System.out.println("You look around the cave some more to look for a replacement and see:\n- A slab of rock that seems to be the same size as the book \n- And a pile of dirt that has the potential to weight the same as the book\nthat you could replace the book with.");
+                Thread.sleep(2000);
+                System.out.println("\nWhich do you choose to replace the book with?");
+                System.out.println("1. A slab of rock");
+                System.out.println("2. A pile of dirt");
+                Thread.sleep(2000);
+                int bookTrapAnswer = Main.readInt("", 2);
+                if (bookTrapAnswer == 1) {
+                    System.out.println("You grab the slab of rock and quickly lift the book to swiftly put the rock in replacement");
+                    Thread.sleep(1000);
+                    System.out.println("It worked and you have obtained the book!");
+                    Thread.sleep(2500);
+                    player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship");
+                    displayPlayerInfo(player);
+                    System.out.println("---Ruined Book was added to your inventory---");
+                    haveBook = true;
+                    break;
+                } else if (bookTrapAnswer == 2) {
+                    System.out.println("You grab a handful of dirt and quickly try to replace the book. \nAs you lift the ruined book, the handful of dirt is flowing out of your hand and it was not weighted enough to work as a replacement!");
+                    Thread.sleep(2000);
+                    System.out.println("OUCH!");
+                    //take damage
+                    player.setCurrentHealth(player.getCurrentHealth() - 20);
+                    System.out.println("The trigger went off and a hidden arrow had shot you... \nAt least you've obtained the book!");
+                    Thread.sleep(2500);
+                    player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship");
+                    displayPlayerInfo(player);
+                    System.out.println("---Ruined Book was added to your inventory---");
+                    haveBook = true;
+                    break;
+                }
+            }
+            if (haveBook == true) {
+                System.out.println("\nYou walk past the dingy cave that you got the ruined book from, and continue to struggle up the mountain");
+                Thread.sleep(1000);
+            }
+        }
     }
 
     //Dragon lover event
     private void handleDragon(Player player) {
         System.out.println("testing dragon");
     }
-
+    public boolean enteredQuickSand = false;
+    public boolean firstVisitQuickSand = true;
     //Quicksand event
     private void handleQuickSand(Player player) {
-        System.out.println("testing quicksand"); }
+        if (firstVisitQuickSand) {
+            System.out.println("\nYou've stumbled into a pit of quicksand!\nHow do you want to react?\n");
+            System.out.println("1. Muscle your way out of it");
+            System.out.println("2. Slowly crawl across the surface");
+            int quickSandAnswer = Main.readInt("", 2);
+
+            if (quickSandAnswer == 1) {
+                System.out.println("You manage to push through and escape, but the quicksand crushes your body as you do so, and you take 20 damage.");
+            } else if (quickSandAnswer == 2) {
+                System.out.println("You carefully crawl across the surface of the quicksand and escape, avoiding any bodily harm.");
+            }
+            enteredQuickSand = true;
+            firstVisitQuickSand = false;
+        } else if (!firstVisitQuickSand){
+            System.out.println("\nBefore you is a dangerous pit of quicksand. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
+        }
+    }
 
     //Marsh non-event
     private void handleMarsh(Player player) {
-        System.out.println("testing marsh"); }
+        System.out.println("\nYou stumble into a swampy marshland." +
+                "\nThe sounds of far-off birds and other chittering creatures surround you, and the smell of rotten wood and decay fills the air." +
+                "\nYour feet sink several inches into the ground with each step.\n"); }
 
     //Woods non-event
     private void handleWoods(Player player) {
-        System.out.println("testing woods"); }
+        System.out.println("\nYou find yourself in the Silverglade Woods." +
+                "\nSilvery-grey coloured trunks of all sizes shoot upwards, and a thick canopy blocks out most of the sky." +
+                "\nThin beams of golden light break through the foliage and speckle the ground like tiny gemstones, making for a beautiful and enchanting sight.\n"); }
 
     //Sandyplain non-event
     private void handleSandyPlain(Player player) {
-        System.out.println("testing sandy plain"); }
+        System.out.println("\nA damp, sandy plain stretches out before you." +
+                "\nLooking over the area you can spot small crustaceans scurrying in and out of their burrows." +
+                "\nYou can hear the sound of rushing water to the south; a river must be close by.\n"); }
 
     //Greenfield north side non-event
     private void handleGreenFieldNorth(Player player) {
-        System.out.println("testing green field north"); }
+        System.out.println("\nYou stand in a plain, grassy field." +
+                "\nTufts of yellow-green plants are scattered about, and a chill Southerly-wind buffets you." +
+                "\nYou see massive footprints in the ground leading east; a gigantic (and likely dangerous) creature must have left these.\n"); }
 
     //Greenfield south side non-event
     private void handleGreenFieldSouth(Player player) {
-        System.out.println("testing "); }
+        System.out.println("\nYou've entered a sparse grassland. To your north you hear the rushing water of the river," +
+                "\nand to your east you see a steep mountain erupting from the ground." +
+                "\nGulls circle overhead; their squawks and screeches piercing the otherwise peaceful atmosphere.\n"); }
 
     //Mountain entrance non-event
     private void handleMountainEntrance(Player player) {
-        System.out.println("testing "); }
+        System.out.println("\nTo your south a small rocky path winds its way up the mountain, flanked on either side by steep cliffs." +
+                "\nA chill wind blows through you; the temperature is dropping as the elevation rises.\n"); }
 
     //Craggy rocks non-event
     private void handleCraggyRocks(Player player) {
-        System.out.println("testing craggy rocks"); }
+        System.out.println("\nThe path in this area is difficult to follow; a mess of jagged rocks and large boulders litter the ground." +
+                "\nIt will be slow going but with careful foot placement you'll be able to hike onwards." +
+                "\nThe path continues to the south up the mountain, but you also spy a hidden cave to your east.\n"); }
 
     //Cliff edge non-event
     private void handleCliffEdge(Player player) {
-        System.out.println("testing cliff edge"); }
+        System.out.println("\nYou stand at the precipice of a large cliff edge." +
+                "\nYou peer over the edge and see a large valley down below, with a small river running though it." +
+                "\nIn the distance beyond the valley a vast, misty forest sprawls endlessly across the landscape.\n"); }
 
     //Mountain east non-event, south direction is blocked
     private void handleMountainEast(Player player) {
-        System.out.println("testing mountain east"); }
+        System.out.println("\nA sheer cliff face rises up around you to the south and east, creating an impenetrable barrier." +
+                "\nYou spot a family of mountain goats; these sure-footed creatures are somehow scrambling up the side of this impossibly-steep mountain.\n"); }
 
     //Default event, in case cases no catch
     private void handleDefaultEvent(Player player) {
-        System.out.println("You've encountered an unknown area.");
+        System.out.println("\nYou've encountered an unknown area.\n");
     }
 }
