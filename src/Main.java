@@ -142,6 +142,7 @@ public class Main {
         return input;
     }
 //    public static void displayPlayerInfo(Player player) {
+//        gameMap gameMap = new gameMap(); // Initializing gameMap
 //        System.out.println("");
 //        System.out.println("Name: " + player.getPlayerName());
 //        Display.playerClass(player);
