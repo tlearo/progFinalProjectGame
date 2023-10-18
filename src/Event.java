@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Event {
     Scanner userInput = new Scanner(System.in); //implement scanner input
     private Player player; //assigning relationship to classes
+    private Enemy enemy;
     private Inventory inventory; //constructor
     gameMap gameMap = new gameMap(); // Initializing gameMap
 
@@ -286,10 +287,36 @@ public class Event {
     private void handleSuitor(Player player) {
         System.out.println("testing suitor");
     }
+    public int randomAttackPower;
+
+    //Random Number Generator method
+    public int RandomNumber() {
+        int minDamage = 0;
+        int maxDamage = 30;
+        randomAttackPower = (int) (Math.floor(Math.random() * 31));
+        return randomAttackPower;
+    }
+
+    //Battle stats method
+    public void BattleStats() {
+        Display.name(player);
+        Display.health(player);
+        Display.attack(player);
+        System.out.println("--------------------");
+        Display.name(enemy);
+        Display.health(enemy);
+        Display.attack(enemy);
+    }
 
     //Ogre event
     private void handleOgre(Player player) {
-        System.out.println("testing ogre");
+        int attackPower = RandomNumber();
+        Enemy enemy = new Enemy("Ogre", 200, 200, attackPower);
+        System.out.println("You step into a dusty clearing, the wind whips it up around you momentarily obscuring your vision." +
+                "\nWhen the dust settles you see an enormous green Ogre standing before you. It towers over you, and it's eyes gleam with bloodlust." +
+                "\nA greedy smile creeps across it's face, and then it lets out a bellowing roar!" +
+                "\n\nPrepare for battle, or run!");
+
     }
 
     //Enchanted book cavern event
