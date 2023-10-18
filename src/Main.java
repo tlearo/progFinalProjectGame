@@ -10,7 +10,7 @@ public class Main {
         boolean classSet = false;
 
         // Start Introduction
-        // StoryLore.Introduction();
+         StoryLore.Introduction();
 
         // Getting player name
         String playerName;
@@ -36,6 +36,7 @@ public class Main {
             System.out.println("2. Assassin (Low health, high attack");
             System.out.println("3. Warrior (Average health, average attack)");
             int chooseClass = readInt("", 3);
+            System.out.println("");
             if (chooseClass == 1) {
                 playerClass = "Guardian";
                 currentHealth = 150;
