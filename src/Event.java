@@ -37,9 +37,6 @@ public class Event {
             case 'X':
                 handleStartLocation(player);
                 break;
-            case '^':
-                handleMountain(player);
-                break;
             case '$':
                 handleShop(player);
                 break;
@@ -81,8 +78,6 @@ public class Event {
             case '9':
                 handleMountainEast(player);
                 break;
-
-                break;
             default:
                 handleDefaultEvent(player);
                 break;
@@ -100,8 +95,8 @@ public class Event {
         gameMap gameMap = new gameMap(); // Initializing gameMap
         while (haveSword == false) {
             System.out.println("\nYou see the hilt of a sword protruding from a crack in a large boulder.");
+            Thread.sleep(1000);
             System.out.println("Would you like to pull it out?");
-            Thread.sleep(2000);
             System.out.println("1. Yes");
             System.out.println("2. No");
             int swordAnswer = Main.readInt("", 2);
@@ -113,9 +108,10 @@ public class Event {
                 Display.attack(player);
                 Display.location(player);
                 System.out.println("\nWith one swift, strong motion you free the sword from it's stone!");
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 System.out.println("---Elven Sword was added to your inventory---");
                 player.addItemToInventory("Elven Sword", "A sharp and shiny sword of excellent quality");
+                Thread.sleep(500);
                 haveSword = true;
                 player.setAttackDamage(player.getAttackDamage()+10);
                 break;
@@ -127,11 +123,13 @@ public class Event {
                 Display.attack(player);
                 Display.location(player);
                 System.out.println("\nYou leave the sword where it lays.");
+                Thread.sleep(500);
                 break;
             }
         }
         if (haveSword == true) {
             System.out.println("\nBefore you stands the large boulder from whence you removed the sword.");
+            Thread.sleep(1000);
         }
     }
 
@@ -141,9 +139,12 @@ public class Event {
     }
 
     //Cozy Cottage event
-    private void handleCottage(Player player) {
+    private void handleCottage(Player player) throws InterruptedException {
         gameMap gameMap = new gameMap(); // Initializing gameMap
-        System.out.println("\nYou see a quaint, cozy cottage. It looks to be abandoned.\nPerhaps you could rest here to recover your strength.");
+        System.out.println("\nYou see a quaint, cozy cottage. It looks to be abandoned.");
+        Thread.sleep(1000);
+        System.out.println("Perhaps you could rest here to recover your strength.");
+        Thread.sleep(1000);
         System.out.println("\nWould you like to rest?");
         System.out.println("1. Yes");
         System.out.println("2. No");
@@ -157,6 +158,7 @@ public class Event {
             Display.attack(player);
             Display.location(player);
             System.out.println("\n---You are fully healed---");
+            Thread.sleep(500);
         } else if (cottageAnswer == 2) {
             gameMap.printMap(player);
             Display.name(player);
@@ -165,6 +167,7 @@ public class Event {
             Display.attack(player);
             Display.location(player);
             System.out.println("\nYou decide against resting in the cottage.");
+            Thread.sleep(1000);
         }
     }
 
@@ -179,10 +182,10 @@ public class Event {
         gameMap gameMap = new gameMap(); // Initializing gameMap
         while (haveFlower == false) {
             System.out.println("\nAs you get closer to the island, you see a field of thousands of beautiful flowers.");
-            Thread.sleep(500);
+            Thread.sleep(1000);
             System.out.println("You are reminded of the days where you and the Dragon went out on a picnic together in the fields.");
-            Thread.sleep(500);
-            System.out.println("");
+            Thread.sleep(1000);
+            System.out.println("Would you like to make a flower bouquet for your lover?");
             System.out.println("1. Yes");
             System.out.println("2. No");
             int swordAnswer = Main.readInt("", 2);
@@ -193,12 +196,11 @@ public class Event {
                 Display.health(player);
                 Display.attack(player);
                 Display.location(player);
-                System.out.println("\nWith one swift, strong motion you free the sword from it's stone!");
+                System.out.println("\nYou carefully gather all her favourite flowers into a gorgeous bouquet");
                 Thread.sleep(2000);
-                System.out.println("---Elven Sword was added to your inventory---");
-                player.addItemToInventory("Elven Sword", "A sharp and shiny sword of excellent quality");
-                haveSword = true;
-                player.setAttackDamage(player.getAttackDamage()+10);
+                System.out.println("---Flower Bouquet was added to your inventory---");
+                player.addItemToInventory("Flower Bouquet", "Handpicked bouquet of the Dragons favourite flowers");
+                haveFlower = true;
                 break;
             } else if (swordAnswer == 2) {
                 gameMap.printMap(player);
@@ -207,12 +209,13 @@ public class Event {
                 Display.health(player);
                 Display.attack(player);
                 Display.location(player);
-                System.out.println("\nYou leave the sword where it lays.");
+                System.out.println("\nYou leave the flowers untouched, reminding yourself that you need to make one in order to win their heart back...");
                 break;
             }
         }
-        if (haveSword == true) {
-            System.out.println("\nBefore you stands the large boulder from whence you removed the sword.");
+        if (haveFlower == true) {
+            System.out.println("\nYou carefully walk along the flower field, bouquet in hand, reminiscing the good old days...");
+            Thread.sleep(1000);
         }
     }
 
