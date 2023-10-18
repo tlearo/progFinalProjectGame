@@ -29,6 +29,19 @@ public class Display {
         System.out.println("Gold: "+player.getGold());
     }
 
+
+    //OGRE
+    public static void health(Enemy enemy) {
+        System.out.println("Health: "+enemy.getCurrentHealth() + " / " + enemy.getMaxHealth());
+    }
+
+    public static void attack(Enemy enemy) {
+        System.out.println("Attack: "+enemy.getAttackDamage());
+    }
+    public static void name(Enemy enemy) {
+        System.out.println("Name: "+enemy.getEnemyName());
+    }
+
 //    public static void inventory(Inventory inventory) {
 //
 //        }
