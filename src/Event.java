@@ -225,21 +225,58 @@ public class Event {
     }
 
     //Merchant's shop event
+// Merchant's shop event
     private void handleShop(Player player) {
-        System.out.println("testing shop");
+        // Create an instance of the inventory for the shop
         Inventory shopInventory = new Inventory();
 
-        shopInventory.addItem("Potion", "Restores some health");
-        shopInventory.addItem("Armor", "Provides extra defense");
+        // Add items to the shop's inventory with costs
+        shopInventory.addItem("Potion", "Restores some health", 20);
+        shopInventory.addItem("Armor", "Provides extra defense", 50);
 
+        // Display the shop's inventory
         List<Inventory.Item> shopItems = shopInventory.getItems();
         System.out.println("Welcome to the shop! Here's what's available for purchase:");
 
         for (int i = 0; i < shopItems.size(); i++) {
             Inventory.Item item = shopItems.get(i);
-            System.out.println((i + 1) + ". " + item.getName() + " - " + item.getDescription());
+            System.out.println((i + 1) + ". " + item.getName() + " - " + item.getDescription() + " (Cost: " + item.getCost() + " gold)");
+        }
+
+        // Allow the player to interact with the shop and buy items for gold
+        Scanner userInput = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Your Gold: " + player.getGold());
+            System.out.println("Enter the item number you want to buy (or 0 to exit):");
+            int choice = userInput.nextInt();
+
+            if (choice == 0) {
+                System.out.println("Thank you for visiting the shop!");
+                break;
+            }
+
+            if (choice > 0 && choice <= shopItems.size()) {
+                Inventory.Item selectedItem = shopItems.get(choice - 1);
+                int cost = selectedItem.getCost();
+
+                if (player.getGold() >= cost) {
+                    // Deduct the cost from the player's gold
+                    player.subtractGold(cost);
+
+                    // Add the purchased item to the player's inventory
+                    player.addItemToInventory(selectedItem.getName(), selectedItem.getDescription());
+
+                    System.out.println("You bought " + selectedItem.getName() + " for " + cost + " gold.");
+                } else {
+                    System.out.println("You don't have enough gold to buy this item.");
+                }
+            } else {
+                System.out.println("Invalid choice. Please enter a valid item number.");
+            }
         }
     }
+
 
     //Suitor event
     private void handleSuitor(Player player) {

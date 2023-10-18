@@ -5,6 +5,7 @@ public class Player {
     private int currentHealth;
     private int maxHealth;
     private String playerName;
+    private int gold;
     private int xLocation;
     private int yLocation;
     private int attackDamage;
@@ -20,6 +21,18 @@ public class Player {
         this.yLocation = yLocation;
         this.inventory = new Inventory();
         this.playerClass = playerClass;
+        this.gold = 100;
+    }
+    public int getGold() {
+        return gold;
+    }
+
+    public void addGold(int amount) {
+        gold += amount;
+    }
+
+    public void subtractGold(int amount) {
+        gold -= amount;
     }
 
     public void setCurrentHealth(int currentHealth) {
@@ -62,7 +75,7 @@ public class Player {
     }
 
     public void addItemToInventory(String itemName, String itemDescription) {
-        inventory.addItem(itemName, itemDescription);
+        inventory.addItem(itemName, itemDescription,0);
     }
 
     public Inventory getInventory() {
