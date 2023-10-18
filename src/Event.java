@@ -5,6 +5,7 @@ public class Event {
     Scanner userInput = new Scanner(System.in); //implement scanner input
     private Player player; //assigning relationship to classes
     private Inventory inventory; //constructor
+    gameMap gameMap = new gameMap(); // Initializing gameMap
 
     public Event(Player player) {
         this.player = player;
@@ -84,6 +85,18 @@ public class Event {
         }
     }
 
+    //Method to display stuff
+    public static void displayPlayerInfo(Player player){
+        gameMap gameMap = new gameMap();
+        gameMap.printMap(player);
+        Display.name(player);
+        Display.playerClass(player);
+        Display.health(player);
+        Display.attack(player);
+        Display.location(player);
+        player.printInventory();
+    }
+
     //Fairy circle event
     private void handleFairyCircle(Player player) {
         System.out.println("testing Fairy circle");
@@ -92,7 +105,6 @@ public class Event {
     //Boulder Sword event
     public boolean haveSword = false;
     private void handleGetSword(Player player) throws InterruptedException {
-        gameMap gameMap = new gameMap(); // Initializing gameMap
         while (haveSword == false) {
             System.out.println("\nYou see the hilt of a sword protruding from a crack in a large boulder.");
             Thread.sleep(1000);
@@ -101,14 +113,10 @@ public class Event {
             System.out.println("2. No");
             int swordAnswer = Main.readInt("", 2);
             if (swordAnswer == 1) {
-                gameMap.printMap(player);
-                Display.name(player);
-                Display.playerClass(player);
-                Display.health(player);
-                Display.attack(player);
-                Display.location(player);
+                StoryLore.Separator(5);
                 System.out.println("\nWith one swift, strong motion you free the sword from it's stone!");
                 Thread.sleep(1000);
+                displayPlayerInfo(player);
                 System.out.println("---Elven Sword was added to your inventory---");
                 player.addItemToInventory("Elven Sword", "A sharp and shiny sword of excellent quality");
                 Thread.sleep(500);
@@ -116,12 +124,7 @@ public class Event {
                 player.setAttackDamage(player.getAttackDamage()+10);
                 break;
             } else if (swordAnswer == 2) {
-                gameMap.printMap(player);
-                Display.name(player);
-                Display.playerClass(player);
-                Display.health(player);
-                Display.attack(player);
-                Display.location(player);
+                displayPlayerInfo(player);
                 System.out.println("\nYou leave the sword where it lays.");
                 Thread.sleep(500);
                 break;
@@ -140,7 +143,6 @@ public class Event {
 
     //Cozy Cottage event
     private void handleCottage(Player player) throws InterruptedException {
-        gameMap gameMap = new gameMap(); // Initializing gameMap
         System.out.println("\nYou see a quaint, cozy cottage. It looks to be abandoned.");
         Thread.sleep(1000);
         System.out.println("Perhaps you could rest here to recover your strength.");
@@ -151,21 +153,11 @@ public class Event {
         int cottageAnswer = Main.readInt("", 2);
         if (cottageAnswer == 1) {
             player.setCurrentHealth(player.getMaxHealth());
-            gameMap.printMap(player);
-            Display.name(player);
-            Display.playerClass(player);
-            Display.health(player);
-            Display.attack(player);
-            Display.location(player);
+            displayPlayerInfo(player);
             System.out.println("\n---You are fully healed---");
             Thread.sleep(500);
         } else if (cottageAnswer == 2) {
-            gameMap.printMap(player);
-            Display.name(player);
-            Display.playerClass(player);
-            Display.health(player);
-            Display.attack(player);
-            Display.location(player);
+            displayPlayerInfo(player);
             System.out.println("\nYou decide against resting in the cottage.");
             Thread.sleep(1000);
         }
@@ -190,12 +182,7 @@ public class Event {
             System.out.println("2. No");
             int swordAnswer = Main.readInt("", 2);
             if (swordAnswer == 1) {
-                gameMap.printMap(player);
-                Display.name(player);
-                Display.playerClass(player);
-                Display.health(player);
-                Display.attack(player);
-                Display.location(player);
+                displayPlayerInfo(player);
                 System.out.println("\nYou carefully gather all her favourite flowers into a gorgeous bouquet");
                 Thread.sleep(2000);
                 System.out.println("---Flower Bouquet was added to your inventory---");
@@ -203,12 +190,7 @@ public class Event {
                 haveFlower = true;
                 break;
             } else if (swordAnswer == 2) {
-                gameMap.printMap(player);
-                Display.name(player);
-                Display.playerClass(player);
-                Display.health(player);
-                Display.attack(player);
-                Display.location(player);
+                displayPlayerInfo(player);
                 System.out.println("\nYou leave the flowers untouched, reminding yourself that you need to make one in order to win their heart back...");
                 break;
             }
@@ -278,17 +260,6 @@ public class Event {
         }
     }
 
-    //Method to display stuff
-    public static void displayPlayerInfo(Player player){
-        gameMap gameMap = new gameMap();
-        gameMap.printMap(player);
-        Display.name(player);
-        Display.playerClass(player);
-        Display.health(player);
-        Display.attack(player);
-        Display.location(player);
-    }
-
     //Suitor event
     private void handleSuitor(Player player) {
         System.out.println("testing suitor");
@@ -299,8 +270,6 @@ public class Event {
         System.out.println("testing ogre");
     }
 
-    //Enchanted book cavern event
-//Enchanted book cavern event
     //Enchanted book cavern event
     public Boolean haveBook = false;
     private void handleCavern(Player player) throws InterruptedException {
@@ -382,19 +351,24 @@ public class Event {
     private void handleDragon(Player player) {
         System.out.println("testing dragon");
     }
+
+    //Quicksand event
     public boolean enteredQuickSand = false;
     public boolean firstVisitQuickSand = true;
-    //Quicksand event
-    private void handleQuickSand(Player player) {
+    private void handleQuickSand(Player player) throws InterruptedException {
         if (firstVisitQuickSand) {
-            System.out.println("\nYou've stumbled into a pit of quicksand!\nHow do you want to react?\n");
+            System.out.println("\nYou've stumbled into a pit of quicksand!");
+            Thread.sleep(1000);
+            System.out.println("\nHow do you want to react?\n");
             System.out.println("1. Muscle your way out of it");
             System.out.println("2. Slowly crawl across the surface");
             int quickSandAnswer = Main.readInt("", 2);
 
             if (quickSandAnswer == 1) {
+                StoryLore.Separator(5);
                 System.out.println("You manage to push through and escape, but the quicksand crushes your body as you do so, and you take 20 damage.");
             } else if (quickSandAnswer == 2) {
+                StoryLore.Separator(5);
                 System.out.println("You carefully crawl across the surface of the quicksand and escape, avoiding any bodily harm.");
             }
             enteredQuickSand = true;
@@ -405,59 +379,78 @@ public class Event {
     }
 
     //Marsh non-event
-    private void handleMarsh(Player player) {
-        System.out.println("\nYou stumble into a swampy marshland." +
-                "\nThe sounds of far-off birds and other chittering creatures surround you, and the smell of rotten wood and decay fills the air." +
-                "\nYour feet sink several inches into the ground with each step.\n"); }
+    private void handleMarsh(Player player) throws InterruptedException {
+        System.out.println("\nYou stumble into a swampy marshland.");
+        Thread.sleep(1000);
+        System.out.println("\nThe sounds of far-off birds and other chittering creatures surround you, and the smell of rotten wood and decay fills the air." +
+                "\nYour feet sink several inches into the ground with each step.\n");
+    }
 
     //Woods non-event
-    private void handleWoods(Player player) {
-        System.out.println("\nYou find yourself in the Silverglade Woods." +
-                "\nSilvery-grey coloured trunks of all sizes shoot upwards, and a thick canopy blocks out most of the sky." +
-                "\nThin beams of golden light break through the foliage and speckle the ground like tiny gemstones, making for a beautiful and enchanting sight.\n"); }
+    private void handleWoods(Player player) throws InterruptedException {
+        System.out.println("\nYou find yourself in the Silverglade Woods.");
+        Thread.sleep(1000);
+        System.out.println("\nSilvery-grey coloured trunks of all sizes shoot upwards, and a thick canopy blocks out most of the sky." +
+                "\nThin beams of golden light break through the foliage and speckle the ground like tiny gemstones, making for a beautiful and enchanting sight.\n");
+    }
 
     //Sandyplain non-event
-    private void handleSandyPlain(Player player) {
-        System.out.println("\nA damp, sandy plain stretches out before you." +
-                "\nLooking over the area you can spot small crustaceans scurrying in and out of their burrows." +
-                "\nYou can hear the sound of rushing water to the south; a river must be close by.\n"); }
+    private void handleSandyPlain(Player player) throws InterruptedException {
+        System.out.println("\nA damp, sandy plain stretches out before you.");
+        Thread.sleep(1000);
+        System.out.println("over the area you can spot small crustaceans scurrying in and out of their burrows." +
+                "\nYou can hear the sound of rushing water to the south; a river must be close by.\n");
+    }
 
     //Greenfield north side non-event
-    private void handleGreenFieldNorth(Player player) {
-        System.out.println("\nYou stand in a plain, grassy field." +
-                "\nTufts of yellow-green plants are scattered about, and a chill Southerly-wind buffets you." +
-                "\nYou see massive footprints in the ground leading east; a gigantic (and likely dangerous) creature must have left these.\n"); }
+    private void handleGreenFieldNorth(Player player) throws InterruptedException {
+        System.out.println("\nYou stand in a plain, grassy field.");
+        Thread.sleep(1000);
+        System.out.print("Tufts of yellow-green plants are scattered about, and a chill Southerly-wind buffets you." +
+                "\nYou see massive footprints in the ground leading east; a gigantic (and likely dangerous) creature must have left these.\n");
+    }
 
     //Greenfield south side non-event
-    private void handleGreenFieldSouth(Player player) {
+    private void handleGreenFieldSouth(Player player) throws InterruptedException {
         System.out.println("\nYou've entered a sparse grassland. To your north you hear the rushing water of the river," +
-                "\nand to your east you see a steep mountain erupting from the ground." +
-                "\nGulls circle overhead; their squawks and screeches piercing the otherwise peaceful atmosphere.\n"); }
+                "\nand to your east you see a steep mountain erupting from the ground.");
+        Thread.sleep(1000);
+        System.out.println("\nGulls circle overhead; their squawks and screeches piercing the otherwise peaceful atmosphere.\n");
+    }
 
     //Mountain entrance non-event
-    private void handleMountainEntrance(Player player) {
-        System.out.println("\nTo your south a small rocky path winds its way up the mountain, flanked on either side by steep cliffs." +
-                "\nA chill wind blows through you; the temperature is dropping as the elevation rises.\n"); }
+    private void handleMountainEntrance(Player player) throws InterruptedException {
+        System.out.println("\nTo your south a small rocky path winds its way up the mountain, flanked on either side by steep cliffs.");
+        Thread.sleep(1000);
+        System.out.println("\nA chill wind blows through you; the temperature is dropping as the elevation rises.\n");
+    }
 
     //Craggy rocks non-event
-    private void handleCraggyRocks(Player player) {
+    private void handleCraggyRocks(Player player) throws InterruptedException {
         System.out.println("\nThe path in this area is difficult to follow; a mess of jagged rocks and large boulders litter the ground." +
-                "\nIt will be slow going but with careful foot placement you'll be able to hike onwards." +
-                "\nThe path continues to the south up the mountain, but you also spy a hidden cave to your east.\n"); }
+                "\nIt will be slow going but with careful foot placement you'll be able to hike onwards.");
+        Thread.sleep(1000);
+        System.out.println("\nThe path continues to the south up the mountain, but you also spy a hidden cave to your east.\n");
+    }
 
     //Cliff edge non-event
-    private void handleCliffEdge(Player player) {
+    private void handleCliffEdge(Player player) throws InterruptedException {
         System.out.println("\nYou stand at the precipice of a large cliff edge." +
-                "\nYou peer over the edge and see a large valley down below, with a small river running though it." +
-                "\nIn the distance beyond the valley a vast, misty forest sprawls endlessly across the landscape.\n"); }
+                "\nYou peer over the edge and see a large valley down below, with a small river running though it.");
+        Thread.sleep(1000);
+        System.out.println("\nIn the distance beyond the valley a vast, misty forest sprawls endlessly across the landscape.\n");
+    }
 
     //Mountain east non-event, south direction is blocked
-    private void handleMountainEast(Player player) {
-        System.out.println("\nA sheer cliff face rises up around you to the south and east, creating an impenetrable barrier." +
-                "\nYou spot a family of mountain goats; these sure-footed creatures are somehow scrambling up the side of this impossibly-steep mountain.\n"); }
+    private void handleMountainEast(Player player) throws InterruptedException {
+        System.out.println("\nA sheer cliff face rises up around you to the south and east, creating an impenetrable barrier.");
+        Thread.sleep(1000);
+        System.out.println("\nYou spot a family of mountain goats; these sure-footed creatures are somehow scrambling up the side of this impossibly-steep mountain.\n");
+    }
 
     //Default event, in case cases no catch
-    private void handleDefaultEvent(Player player) {
+    private void handleDefaultEvent(Player player) throws InterruptedException {
         System.out.println("\nYou've encountered an unknown area.\n");
+                Thread.sleep(2500);
     }
 }
