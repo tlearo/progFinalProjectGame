@@ -227,6 +227,18 @@ public class Event {
     //Merchant's shop event
     private void handleShop(Player player) {
         System.out.println("testing shop");
+        Inventory shopInventory = new Inventory();
+
+        shopInventory.addItem("Potion", "Restores some health");
+        shopInventory.addItem("Armor", "Provides extra defense");
+
+        List<Inventory.Item> shopItems = shopInventory.getItems();
+        System.out.println("Welcome to the shop! Here's what's available for purchase:");
+
+        for (int i = 0; i < shopItems.size(); i++) {
+            Inventory.Item item = shopItems.get(i);
+            System.out.println((i + 1) + ". " + item.getName() + " - " + item.getDescription());
+        }
     }
 
     //Suitor event
