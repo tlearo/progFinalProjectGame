@@ -302,10 +302,9 @@ public class Event {
         Display.name(player);
         Display.health(player);
         Display.attack(player);
-        System.out.println("--------------------");
+        System.out.println("-----------------");
         Display.name(enemy);
         Display.health(enemy);
-        Display.attack(enemy);
     }
 
     //Ogre event
