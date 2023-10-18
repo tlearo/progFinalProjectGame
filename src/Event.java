@@ -242,41 +242,47 @@ public class Event {
             System.out.println((i + 1) + ". " + item.getName() + " - " + item.getDescription() + " (Cost: " + item.getCost() + " gold)");
         }
 
-        // Allow the player to interact with the shop and buy items for gold
-        Scanner userInput = new Scanner(System.in);
+        boolean inShop = true; // Flag to track if the player is in the shop
 
-        while (true) {
+        while (inShop) {
             System.out.println("Your Gold: " + player.getGold());
-            int choice = Main.readInt("Enter the item number you want to buy (or 0 to exit):", shopItems.size());
+            System.out.println("Enter the item number you want to buy (or 0 to exit): ");
+            String choiceInput = userInput.next();
 
-            if (choice == 0) {
+            if (choiceInput.equals("0")) {
                 System.out.println("Thank you for visiting the shop!");
-                break;
-            }
-
-            if (choice > 0 && choice <= shopItems.size()) {
-                Inventory.Item selectedItem = shopItems.get(choice - 1);
-                int cost = selectedItem.getCost();
-
-                if (player.getGold() >= cost) {
-                    // Deduct the cost from the player's gold
-                    player.subtractGold(cost);
-
-                    // Add the purchased item to the player's inventory
-                    player.addItemToInventory(selectedItem.getName(), selectedItem.getDescription());
-
-                    // Remove the purchased item from the shop's inventory
-                    shopInventory.removeItem(selectedItem);
-
-                    System.out.println("You bought " + selectedItem.getName() + " for " + cost + " gold.");
-                } else {
-                    System.out.println("You don't have enough gold to buy this item.");
-                }
+                inShop = false; // Exit the shop loop
             } else {
-                System.out.println("Invalid choice. Please enter a valid item number.");
+                try {
+                    int choice = Integer.parseInt(choiceInput);
+                    if (choice > 0 && choice <= shopItems.size()) {
+                        Inventory.Item selectedItem = shopItems.get(choice - 1);
+                        int cost = selectedItem.getCost();
+
+                        if (player.getGold() >= cost) {
+                            // Deduct the cost from the player's gold
+                            player.subtractGold(cost);
+
+                            // Add the purchased item to the player's inventory
+                            player.addItemToInventory(selectedItem.getName(), selectedItem.getDescription());
+
+                            // Remove the purchased item from the shop's inventory
+                            shopInventory.removeItem(selectedItem);
+
+                            System.out.println("You bought " + selectedItem.getName() + " for " + cost + " gold.");
+                        } else {
+                            System.out.println("You don't have enough gold to buy this item.");
+                        }
+                    } else {
+                        System.out.println("Invalid choice. Please enter a valid item number.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid item number or 0 to exit.");
+                }
             }
         }
     }
+
 
     //Method to display stuff
     public static void displayPlayerInfo(Player player){
