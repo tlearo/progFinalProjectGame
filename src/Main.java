@@ -80,13 +80,13 @@ public class Main {
             Display.health(player);
             Display.attack(player);
             Display.location(player);
-            event.handleEvent(eventSymbol);
             player.printInventory();
-            System.out.println("\nWhere would you like to move? N/E/S/W (Type 'Q' to quit): ");
+            event.handleEvent(eventSymbol);
+            System.out.println("\nWhere would you like to move? W/A/S/D (Type 'Q' to quit): ");
             String move = userInput.next();
             boolean invalidMove = false;
             switch (move) {
-                case "n":
+                case "w":
                     if (eventSymbol == 'D' || eventSymbol == 'E') {
                         System.out.println("\nYou can't go that way!\n");
                         break;
@@ -98,7 +98,7 @@ public class Main {
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
-                case "w":
+                case "a":
                     if (eventSymbol == '7' || eventSymbol == '@' /*|| eventSymbol == '~'*/) {
                         System.out.println("\nYou can't go that way!\n");
                         break;
@@ -122,7 +122,7 @@ public class Main {
                         System.out.println("The path is too treacherous that way...");
                     }
                     break;
-                case "e":
+                case "d":
                     if (/*eventSymbol == '~' ||*/ eventSymbol == 'E' || eventSymbol == '4') {
                         System.out.println("\nYou can't go that way!\n");
                         break;
@@ -137,7 +137,7 @@ public class Main {
                 case "q":
                     System.exit(0);
                 default:
-                    System.out.println("The atmosphere must be getting to you! You can only enter N/E/S/W, or Q to quit!");
+                    System.out.println("The atmosphere must be getting to you! You can only enter W/A/S/D, or Q to quit!");
             }
         }
     }
@@ -173,3 +173,4 @@ public class Main {
 //        player.printInventory();
 //    }
 }
+
