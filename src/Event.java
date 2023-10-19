@@ -310,32 +310,42 @@ public class Event {
     //getter
 
     public void battle(Enemy enemy){
-        System.out.println("You attacked the monster and gave "+player.getAttackDamage()+" damage!");
+        System.out.println("\nYou attacked the monster and did "+player.getAttackDamage()+" damage!");
 
         enemy.setCurrentHealth(enemy.getCurrentHealth() -  player.getAttackDamage());
-        BattleStats(enemy);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         if (enemy.getCurrentHealth()<1){
-            System.out.println("WIN");
+            System.out.println("\nWIN");
 //            win();
         }
         if (enemy.getCurrentHealth()>0){
             int EnemyDamage;
             EnemyDamage = (enemy.getAttackDamage() + (new java.util.Random().nextInt(10)));
-            System.out.println("The monster attacked "+EnemyDamage+"!");
+            System.out.println("\nThe monster attacked for "+EnemyDamage+" damage!\n");
             player.setCurrentHealth(player.getCurrentHealth() - EnemyDamage);
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            BattleStats(enemy);
 
             if(player.getCurrentHealth()<1) {
-                System.out.println("DEAD");
+                System.out.println("\nDEAD\n");
 //                dead
             } else if (player.getCurrentHealth()>0){
-                System.out.println("Do you want to keep attacking"+enemy.getEnemyName()+"?");
-                System.out.println("1. Continue fighting!\n2. Run away!");
+                System.out.println("\nDo you want to keep attacking the "+enemy.getEnemyName()+"?");
+                System.out.println("\n1. Attack\n2. Run");
                 int ContinueFight = Main.readInt("", 2);
                 if (ContinueFight == 1) {
                     battle(enemy);
                 }else if (ContinueFight == 2) {
-                    System.out.println("RUN");
+                    System.out.println("\nRUN\n");
                 }
             }
     }
@@ -345,18 +355,24 @@ public class Event {
     private void handleOgre(Player player) {
         int attackPower = RandomNumber();
         Enemy enemy = new Enemy("Ogre", 200, 200, attackPower);
-        System.out.println("You step into a dusty clearing, the wind whips it up around you momentarily obscuring your vision." +
-                "\nWhen the dust settles you see an enormous green Ogre standing before you. It towers over you, and it's eyes gleam with bloodlust." +
+        System.out.println("\nYou step into a dusty clearing, the wind whips the dirt up around you momentarily obscuring your vision." +
+                "\nAfter the dust settles you see an enormous green Ogre standing before you. It towers over you, and it's eyes gleam with bloodlust." +
                 "\nA greedy smile creeps across it's face, and then it lets out a bellowing roar!" +
                 "\n\nPrepare for battle, or run!");
-        System.out.println("1. Prepare for battle!");
-        System.out.println("2. Run!");
+        System.out.println("1. Attack");
+        System.out.println("2. Run");
         int ogreFight = Main.readInt("", 2);
         if (ogreFight == 1) {
-            System.out.print("LETS GO TO BATTLE");
+            System.out.print("\nLETS GO TO BATTLE!\n\n");
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            BattleStats(enemy);
             battle(enemy);
         } else if (ogreFight == 2) {
-            System.out.print("RUN");
+            System.out.print("\nRUN");
         }
 
 
