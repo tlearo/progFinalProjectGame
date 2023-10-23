@@ -114,7 +114,7 @@ public class Main {
                         }
                         break;
                     } else if (eventSymbol == '~' && event.hasBoat && player.getYLocation() > 0) {
-                        player.setYLocation(player.getYLocation() - 1);
+                        player.setYLocation(player.getYLocation() + 1);
                         break;
                     }
 
@@ -135,7 +135,7 @@ public class Main {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }
-                    if (player.getYLocation() < gameMap.mapSize - 1) {
+                    if (player.getYLocation() < gameMap.mapSize + 1) {
                         player.setYLocation(player.getYLocation() + 1);
                     } else {
                         invalidMove = true;
