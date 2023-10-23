@@ -104,6 +104,56 @@ public class Event {
         System.out.println("\nAs you trek up on the mountain you see a young lady with a sword in hand watching over the horizon" +
                 "\nYou call out to her and she looks back, showing off her sharp teeth and hissing at you.");
         Thread.sleep(1500);
+        System.out.println("'Are you here for the dragon?' she says...\n");
+        Thread.sleep(1500);
+        System.out.println("\n1. Yes, I am here for the dragon");
+        System.out.println("2. No, Im just lost");
+        int suitorIntro = Main.readInt("", 2);
+        if (suitorIntro == 1) {
+            System.out.println("\n\n'That dragon is mine! You must defeat me before you can even see them!'");
+            Thread.sleep(1500);
+            System.out.println("\nPrepare for battle, or run?");
+            System.out.println("1. Attack");
+            System.out.println("2. Run");
+            int suitorFight = Main.readInt("", 2);
+            if (suitorFight == 1) {
+                System.out.print("\nLETS GO TO BATTLE!\n\n");
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                BattleStats(enemy);
+                battle(enemy);
+            } else if (suitorFight == 2) {
+                System.out.print("\n");
+                Thread.sleep(1500);
+                System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her");
+            }
+        } else if (suitorIntro == 2) {
+            System.out.print("\n'That's a lie! You are here for the dragon!'");
+            Thread.sleep(1500);
+            System.out.println("'You must defeat me before you can even see them!'\n");
+            System.out.println("\nPrepare for battle, or run?");
+            System.out.println("1. Attack");
+            System.out.println("2. Run");
+            int suitorFight = Main.readInt("", 2);
+            if (suitorFight == 1) {
+                System.out.print("\nLETS GO TO BATTLE!\n\n");
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                BattleStats(enemy);
+                battle(enemy);
+            } else if (suitorFight == 2) {
+                System.out.print("\n");
+                Thread.sleep(1500);
+                System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her");
+
+            }
+        }
     }
 
     public int randomAttackPower;
