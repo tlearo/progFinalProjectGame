@@ -98,16 +98,117 @@ public class Event {
         Display.location(player);
         player.printInventory();
     }
+    private void handleSuitor(Player player) {
+        System.out.println("testing suitor");
+    }
+    public int randomAttackPower;
 
-    //Fairy circle event
-    private void handleFairyCircle(Player player) {
-        System.out.println("testing Fairy circle");
+    //Random Number Generator method
+    public int RandomNumber() {
+        int minDamage = 0;
+        int maxDamage = 30;
+        randomAttackPower = (int) (Math.floor(Math.random() * 31));
+        return randomAttackPower;
     }
 
+    //Battle stats method
+    public void BattleStats(Enemy enemy) {
+        Display.name(player);
+        Display.health(player);
+        Display.attack(player);
+        System.out.println("-----------------");
+        Display.name(enemy);
+        Display.health(enemy);
+    }
+    public void battle(Enemy enemy) throws InterruptedException {
+        System.out.println("\nYou attacked the "+ enemy.getEnemyName() +" and did "+player.getAttackDamage()+" damage!");
+
+        enemy.setCurrentHealth(enemy.getCurrentHealth() -  player.getAttackDamage());
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (enemy.getCurrentHealth()<1){
+            System.out.println("\nThe "+ enemy.getEnemyName() +" fell to its knees as you attack them in one big blow");
+            System.out.println("\nAfter all your valiant efforts, you have won the battle!");
+            Thread.sleep(1500);
+            System.out.println("\nYou scour around their body and find 100 gold!");
+            displayPlayerInfo(player);
+        }
+        if (enemy.getCurrentHealth()>0){
+            int EnemyDamage;
+            EnemyDamage = (enemy.getAttackDamage() + (new java.util.Random().nextInt(10)));
+            System.out.println("\nThe "+ enemy.getEnemyName() +" attacked for "+EnemyDamage+" damage!\n");
+            player.setCurrentHealth(player.getCurrentHealth() - EnemyDamage);
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            BattleStats(enemy);
+
+            if(player.getCurrentHealth()<1) {
+                System.out.println("\nYou lost the fight!\nYou have died! Game over.");
+                System.exit(0);
+            } else if (player.getCurrentHealth()>0){
+                System.out.println("\nDo you want to keep attacking the "+enemy.getEnemyName()+"?");
+                System.out.println("\n1. Attack\n2. Run");
+                int ContinueFight = Main.readInt("", 2);
+                if (ContinueFight == 1) {
+                    battle(enemy);
+                }else if (ContinueFight == 2) {
+                    System.out.print("\nAs you continue to fight the "+ enemy.getEnemyName() +", you find yourself getting restless...");
+                    Thread.sleep(1500);
+                    System.out.print("\nYou decide its best not to continue fighting this Ogre and you shall return when you are ready!");
+                    displayPlayerInfo(player);
+                }
+            }
+        }
+    }
+
+    //Fairy circle event
+    private void handleFairyCircle(Player player) throws InterruptedException {
+        int attackPower = RandomNumber();
+        Enemy enemy = new Enemy("Evil Fairy", 100, 100, attackPower);
+        System.out.println("\nYou emerge out of the scrub into a grassy clearing.\n" +
+                "You see a large circle of red and white spotted mushrooms surrounding a small tree stump.\n" +
+                "Nestled within the stump is a beautiful ruby red gemstone! It's iridescent glow reminds you of the dragon's lovely eyes.\n" +
+                "You feel the strong urge to covet this gemstone!\n" +
+                "Do you enter the mushroom circle to take it?\n");
+        System.out.println("1. Enter");
+        System.out.println("2. Leave");
+        int enterCircle = Main.readInt("", 2);
+        if (enterCircle == 1) {
+            System.out.print("\nYou step over the line of mushrooms, but as soon as your foot touches \n" +
+                    "the ground on the other side a swirl of flower petals and leaves rush upwards in front of you!\n" +
+                    "When the air clears, you see a beautiful fairy queen standing before you.\n" +
+                    "'How dare you enter my circle without my permission! Leave or you shall die!'\n");
+            System.out.println("1. Attack");
+            System.out.println("2. Run");
+            int fairyFight = Main.readInt("", 2);
+            if (fairyFight == 1) {
+                System.out.print("\nLETS GO TO BATTLE!\n\n");
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                BattleStats(enemy);
+                battle(enemy);
+            } else if (fairyFight == 2) {
+                System.out.print("\nRUN");
+            } else if (enterCircle == 2) {
+                System.out.print("\nYou decide to give the mushroom circle a wide berth.\n");
+            }
+        }
+    }
     //Boulder Sword event
     public boolean haveSword = false;
+
     private void handleGetSword(Player player) throws InterruptedException {
-        while (haveSword == false) {
+        while (!haveSword) {
             System.out.println("\nYou see the hilt of a sword protruding from a crack in a large boulder.");
             Thread.sleep(1000);
             System.out.println("Would you like to pull it out?");
@@ -283,81 +384,14 @@ public class Event {
         }
     }
 
-    //Suitor event
-    private void handleSuitor(Player player) {
-        System.out.println("testing suitor");
-    }
-    public int randomAttackPower;
-
-    //Random Number Generator method
-    public int RandomNumber() {
-        int minDamage = 0;
-        int maxDamage = 30;
-        randomAttackPower = (int) (Math.floor(Math.random() * 31));
-        return randomAttackPower;
-    }
-
-    //Battle stats method
-    public void BattleStats(Enemy enemy) {
-        Display.name(player);
-        Display.health(player);
-        Display.attack(player);
-        System.out.println("-----------------");
-        Display.name(enemy);
-        Display.health(enemy);
-    }
-
-    //getter
-
-    public void battle(Enemy enemy){
-        System.out.println("\nYou attacked the monster and did "+player.getAttackDamage()+" damage!");
-
-        enemy.setCurrentHealth(enemy.getCurrentHealth() -  player.getAttackDamage());
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        if (enemy.getCurrentHealth()<1){
-            System.out.println("\nWIN");
-//            win();
-        }
-        if (enemy.getCurrentHealth()>0){
-            int EnemyDamage;
-            EnemyDamage = (enemy.getAttackDamage() + (new java.util.Random().nextInt(10)));
-            System.out.println("\nThe monster attacked for "+EnemyDamage+" damage!\n");
-            player.setCurrentHealth(player.getCurrentHealth() - EnemyDamage);
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            BattleStats(enemy);
-
-            if(player.getCurrentHealth()<1) {
-                System.out.println("\nYou lost the fight!\n");
-//                dead
-            } else if (player.getCurrentHealth()>0){
-                System.out.println("\nDo you want to keep attacking the "+enemy.getEnemyName()+"?");
-                System.out.println("\n1. Attack\n2. Run");
-                int ContinueFight = Main.readInt("", 2);
-                if (ContinueFight == 1) {
-                    battle(enemy);
-                }else if (ContinueFight == 2) {
-                    System.out.println("\nRUN\n");
-                }
-            }
-    }
-    }
-
     //Ogre event
-    private void handleOgre(Player player) {
+    private void handleOgre(Player player) throws InterruptedException {
         int attackPower = RandomNumber();
         Enemy enemy = new Enemy("Ogre", 200, 200, attackPower);
         System.out.println("\nYou step into a dusty clearing, the wind whips the dirt up around you momentarily obscuring your vision." +
-                "\nAfter the dust settles you see an enormous green Ogre standing before you. It towers over you, and it's eyes gleam with bloodlust." +
-                "\nA greedy smile creeps across it's face, and then it lets out a bellowing roar!" +
+                "\nAfter the dust settles you see an enormous green Ogre standing before you. It towers over you, and it's eyes gleam with bloodlust.");
+        Thread.sleep(1500);
+        System.out.println("A greedy smile creeps across it's face, and then it lets out a bellowing roar!" +
                 "\n\nPrepare for battle, or run!");
         System.out.println("1. Attack");
         System.out.println("2. Run");
@@ -372,11 +406,10 @@ public class Event {
             BattleStats(enemy);
             battle(enemy);
         } else if (ogreFight == 2) {
-            System.out.print("\nRUN");
+            System.out.print("\nHis roar gave you a fright and decided not to pick this battle this time...");
+            Thread.sleep(1500);
+            System.out.print("\nYou shall return when you are ready!");
         }
-
-
-
     }
 
     //Enchanted book cavern event
