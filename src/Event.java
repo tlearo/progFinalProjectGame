@@ -98,9 +98,14 @@ public class Event {
         Display.location(player);
         player.printInventory();
     }
-    private void handleSuitor(Player player) {
-        System.out.println("testing suitor");
+    private void handleSuitor(Player player) throws InterruptedException {
+        int attackPower = RandomNumber();
+        Enemy enemy = new Enemy("Suitor", 150, 150, attackPower);
+        System.out.println("\nAs you trek up on the mountain you see a young lady with a sword in hand watching over the horizon" +
+                "\nYou call out to her and she looks back, showing off her sharp teeth and hissing at you.");
+        Thread.sleep(1500);
     }
+
     public int randomAttackPower;
 
     //Random Number Generator method
@@ -345,8 +350,8 @@ public class Event {
     public void handleShop(Player player) throws InterruptedException {
         // Add items to the shop's inventory with costs (you can do this once at initialization)
         if (shopInventory.getItems().isEmpty()) {
-            shopInventory.addItem("Potion", "Restores full health", 50, player.getMaxHealth()); // Set cost and max health here
-            shopInventory.addItem("Armor", "Provides extra defense and +50 health", 50, 0);
+            shopInventory.addItem("Potion", "Heals you fully when your health is 0", 50, player.getMaxHealth()); // Set cost and max health here
+            shopInventory.addItem("Armor", "Boosts your max health (+50)", 50, 50);
             shopInventory.addItem("Boat", "Can be used to cross a flowing river", 100, 0);
         }
 
@@ -382,7 +387,7 @@ public class Event {
                             // Deduct the cost from the player's gold
                             player.subtractGold(cost);
 
-                            if (hpGranted > 0) {
+                            if (choiceInput.equals("2")) {
                                 // Update the player's health when buying Armor
                                 player.setCurrentHealth(player.getCurrentHealth() + hpGranted);
                                 player.setMaxHealth(player.getMaxHealth() + hpGranted);
