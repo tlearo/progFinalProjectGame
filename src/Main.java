@@ -71,7 +71,7 @@ public class Main {
 
 
         // Moving switch statement
-        while (true) {
+        while (player.getCurrentHealth() > 0) {
             char eventSymbol = gameMap.getEventSymbol(player.getXLocation(), player.getYLocation());
             gameMap.printMap(player);
             System.out.println("");
@@ -138,7 +138,13 @@ public class Main {
                 case "q":
                     System.exit(0);
                 default:
-                    System.out.println("\nThe atmosphere must be getting to you! You can only enter W/A/S/D, or Q to quit!\n");
+                    if (player.getCurrentHealth() > 0) {
+                        System.out.println("\nThe atmosphere must be getting to you! You can only enter W/A/S/D, or Q to quit!\n");
+                    }
+            }
+            while (player.getCurrentHealth() <= 0) {
+                System.out.println("You have died! Game over.");
+                System.exit(0);
             }
         }
     }

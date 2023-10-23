@@ -336,7 +336,7 @@ public class Event {
             BattleStats(enemy);
 
             if(player.getCurrentHealth()<1) {
-                System.out.println("\nDEAD\n");
+                System.out.println("\nYou lost the fight!\n");
 //                dead
             } else if (player.getCurrentHealth()>0){
                 System.out.println("\nDo you want to keep attacking the "+enemy.getEnemyName()+"?");
