@@ -84,7 +84,7 @@ public class Main {
             player.printInventory();
             event.handleEvent(eventSymbol);
             System.out.println("\nWhere would you like to move? W/A/S/D (Type 'Q' to quit): ");
-            String move = userInput.next();
+            String move = userInput.next().toLowerCase();
             boolean invalidMove = false;
             switch (move) {
                 case "w":
