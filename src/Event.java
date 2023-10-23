@@ -385,6 +385,7 @@ public class Event {
                                 // Update the player's health when buying Armor
                                 player.setCurrentHealth(player.getCurrentHealth() + hpGranted);
                                 player.setMaxHealth(player.getMaxHealth() + hpGranted);
+                                player.getInventory().addItem(selectedItem.getName(), selectedItem.getDescription(), cost, hpGranted);
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
                                 System.out.println("\nYour health is increased by " + hpGranted + " HP.\n");
                                 Thread.sleep(1000);
