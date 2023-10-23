@@ -315,9 +315,9 @@ public class Event {
     public void handleShop(Player player) throws InterruptedException {
         // Add items to the shop's inventory with costs (you can do this once at initialization)
         if (shopInventory.getItems().isEmpty()) {
-            shopInventory.addItem("Potion", "Restores some health", 20);
-            shopInventory.addItem("Armor", "Provides extra defense", 50);
-            shopInventory.addItem("Boat", "Can be used to cross a flowing river", 100);
+            shopInventory.addItem("Potion", "Restores full health", 20, player.getMaxHealth()); // Set cost and max health here
+            shopInventory.addItem("Armor", "Provides extra defense", 50, 50);
+            shopInventory.addItem("Boat", "Can be used to cross a flowing river", 100 ,0);
         }
 
         // Display the shop's inventory
@@ -352,18 +352,19 @@ public class Event {
                             // Deduct the cost from the player's gold
                             player.subtractGold(cost);
 
-                            // Check if the item grants HP (Armor)
+                            // Check if the item grants HP (Potion)
                             if (hpGranted > 0) {
-                                // Increase the player's health by the HP granted
-                                player.setCurrentHealth(player.getCurrentHealth() + hpGranted);
+                                // Restore the player's health to full (max health)
+                                player.setCurrentHealth(player.getMaxHealth());
 
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
-                                System.out.println("\nYou gained " + hpGranted + " HP.\n");
+                                System.out.println("\nYour health is restored to full.\n");
                                 Thread.sleep(1000);
+                                Display.health(player);
                                 Display.gold(player);
                             } else {
-                                // Add the purchased item to the player's inventory (e.g., Potion or Boat)
-                                player.addItemToInventory(selectedItem.getName(), selectedItem.getDescription());
+                                // Add the purchased item to the player's inventory (e.g., Armor or Boat)
+                                player.getInventory().addItem(selectedItem.getName(), selectedItem.getDescription(), cost, hpGranted);
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
                                 Thread.sleep(1000);
                                 Display.gold(player);

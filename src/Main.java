@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.List;
 
 public class Main {
     private static Player player;
@@ -142,12 +143,34 @@ public class Main {
                         System.out.println("\nThe atmosphere must be getting to you! You can only enter W/A/S/D, or Q to quit!\n");
                     }
             }
-            while (player.getCurrentHealth() <= 0) {
-                System.out.println("You have died! Game over.");
-                System.exit(0);
+            Inventory playerInventory = player.getInventory();
+            boolean hasHealthPotion = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Health Potion"));
+
+            if (player.getCurrentHealth() <= 0) {
+                if (hasHealthPotion) {
+                    System.out.println("You have zero health and you have a health potion. Do you want to drink it? (yes/no)");
+                    String response = userInput.next();
+
+                    if (response.equalsIgnoreCase("yes")) {
+                        // Player chooses to drink the health potion
+                        List<Inventory.Item> items = playerInventory.getItems();
+                        for (Inventory.Item item : items) {
+                            if (item.getName().equals("Health Potion")) {
+                                player.healPlayer(item.getHp());
+                                playerInventory.removeItem(item);
+                                System.out.println("You drank the health potion and gained " + item.getHp() + " health points. Your current health is " + player.getCurrentHealth() + ".");
+                                break; // You should exit the loop here
+                            }
+                        }
+                    }
+                } else {
+                    System.out.println("You have died! Game over.");
+                    System.exit(0);
+                }
             }
         }
     }
+
 
     static void clearScreen() {
         for (int i = 1; i <= 10; i++) {

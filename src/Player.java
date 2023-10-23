@@ -74,7 +74,7 @@ public class Player {
     }
 
     public void addItemToInventory(String itemName, String itemDescription) {
-        inventory.addItem(itemName, itemDescription,0);
+        inventory.addItem(itemName, itemDescription,0,0);
     }
 
     public Inventory getInventory() {
@@ -107,4 +107,7 @@ public class Player {
     }
 
 }
+
+
+
 

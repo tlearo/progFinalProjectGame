@@ -7,7 +7,7 @@ public class Inventory {
         private String description;
         private int cost;
         private int hp;
-        public Item(String name, String description, int cost) {
+        public Item(String name, String description, int cost,int hp) {
             this.name = name;
             this.description = description;
             this.cost = cost;
@@ -42,8 +42,8 @@ public class Inventory {
         this.items = new ArrayList<>();
     }
 
-    public boolean addItem(String name, String description, int cost) {
-        Item item = new Item(name, description, cost);
+    public boolean addItem(String name, String description, int cost, int hp) {
+        Item item = new Item(name, description, cost, hp);
         items.add(item);
         return true;
     }
@@ -56,3 +56,4 @@ public class Inventory {
         return items;
     }
 }
+
