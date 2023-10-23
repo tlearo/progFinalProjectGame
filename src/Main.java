@@ -101,19 +101,25 @@ public class Main {
                     }
                     break;
                 case "a":
-                    if (eventSymbol == '7' || eventSymbol == '@' || eventSymbol == '~') {
+                    if (eventSymbol == '7' || eventSymbol == '@' || (eventSymbol == '~' && !event.hasBoat)) {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }
-                    if (player.getYLocation() > 0) {
+                    if (eventSymbol != '~') {
+                        if (player.getYLocation() > 0) {
+                            player.setYLocation(player.getYLocation() - 1);
+                        } else {
+                            invalidMove = true;
+                            System.out.println("\nThe path is too treacherous that way...\n");
+                        }
+                        break;
+                    } else if (eventSymbol == '~' && event.hasBoat && player.getYLocation() > 0) {
                         player.setYLocation(player.getYLocation() - 1);
-                    } else {
-                        invalidMove = true;
-                        System.out.println("\nThe path is too treacherous that way...\n");
+                        break;
                     }
-                    break;
+
                 case "s":
-                    if (eventSymbol == '~' || eventSymbol == 'E' || eventSymbol == '9') {
+                    if ((eventSymbol == '~' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '9') {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }
@@ -125,7 +131,7 @@ public class Main {
                     }
                     break;
                 case "d":
-                    if (eventSymbol == '~' || eventSymbol == 'E' || eventSymbol == '4') {
+                    if ((eventSymbol == '~' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '4') {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }

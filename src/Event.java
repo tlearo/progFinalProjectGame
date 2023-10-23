@@ -7,7 +7,7 @@ public class Event {
     private Enemy enemy;
     private Inventory inventory; //constructor
 
-    private boolean hasBoat;
+    public boolean hasBoat;
     gameMap gameMap = new gameMap(); // Initializing gameMap
 
     public Event(Player player) {
