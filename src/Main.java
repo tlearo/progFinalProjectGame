@@ -112,12 +112,12 @@ public class Main {
                             invalidMove = true;
                             System.out.println("\nThe path is too treacherous that way...\n");
                         }
-                        break;
                     } else if (eventSymbol == '~' && event.hasBoat && player.getYLocation() > 0) {
                         player.setYLocation(player.getYLocation() - 1);
-                        break;
+                    } else {
+                        System.out.println("\nYou need a boat to cross the river!\n");
                     }
-
+                    break;
                 case "s":
                     if ((eventSymbol == '~' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '9') {
                         System.out.println("\nYou can't go that way!\n");
@@ -127,7 +127,7 @@ public class Main {
                         player.setXLocation(player.getXLocation() + 1);
                     } else {
                         invalidMove = true;
-                        System.out.println("\nhe path is too treacherous that way...\n");
+                        System.out.println("\nThe path is too treacherous that way...\n");
                     }
                     break;
                 case "d":

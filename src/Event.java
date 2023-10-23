@@ -244,7 +244,6 @@ public class Event {
     //Crossing river event
     private void handleRiver(Player player) {
         boolean hasBoat = inventory.getItems().stream().anyMatch(item -> item.getName().equals("Boat"));
-        System.out.println(hasBoat);
         if (hasBoat) {
             System.out.println("\nA swiftly flowing river surges in front of you. " +
                     "With the boat you purchased, you're able to travel across it!");
