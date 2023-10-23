@@ -53,6 +53,7 @@ public class Event {
                 break;
             case 'D':
                 handleDragon(player);
+                break;
             case '1':
                 handleMarsh(player);
                 break;
