@@ -267,8 +267,38 @@ public class Event {
     }
 
     //Spike trap event
-    private void handleSpikeTrap(Player player) {
-        System.out.println("testing spikes");
+    public boolean enteredSpikeTrap = false;
+    public boolean firstVisitSpikeTrap = true;
+    private void handleSpikeTrap(Player player) throws InterruptedException {
+        if (firstVisitSpikeTrap) {
+            System.out.println("\nYou emerge into a clearing, in the middle of which lays a pile of forest debris.");
+            Thread.sleep(1000);
+            System.out.println("\nWhat do you do?\n");
+            System.out.println("1. Confidently walk across the debris");
+            System.out.println("2. Avoid the debris");
+            int spikeTrapAnswer = Main.readInt("", 2);
+
+            if (spikeTrapAnswer == 1) {
+                StoryLore.Separator(5);
+                System.out.println("\nYou stride across the debris without a care in the world.\n" +
+                        "Suddenly, the ground below you gives out!\n" +
+                        "You tumble downwards into a pit of sharpened spikes and take 20 damage!\n" +
+                        "You manage to crawl out of the pit having learned your lesson regarding reckless behaviour.\n");
+                player.setCurrentHealth(player.getCurrentHealth() - 20);
+                Thread.sleep(1000);
+                displayPlayerInfo(player);
+            } else if (spikeTrapAnswer == 2) {
+                StoryLore.Separator(5);
+                System.out.println("You carefully crawl across the surface of the quicksand and escape, avoiding any bodily harm.\n");
+                Thread.sleep(1000);
+                displayPlayerInfo(player);
+            }
+            enteredSpikeTrap = true;
+            firstVisitSpikeTrap = false;
+        } else if (!firstVisitSpikeTrap){
+            System.out.println("\nBefore you is a dangerous spike trap. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
+        }
+
     }
 
     //Petalling forest event
@@ -315,9 +345,9 @@ public class Event {
     public void handleShop(Player player) throws InterruptedException {
         // Add items to the shop's inventory with costs (you can do this once at initialization)
         if (shopInventory.getItems().isEmpty()) {
-            shopInventory.addItem("Potion", "Restores full health", 20, player.getMaxHealth()); // Set cost and max health here
-            shopInventory.addItem("Armor", "Provides extra defense", 50, 50);
-            shopInventory.addItem("Boat", "Can be used to cross a flowing river", 100 ,0);
+            shopInventory.addItem("Potion", "Restores full health", 50, player.getMaxHealth()); // Set cost and max health here
+            shopInventory.addItem("Armor", "Provides extra defense and +50 health", 50, 0);
+            shopInventory.addItem("Boat", "Can be used to cross a flowing river", 100, 0);
         }
 
         // Display the shop's inventory
@@ -352,18 +382,17 @@ public class Event {
                             // Deduct the cost from the player's gold
                             player.subtractGold(cost);
 
-                            // Check if the item grants HP (Potion)
                             if (hpGranted > 0) {
-                                // Restore the player's health to full (max health)
-                                player.setCurrentHealth(player.getMaxHealth());
-
+                                // Update the player's health when buying Armor
+                                player.setCurrentHealth(player.getCurrentHealth() + hpGranted);
+                                player.setMaxHealth(player.getMaxHealth() + hpGranted);
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
-                                System.out.println("\nYour health is restored to full.\n");
+                                System.out.println("\nYour health is increased by " + hpGranted + " HP.\n");
                                 Thread.sleep(1000);
                                 Display.health(player);
                                 Display.gold(player);
                             } else {
-                                // Add the purchased item to the player's inventory (e.g., Armor or Boat)
+                                // Add the purchased item to the player's inventory (e.g., Potion or Boat)
                                 player.getInventory().addItem(selectedItem.getName(), selectedItem.getDescription(), cost, hpGranted);
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
                                 Thread.sleep(1000);
@@ -511,6 +540,7 @@ public class Event {
                 StoryLore.Separator(5);
                 System.out.println("You manage to push through and escape, but the quicksand crushes your body as you do so, and you take 20 damage.\n");
                 Thread.sleep(1000);
+                player.setCurrentHealth(player.getCurrentHealth() - 20);
                 displayPlayerInfo(player);
             } else if (quickSandAnswer == 2) {
                 StoryLore.Separator(5);
