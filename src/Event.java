@@ -239,8 +239,17 @@ public class Event {
     }
 
     //Crossing river event
+    private Inventory playerInventory;
+    public boolean hasBoat = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Boat"));
     private void handleRiver(Player player) {
-        System.out.println("\nA swiftly flowing river surges in front of you.\nIt would be far too dangerous to try and swim across.");
+        System.out.println(hasBoat);
+        if (hasBoat) {
+            System.out.println("\nA swiftly flowing river surges in front of you." +
+                    "With the boat you purchased you're able to travel across it!");
+        } else if (!hasBoat) {
+            System.out.println("\nA swiftly flowing river surges in front of you.\n" +
+                    "It would be far too dangerous to try and swim across. Perhaps a boat would help?");
+        }
     }
 
     //Cozy Cottage event
