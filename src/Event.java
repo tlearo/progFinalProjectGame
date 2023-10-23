@@ -6,10 +6,13 @@ public class Event {
     private Player player; //assigning relationship to classes
     private Enemy enemy;
     private Inventory inventory; //constructor
+
+    private boolean hasBoat;
     gameMap gameMap = new gameMap(); // Initializing gameMap
 
     public Event(Player player) {
         this.player = player;
+        this.inventory = player.getInventory(); // Assign the player's inventory to the Event's inventory
     } //creating an instance of player for event
 
     //cases for gameMap
@@ -239,19 +242,17 @@ public class Event {
     }
 
     //Crossing river event
-    private Inventory playerInventory;
-    public boolean hasBoat = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Boat"));
     private void handleRiver(Player player) {
+        boolean hasBoat = inventory.getItems().stream().anyMatch(item -> item.getName().equals("Boat"));
         System.out.println(hasBoat);
         if (hasBoat) {
-            System.out.println("\nA swiftly flowing river surges in front of you." +
-                    "With the boat you purchased you're able to travel across it!");
-        } else if (!hasBoat) {
+            System.out.println("\nA swiftly flowing river surges in front of you. " +
+                    "With the boat you purchased, you're able to travel across it!");
+        } else {
             System.out.println("\nA swiftly flowing river surges in front of you.\n" +
                     "It would be far too dangerous to try and swim across. Perhaps a boat would help?");
         }
     }
-
     //Cozy Cottage event
     private void handleCottage(Player player) throws InterruptedException {
         System.out.println("\nYou see a quaint, cozy cottage. It looks to be abandoned.");
