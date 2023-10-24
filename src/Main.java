@@ -22,7 +22,7 @@ public class Main {
             System.out.println("Your name is " + playerName + ", correct?");
             System.out.println("1. Yes");
             System.out.println("2. No");
-            int nameConfirm = readInt("", 2);
+            int nameConfirm = readInt("", 1,2);
             if (nameConfirm == 1)
                 nameSet = true;
         } while (!nameSet);
@@ -36,7 +36,7 @@ public class Main {
             System.out.println("1. Guardian (High health, low attack)");
             System.out.println("2. Assassin (Low health, high attack");
             System.out.println("3. Warrior (Average health, average attack)");
-            int chooseClass = readInt("", 3);
+            int chooseClass = readInt("", 1,3);
             System.out.println("");
             if (chooseClass == 1) {
                 playerClass = "Guardian";
@@ -184,20 +184,29 @@ public class Main {
         }
     }
 
-    public static int readInt(String prompt, int userChoices) {
-        Scanner userInput = new Scanner(System.in);
-        int input;
+    public static int readInt(String prompt, int min, int max) {
+        Scanner input = new Scanner(System.in);
+        int choice = 0;
+        boolean isValid = false;
+
         do {
-            System.out.println(prompt);
-            try {
-                input = Integer.parseInt(userInput.next());
-            } catch (Exception e) {
-                input = -1;
-                System.out.println("\nPlease enter a number!\n");
+            System.out.print(prompt);
+            if (input.hasNextInt()) {
+                choice = input.nextInt();
+                if (choice >= min && choice <= max) {
+                    isValid = true;
+                } else {
+                    System.out.println("Invalid option. Please enter a valid choice.");
+                }
+            } else {
+                input.next(); // Clear the invalid input
+                System.out.println("Invalid input. Please enter a number.");
             }
-        } while (input < 1 || input > userChoices);
-        return input;
+        } while (!isValid);
+
+        return choice;
     }
+    
 //    public static void displayPlayerInfo(Player player) {
 //        gameMap gameMap = new gameMap(); // Initializing gameMap
 //        System.out.println("");

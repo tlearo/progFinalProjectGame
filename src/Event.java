@@ -159,7 +159,7 @@ public class Event {
             } else if (player.getCurrentHealth() > 0) {
                 System.out.println("\nDo you want to keep attacking the " + enemy.getEnemyName() + "?");
                 System.out.println("\n1. Attack\n2. Run");
-                int ContinueFight = Main.readInt("", 2);
+                int ContinueFight = Main.readInt("", 1,2);
                 if (ContinueFight == 1) {
                     battle(enemy);
                 } else if (ContinueFight == 2) {
@@ -183,7 +183,7 @@ public class Event {
                 "Do you enter the mushroom circle to take it?\n");
         System.out.println("1. Enter");
         System.out.println("2. Leave");
-        int enterCircle = Main.readInt("", 2);
+        int enterCircle = Main.readInt("", 1,2);
         if (enterCircle == 1) {
             System.out.print("\nYou step over the line of mushrooms, but as soon as your foot touches \n" +
                     "the ground on the other side a swirl of flower petals and leaves rush upwards in front of you!\n" +
@@ -191,7 +191,7 @@ public class Event {
                     "'How dare you enter my circle without my permission! Leave or you shall die!'\n");
             System.out.println("1. Attack");
             System.out.println("2. Run");
-            int fairyFight = Main.readInt("", 2);
+            int fairyFight = Main.readInt("", 1,2);
             if (fairyFight == 1) {
                 System.out.print("\nLETS GO TO BATTLE!\n\n");
                 try {
@@ -219,7 +219,7 @@ public class Event {
             System.out.println("Would you like to pull it out?");
             System.out.println("1. Yes");
             System.out.println("2. No");
-            int swordAnswer = Main.readInt("", 2);
+            int swordAnswer = Main.readInt("", 1,2);
             if (swordAnswer == 1) {
                 StoryLore.Separator(5);
                 System.out.println("\nWith one swift, strong motion you free the sword from it's stone!");
@@ -265,7 +265,7 @@ public class Event {
         System.out.println("\nWould you like to rest?");
         System.out.println("1. Yes");
         System.out.println("2. No");
-        int cottageAnswer = Main.readInt("", 2);
+        int cottageAnswer = Main.readInt("", 1,2);
         if (cottageAnswer == 1) {
             player.setCurrentHealth(player.getMaxHealth());
             displayPlayerInfo(player);
@@ -289,7 +289,7 @@ public class Event {
             System.out.println("\nWhat do you do?\n");
             System.out.println("1. Confidently walk across the debris");
             System.out.println("2. Avoid the debris");
-            int spikeTrapAnswer = Main.readInt("", 2);
+            int spikeTrapAnswer = Main.readInt("", 1,2);
 
             if (spikeTrapAnswer == 1) {
                 StoryLore.Separator(5);
@@ -327,7 +327,7 @@ public class Event {
             System.out.println("Would you like to make a flower bouquet for your lover?");
             System.out.println("1. Yes");
             System.out.println("2. No");
-            int swordAnswer = Main.readInt("", 2);
+            int swordAnswer = Main.readInt("", 1,2);
             if (swordAnswer == 1) {
                 displayPlayerInfo(player);
                 System.out.println("\nYou carefully gather all her favourite flowers into a gorgeous bouquet");
@@ -440,7 +440,7 @@ public class Event {
                 "\n\nPrepare for battle, or run!");
         System.out.println("1. Attack");
         System.out.println("2. Run");
-        int ogreFight = Main.readInt("", 2);
+        int ogreFight = Main.readInt("", 1,2);
         if (ogreFight == 1) {
             System.out.print("\nLETS GO TO BATTLE!\n\n");
             try {
@@ -475,7 +475,7 @@ public class Event {
             System.out.println("1. Yes");
             System.out.println("2. No");
             System.out.println("3. Inspect the podium");
-            int bookAnswer = Main.readInt("", 3);
+            int bookAnswer = Main.readInt("", 1,3);
             if (bookAnswer == 1) {
                 System.out.println("\nYou grab the book off the podium and hear a trigger!");
                 //take damage
@@ -502,7 +502,7 @@ public class Event {
                 System.out.println("1. A slab of rock");
                 System.out.println("2. A pile of dirt");
                 Thread.sleep(2000);
-                int bookTrapAnswer = Main.readInt("", 2);
+                int bookTrapAnswer = Main.readInt("", 1,2);
                 if (bookTrapAnswer == 1) {
                     System.out.println("You grab the slab of rock and quickly lift the book to swiftly put the rock in replacement");
                     Thread.sleep(1000);
@@ -548,14 +548,14 @@ public class Event {
             Thread.sleep(1500);
             System.out.println("\n1. Yes, I am here for the dragon");
             System.out.println("2. No, Im just lost");
-            int suitorIntro = Main.readInt("", 2);
+            int suitorIntro = Main.readInt("", 1,2);
             if (suitorIntro == 1) {
                 System.out.println("\n\n'That dragon is mine! You must defeat me before you can even see them!'");
                 Thread.sleep(1500);
                 System.out.println("\nPrepare for battle, or run?");
                 System.out.println("1. Attack");
                 System.out.println("2. Run");
-                int suitorFight = Main.readInt("", 2);
+                int suitorFight = Main.readInt("", 1,2);
                 if (suitorFight == 1) {
                     System.out.print("\nLETS GO TO BATTLE!\n\n");
                     try {
@@ -577,7 +577,7 @@ public class Event {
                 System.out.println("\nPrepare for battle, or run?");
                 System.out.println("1. Attack");
                 System.out.println("2. Run");
-                int suitorFight = Main.readInt("", 2);
+                int suitorFight = Main.readInt("", 1,2);
                 if (suitorFight == 1) {
                     System.out.print("\nLETS GO TO BATTLE!\n\n");
                     try {
@@ -616,7 +616,7 @@ public class Event {
             System.out.println("\nHow do you want to react?\n");
             System.out.println("1. Muscle your way out of it");
             System.out.println("2. Slowly crawl across the surface");
-            int quickSandAnswer = Main.readInt("", 2);
+            int quickSandAnswer = Main.readInt("", 1,2);
 
             if (quickSandAnswer == 1) {
                 StoryLore.Separator(5);
