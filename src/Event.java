@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Scanner;
+
 //Event Squares
 public class Event {
     Scanner userInput = new Scanner(System.in); //implement scanner input
@@ -91,7 +92,7 @@ public class Event {
     }
 
     //Method to display stuff
-    public static void displayPlayerInfo(Player player){
+    public static void displayPlayerInfo(Player player) {
         gameMap gameMap = new gameMap();
         gameMap.printMap(player);
         Display.name(player);
@@ -122,27 +123,28 @@ public class Event {
         Display.name(enemy);
         Display.health(enemy);
     }
-    public void battle(Enemy enemy) throws InterruptedException {
-        System.out.println("\nYou attacked the "+ enemy.getEnemyName() +" and did "+player.getAttackDamage()+" damage!");
 
-        enemy.setCurrentHealth(enemy.getCurrentHealth() -  player.getAttackDamage());
+    public void battle(Enemy enemy) throws InterruptedException {
+        System.out.println("\nYou attacked the " + enemy.getEnemyName() + " and did " + player.getAttackDamage() + " damage!");
+
+        enemy.setCurrentHealth(enemy.getCurrentHealth() - player.getAttackDamage());
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        if (enemy.getCurrentHealth()<1){
-            System.out.println("\nThe "+ enemy.getEnemyName() +" fell to its knees as you attack them in one big blow");
+        if (enemy.getCurrentHealth() < 1) {
+            System.out.println("\nThe " + enemy.getEnemyName() + " fell to its knees as you attack them in one big blow");
             System.out.println("\nAfter all your valiant efforts, you have won the battle!");
             Thread.sleep(1500);
             System.out.println("\nYou scour around their body and find 100 gold!");
             displayPlayerInfo(player);
         }
-        if (enemy.getCurrentHealth()>0){
+        if (enemy.getCurrentHealth() > 0) {
             int EnemyDamage;
             EnemyDamage = (enemy.getAttackDamage() + (new java.util.Random().nextInt(10)));
-            System.out.println("\nThe "+ enemy.getEnemyName() +" attacked for "+EnemyDamage+" damage!\n");
+            System.out.println("\nThe " + enemy.getEnemyName() + " attacked for " + EnemyDamage + " damage!\n");
             player.setCurrentHealth(player.getCurrentHealth() - EnemyDamage);
             try {
                 Thread.sleep(1500);
@@ -151,17 +153,17 @@ public class Event {
             }
             BattleStats(enemy);
 
-            if(player.getCurrentHealth()<1) {
+            if (player.getCurrentHealth() < 1) {
                 System.out.println("\nYou lost the fight!\nYou have died! Game over.");
                 System.exit(0);
-            } else if (player.getCurrentHealth()>0){
-                System.out.println("\nDo you want to keep attacking the "+enemy.getEnemyName()+"?");
+            } else if (player.getCurrentHealth() > 0) {
+                System.out.println("\nDo you want to keep attacking the " + enemy.getEnemyName() + "?");
                 System.out.println("\n1. Attack\n2. Run");
                 int ContinueFight = Main.readInt("", 2);
                 if (ContinueFight == 1) {
                     battle(enemy);
-                }else if (ContinueFight == 2) {
-                    System.out.print("\nAs you continue to fight the "+ enemy.getEnemyName() +", you find yourself getting restless...");
+                } else if (ContinueFight == 2) {
+                    System.out.print("\nAs you continue to fight the " + enemy.getEnemyName() + ", you find yourself getting restless...");
                     Thread.sleep(1500);
                     System.out.print("\nYou decide its best not to continue fighting this Ogre and you shall return when you are ready!");
                     displayPlayerInfo(player);
@@ -206,6 +208,7 @@ public class Event {
             }
         }
     }
+
     //Boulder Sword event
     public boolean haveSword = false;
 
@@ -226,7 +229,7 @@ public class Event {
                 player.addItemToInventory("Elven Sword", "A sharp and shiny sword of excellent quality");
                 Thread.sleep(500);
                 haveSword = true;
-                player.setAttackDamage(player.getAttackDamage()+10);
+                player.setAttackDamage(player.getAttackDamage() + 10);
                 break;
             } else if (swordAnswer == 2) {
                 displayPlayerInfo(player);
@@ -243,7 +246,7 @@ public class Event {
 
     //Crossing river event
     private void handleRiver(Player player) {
-        boolean hasBoat = inventory.getItems().stream().anyMatch(item -> item.getName().equals("Boat"));
+        hasBoat = inventory.getItems().stream().anyMatch(item -> item.getName().equals("Boat"));
         if (hasBoat) {
             System.out.println("\nA swiftly flowing river surges in front of you. " +
                     "With the boat you purchased, you're able to travel across it!");
@@ -252,6 +255,7 @@ public class Event {
                     "It would be far too dangerous to try and swim across. Perhaps a boat would help?");
         }
     }
+
     //Cozy Cottage event
     private void handleCottage(Player player) throws InterruptedException {
         System.out.println("\nYou see a quaint, cozy cottage. It looks to be abandoned.");
@@ -277,6 +281,7 @@ public class Event {
     //Spike trap event
     public boolean enteredSpikeTrap = false;
     public boolean firstVisitSpikeTrap = true;
+
     private void handleSpikeTrap(Player player) throws InterruptedException {
         if (firstVisitSpikeTrap) {
             System.out.println("\nYou emerge into a clearing, in the middle of which lays a pile of forest debris.");
@@ -303,7 +308,7 @@ public class Event {
             }
             enteredSpikeTrap = true;
             firstVisitSpikeTrap = false;
-        } else if (!firstVisitSpikeTrap){
+        } else if (!firstVisitSpikeTrap) {
             System.out.println("\nBefore you is a dangerous spike trap. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
         }
 
@@ -311,6 +316,7 @@ public class Event {
 
     //Petalling forest event
     public Boolean haveFlower = false;
+
     private void handleForest(Player player) throws InterruptedException {
         gameMap gameMap = new gameMap(); // Initializing gameMap
         while (haveFlower == false) {
@@ -453,6 +459,7 @@ public class Event {
 
     //Enchanted book cavern event
     public Boolean haveBook = false;
+
     private void handleCavern(Player player) throws InterruptedException {
         gameMap gameMap = new gameMap(); // Initializing gameMap
         while (haveBook == false) {
@@ -529,6 +536,7 @@ public class Event {
     }
 
     public Boolean defeatSuitor = false;
+
     private void handleSuitor(Player player) throws InterruptedException {
         int attackPower = RandomNumber();
         Enemy enemy = new Enemy("Suitor", 150, 150, attackPower);
@@ -585,7 +593,8 @@ public class Event {
                     System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her");
                 }
             }
-        }if (defeatSuitor == true) {
+        }
+        if (defeatSuitor == true) {
             System.out.println("\nYou walk past the suitor that you have slain, and continue to trek along the mountain...");
             Thread.sleep(1000);
         }
@@ -599,6 +608,7 @@ public class Event {
     //Quicksand event
     public boolean enteredQuickSand = false;
     public boolean firstVisitQuickSand = true;
+
     private void handleQuickSand(Player player) throws InterruptedException {
         if (firstVisitQuickSand) {
             System.out.println("\nYou've stumbled into a pit of quicksand!");
@@ -622,7 +632,7 @@ public class Event {
             }
             enteredQuickSand = true;
             firstVisitQuickSand = false;
-        } else if (!firstVisitQuickSand){
+        } else if (!firstVisitQuickSand) {
             System.out.println("\nBefore you is a dangerous pit of quicksand. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
         }
     }

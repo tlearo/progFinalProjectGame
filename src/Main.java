@@ -101,7 +101,7 @@ public class Main {
                     }
                     break;
                 case "a":
-                    if (eventSymbol == '7' || eventSymbol == '@' || (eventSymbol == '~' && !event.hasBoat)) {
+                    if (eventSymbol == '7' || eventSymbol == '@' || eventSymbol == '~' && !event.hasBoat) {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }
