@@ -29,7 +29,7 @@ class gameMap{
             gameMap[0][2] = '2'; //Woods
             gameMap[1][2] = 'X'; //Starting Location
             gameMap[2][2] = '3'; //Sandy Plain
-            gameMap[3][2] = '~'; //River (East direction blocked)
+            gameMap[3][2] = '&'; //River (East direction blocked)
             gameMap[4][2] = '4'; //Green Field (East direction blocked)
 
             gameMap[0][3] = '$'; //Merchant's Shop

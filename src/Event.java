@@ -31,6 +31,9 @@ public class Event {
             case '~':
                 handleRiver(player);
                 break;
+            case '&':
+                handleRiver(player);
+                break;
             case 'C':
                 handleCottage(player);
                 break;
@@ -139,6 +142,7 @@ public class Event {
             System.out.println("\nAfter all your valiant efforts, you have won the battle!");
             Thread.sleep(1500);
             System.out.println("\nYou scour around their body and find 100 gold!");
+            player.addGold(100);
             displayPlayerInfo(player);
         }
         if (enemy.getCurrentHealth() > 0) {
@@ -302,7 +306,8 @@ public class Event {
                 displayPlayerInfo(player);
             } else if (spikeTrapAnswer == 2) {
                 StoryLore.Separator(5);
-                System.out.println("You carefully crawl across the surface of the quicksand and escape, avoiding any bodily harm.\n");
+                System.out.println("Upon inspection you notice the debris is covering a spike trap!\n" +
+                        "You carefully sidle past it; it would've been embarrassing if you had fallen into it.\n");
                 Thread.sleep(1000);
                 displayPlayerInfo(player);
             }

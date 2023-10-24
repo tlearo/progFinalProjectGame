@@ -101,37 +101,45 @@ public class Main {
                     }
                     break;
                 case "a":
-                    if (eventSymbol == '7' || eventSymbol == '@' || eventSymbol == '~' && !event.hasBoat) {
+                    if (eventSymbol == '7' || eventSymbol == '@' || ((eventSymbol == '~' && !event.hasBoat) || (eventSymbol == '&' && !event.hasBoat))) {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }
-                    if (eventSymbol != '~') {
-                        if (player.getYLocation() > 0) {
-                            player.setYLocation(player.getYLocation() - 1);
+                    if (player.getYLocation() > 0) {
+                        player.setYLocation(player.getYLocation() - 1);
+                    } else {
+                        invalidMove = true;
+                        System.out.println("\nThe path is too treacherous that way...\n");
+                    }
+                    break;
+
+                case "s":
+                    if ((eventSymbol == '~' && !event.hasBoat) || (eventSymbol == '&' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '9') {
+                        System.out.println("\nYou can't go that way!\n");
+                        break;
+                    }
+                    if (eventSymbol != '~' && eventSymbol != '&') {
+                        if (player.getXLocation() < gameMap.mapSize - 1) {
+                            player.setXLocation(player.getXLocation() + 1);
                         } else {
                             invalidMove = true;
                             System.out.println("\nThe path is too treacherous that way...\n");
                         }
                         break;
-                    } else if (eventSymbol == '~' && event.hasBoat && player.getYLocation() > 0) {
-                        player.setYLocation(player.getYLocation() - 1);
+                    } else if ((eventSymbol != '&' || eventSymbol != '~') && event.hasBoat && player.getXLocation() > 0) {
+                        player.setXLocation(player.getXLocation() + 1);
                         break;
-                    }
+                }
 
-                case "s":
-                    if ((eventSymbol == '~' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '9') {
-                        System.out.println("\nYou can't go that way!\n");
-                        break;
-                    }
                     if (player.getXLocation() < gameMap.mapSize - 1) {
                         player.setXLocation(player.getXLocation() + 1);
                     } else {
                         invalidMove = true;
-                        System.out.println("\nhe path is too treacherous that way...\n");
+                        System.out.println("\nThe path is too treacherous that way...\n");
                     }
                     break;
                 case "d":
-                    if ((eventSymbol == '~' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '4') {
+                    if ((eventSymbol == '~' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '4' || eventSymbol == '&') {
                         System.out.println("\nYou can't go that way!\n");
                         break;
                     }
