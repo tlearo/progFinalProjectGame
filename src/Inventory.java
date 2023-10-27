@@ -48,6 +48,12 @@ public class Inventory {
         return true;
     }
 
+    public boolean addItem(String name, String description) {
+        Item item = new Item(name, description);
+        items.add(item);
+        return true;
+    }
+
     public boolean removeItem(Item item) {
         return items.remove(item);
     }
