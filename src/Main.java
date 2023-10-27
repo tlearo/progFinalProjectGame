@@ -139,8 +139,12 @@ public class Main {
                     }
                     break;
                 case "d":
-                    if ((eventSymbol == '~' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '4' || eventSymbol == '&') {
-                        System.out.println("\nYou can't go that way!\n");
+                    if ((eventSymbol == '~' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '4' || eventSymbol == '&' || (eventSymbol == '@' && !event.defeatSuitor)) {
+                        if ((eventSymbol == '@' && !event.defeatSuitor)) {
+                            System.out.println("\nYou need to defeat the suitor before you go this way!\n");
+                        } else {
+                            System.out.println("\nYou can't go that way!\n");
+                        }
                         break;
                     }
                     if (player.getYLocation() < gameMap.mapSize - 1) {

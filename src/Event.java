@@ -179,45 +179,51 @@ public class Event {
     }
 
     //Fairy circle event
+    public boolean firstVisitFairyCircle = true;
     private void handleFairyCircle(Player player) throws InterruptedException {
         int attackPower = RandomNumber();
-        Enemy enemy = new Enemy("Evil Fairy", 100, 100, attackPower);
-        System.out.println("\nYou emerge out of the scrub into a grassy clearing.\n" +
-                "You see a large circle of red and white spotted mushrooms surrounding a small tree stump.\n" +
-                "Nestled within the stump is a beautiful ruby red gemstone! It's iridescent glow reminds you of the dragon's lovely eyes.\n" +
-                "You feel the strong urge to covet this gemstone!\n" +
-                "Do you enter the mushroom circle to take it?\n");
-        System.out.println("1. Enter");
-        System.out.println("2. Leave");
-        int enterCircle = Main.readInt("", 1, 2);
-        if (enterCircle == 1) {
-            System.out.print("\nYou step over the line of mushrooms, but as soon as your foot touches \n" +
-                    "the ground on the other side a swirl of flower petals and leaves rush upwards in front of you!\n" +
-                    "When the air clears, you see a beautiful fairy queen standing before you.\n" +
-                    "'How dare you enter my circle without my permission! Leave or you shall die!'\n");
-            System.out.println("1. Attack");
-            System.out.println("2. Run");
-            int fairyFight = Main.readInt("", 1, 2);
-            if (fairyFight == 1) {
-                System.out.print("\nLETS GO TO BATTLE!\n\n");
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+        if (firstVisitFairyCircle) {
+            Enemy enemy = new Enemy("Evil Fairy", 100, 100, attackPower);
+            System.out.println("\nYou emerge out of the scrub into a grassy clearing.\n" +
+                    "You see a large circle of red and white spotted mushrooms surrounding a small tree stump.\n" +
+                    "Nestled within the stump is a beautiful ruby red gemstone! It's iridescent glow reminds you of the dragon's lovely eyes.\n" +
+                    "You feel the strong urge to covet this gemstone!\n" +
+                    "Do you enter the mushroom circle to take it?\n");
+            System.out.println("1. Enter");
+            System.out.println("2. Leave");
+            int enterCircle = Main.readInt("", 1, 2);
+            if (enterCircle == 1) {
+                System.out.print("\nYou step over the line of mushrooms, but as soon as your foot touches \n" +
+                        "the ground on the other side a swirl of flower petals and leaves rush upwards in front of you!\n" +
+                        "When the air clears, you see a beautiful fairy queen standing before you.\n" +
+                        "'How dare you enter my circle without my permission! Leave or you shall die!'\n");
+                System.out.println("1. Attack");
+                System.out.println("2. Run");
+                int fairyFight = Main.readInt("", 1, 2);
+                if (fairyFight == 1) {
+                    System.out.print("\nLETS GO TO BATTLE!\n\n");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    BattleStats(enemy);
+                    battle(enemy);
+                    if (wonFight == true) {
+                        System.out.print("\n---Red Gemstone added to your inventory---\n");
+                        Thread.sleep(1000);
+                        player.getInventory().addItem("Red Gemstone","A bright red shining ruby.");
+                        wonFight = false;
+                        firstVisitFairyCircle = false;
+                    }
+                } else if (fairyFight == 2) {
+                    System.out.print("\nYou run away from this horrifying fairy queen!");
+                } else if (enterCircle == 2) {
+                    System.out.print("\nYou decide to give the mushroom circle a wide berth.\n");
                 }
-                BattleStats(enemy);
-                battle(enemy);
-                if (wonFight == true) {
-                    System.out.print("\n---Red Gemstone added to your inventory---\n");
-                    Thread.sleep(1000);
-                    player.getInventory().addItem("Red Gemstone","A bright red shining ruby.");
-                    wonFight = false;
-                }
-            } else if (fairyFight == 2) {
-                System.out.print("\nYou run away from this horrifying fairy queen!");
-            } else if (enterCircle == 2) {
-                System.out.print("\nYou decide to give the mushroom circle a wide berth.\n");
             }
+        } else if (!firstVisitFairyCircle) {
+            System.out.println("The slain body of the fairy queen lays before you, her sparkling");
         }
     }
 
