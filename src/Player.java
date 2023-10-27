@@ -1,27 +1,30 @@
 import java.util.List;
 
 public class Player {
-    private int currentHealth;
-    private int maxHealth;
-    private String playerName;
-    private int gold;
-    private int xLocation;
-    private int yLocation;
-    private int attackDamage;
-    private String playerClass;
-    private Inventory inventory;
+    private int currentHealth;     // Current health
+    private int maxHealth;         // Maximum health
+    private String playerName;      // Name of the player.
+    private int gold;              // Amount of gold the player has.
+    private int xLocation;         // X-coordinate of the player's location.
+    private int yLocation;         // Y-coordinate of the player's location.
+    private int attackDamage;      // Attack damage
+    private String playerClass;    // The class or type of the player (e.g., warrior)
+    private Inventory inventory;   // The player's inventory.
 
     public Player(String playerName, int maxHealth, int currentHealth, int attackDamage, int xLocation, int yLocation, String playerClass, int gold) {
+        // Constructor for initializing player properties.
         this.playerName = playerName;
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
         this.attackDamage = attackDamage;
         this.xLocation = xLocation;
         this.yLocation = yLocation;
-        this.inventory = new Inventory();
+        this.inventory = new Inventory();  // Initialize the player's inventory.
         this.playerClass = playerClass;
         this.gold = gold;
     }
+
+    // Getters and setters for various player properties.
     public int getGold() {
         return gold;
     }
@@ -73,6 +76,8 @@ public class Player {
         return playerClass;
     }
 
+
+    // Method for adding an item to the player's inventory.
     public void addItemToInventory(String itemName, String itemDescription) {
         inventory.addItem(itemName, itemDescription,0,0);
     }
@@ -89,14 +94,16 @@ public class Player {
         this.yLocation = yLocation;
     }
 
+    // Method for healing the player with a health potion.
     public void healPlayer(int healthPotion) {
         if (this.currentHealth + healthPotion > this.maxHealth) {
-            this.currentHealth = maxHealth;
+            this.currentHealth = maxHealth;// Ensure the player's health doesn't exceed the maximum.
         } else {
             this.currentHealth += healthPotion;
         }
     }
 
+    // Method for printing the player's inventory.
     public void printInventory() {
         List<Inventory.Item> items = inventory.getItems();
         System.out.println("\nInventory:");
