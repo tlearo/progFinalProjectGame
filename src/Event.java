@@ -251,7 +251,7 @@ public class Event {
                 }
             } else if (enterCircle == 2) {
                 StoryLore.Separator(5);
-                System.out.print("\nYou decide to give the mushroom circle a wide berth.\n");
+                System.out.print("\nYou decide to give the mushroom circle a wide berth...\n");
                 Thread.sleep(1000);
                 displayPlayerInfo(player);
             }

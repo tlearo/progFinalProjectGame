@@ -53,7 +53,7 @@ public class StoryLore {
         Thread.sleep(2000);//wait
         System.out.println("You make plan to get them flowers, a gem, and a book as they loved those when you guys were together");
         Thread.sleep(3000);//wait
-        System.out.println("You are set on an adventure, shall we start?");
+        System.out.println("You are set on an adventure, shall we start? YES");
         Thread.sleep(3000);//wait
         Separator(5);//prints 5 lines
         System.exit(0);
