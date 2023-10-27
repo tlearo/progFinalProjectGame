@@ -140,8 +140,9 @@ public class Event {
         if (enemy.getCurrentHealth() < 1) {
             System.out.println("\nThe " + enemy.getEnemyName() + " fell to its knees as you attack them in one big blow");
             System.out.println("\nAfter all your valiant efforts, you have won the battle!");
-            Thread.sleep(1500);
+            Thread.sleep(1000);
             System.out.println("\nYou scour around their body and find 100 gold!");
+            Thread.sleep(1000);
             player.addGold(100);
             displayPlayerInfo(player);
         }
@@ -168,7 +169,7 @@ public class Event {
                     battle(enemy);
                 } else if (ContinueFight == 2) {
                     System.out.print("\nAs you continue to fight the " + enemy.getEnemyName() + ", you find yourself getting restless...");
-                    Thread.sleep(1500);
+                    Thread.sleep(1000);
                     System.out.print("\nYou decide its best not to continue fighting this Ogre and you shall return when you are ready!");
                     displayPlayerInfo(player);
                 }
@@ -199,7 +200,7 @@ public class Event {
             if (fairyFight == 1) {
                 System.out.print("\nLETS GO TO BATTLE!\n\n");
                 try {
-                    Thread.sleep(1500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -336,7 +337,7 @@ public class Event {
             if (swordAnswer == 1) {
                 displayPlayerInfo(player);
                 System.out.println("\nYou carefully gather all her favourite flowers into a gorgeous bouquet");
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 System.out.println("---Flower Bouquet was added to your inventory---");
                 player.addItemToInventory("Flower Bouquet", "Handpicked bouquet of the Dragons favourite flowers");
                 haveFlower = true;
@@ -440,7 +441,7 @@ public class Event {
         Enemy enemy = new Enemy("Ogre", 200, 200, attackPower);
         System.out.println("\nYou step into a dusty clearing, the wind whips the dirt up around you momentarily obscuring your vision." +
                 "\nAfter the dust settles you see an enormous green Ogre standing before you. It towers over you, and it's eyes gleam with bloodlust.");
-        Thread.sleep(1500);
+        Thread.sleep(1000);
         System.out.println("A greedy smile creeps across it's face, and then it lets out a bellowing roar!" +
                 "\n\nPrepare for battle, or run!");
         System.out.println("1. Attack");
@@ -449,15 +450,15 @@ public class Event {
         if (ogreFight == 1) {
             System.out.print("\nLETS GO TO BATTLE!\n\n");
             try {
-                Thread.sleep(1500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             BattleStats(enemy);
             battle(enemy);
         } else if (ogreFight == 2) {
-            System.out.print("\nHis roar gave you a fright and decided not to pick this battle this time...");
-            Thread.sleep(1500);
+            System.out.print("\nHis roar gave you a fright and you decided not to take the fight this time...");
+            Thread.sleep(1000);
             System.out.print("\nYou shall return when you are ready!");
         }
     }
@@ -473,7 +474,7 @@ public class Event {
             System.out.println("Straight ahead you see a podium enclosing a ruined book. \nIt looks like the book that you threw when the dragon and you had an argument this one time...");
             Thread.sleep(1000);
             System.out.println("You want to grab it as; although it held a dark memory, the book has been intertwined in both of your lives and you feel as though the Dragon would appreciate it");
-            Thread.sleep(2000);
+            Thread.sleep(1000);
             System.out.println("Before you reach for the book, your sense heightens and you feel a cold breeze blow in through the cave. \nIs there something waiting for you?");
             Thread.sleep(1000);
             System.out.println("\nWould you like to reach for the book?");
@@ -489,7 +490,7 @@ public class Event {
                 System.out.println("OOF!");
                 Thread.sleep(500);
                 System.out.println("You have been hit with a hidden arrow and taken 20 damage\nThrough the pain, you have obtained the book!");
-                Thread.sleep(2500);
+                Thread.sleep(1500);
                 player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship");
                 displayPlayerInfo(player);
                 System.out.println("---Ruined Book was added to your inventory---");
@@ -502,7 +503,7 @@ public class Event {
                 System.out.println("\nAs you look closer into the podium, you realise the book is on top of a pressure plate.\nIf you had lifted the book, it would trigger a trap!");
                 Thread.sleep(1000);
                 System.out.println("You look around the cave some more to look for a replacement and see:\n- A slab of rock that seems to be the same size as the book \n- And a pile of dirt that has the potential to weight the same as the book\nthat you could replace the book with.");
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 System.out.println("\nWhich do you choose to replace the book with?");
                 System.out.println("1. A slab of rock");
                 System.out.println("2. A pile of dirt");
@@ -512,7 +513,7 @@ public class Event {
                     System.out.println("You grab the slab of rock and quickly lift the book to swiftly put the rock in replacement");
                     Thread.sleep(1000);
                     System.out.println("It worked and you have obtained the book!");
-                    Thread.sleep(2500);
+                    Thread.sleep(1500);
                     player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship");
                     displayPlayerInfo(player);
                     System.out.println("---Ruined Book was added to your inventory---");
@@ -520,12 +521,12 @@ public class Event {
                     break;
                 } else if (bookTrapAnswer == 2) {
                     System.out.println("You grab a handful of dirt and quickly try to replace the book. \nAs you lift the ruined book, the handful of dirt is flowing out of your hand and it was not weighted enough to work as a replacement!");
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                     System.out.println("OUCH!");
                     //take damage
                     player.setCurrentHealth(player.getCurrentHealth() - 20);
                     System.out.println("The trigger went off and a hidden arrow had shot you... \nAt least you've obtained the book!");
-                    Thread.sleep(2500);
+                    Thread.sleep(1500);
                     player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship");
                     System.out.println("---Ruined Book was added to your inventory---");
                     displayPlayerInfo(player);
@@ -548,15 +549,15 @@ public class Event {
         while (defeatSuitor == false) {
             System.out.println("\nAs you trek up on the mountain you see a young lady with a sword in hand watching over the horizon" +
                     "\nYou call out to her and she looks back, showing off her sharp teeth and hissing at you.");
-            Thread.sleep(1500);
+            Thread.sleep(1000);
             System.out.println("'Are you here for the dragon?' she says...\n");
-            Thread.sleep(1500);
+            Thread.sleep(1000);
             System.out.println("\n1. Yes, I am here for the dragon");
             System.out.println("2. No, Im just lost");
             int suitorIntro = Main.readInt("", 1,2);
             if (suitorIntro == 1) {
                 System.out.println("\n\n'That dragon is mine! You must defeat me before you can even see them!'");
-                Thread.sleep(1500);
+                Thread.sleep(1000);
                 System.out.println("\nPrepare for battle, or run?");
                 System.out.println("1. Attack");
                 System.out.println("2. Run");
@@ -564,7 +565,7 @@ public class Event {
                 if (suitorFight == 1) {
                     System.out.print("\nLETS GO TO BATTLE!\n\n");
                     try {
-                        Thread.sleep(1500);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -572,12 +573,12 @@ public class Event {
                     battle(enemy);
                 } else if (suitorFight == 2) {
                     System.out.print("\n");
-                    Thread.sleep(1500);
+                    Thread.sleep(1000);
                     System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her");
                 }
             } else if (suitorIntro == 2) {
                 System.out.print("\n'That's a lie! You are here for the dragon!'");
-                Thread.sleep(1500);
+                Thread.sleep(1000);
                 System.out.println("'You must defeat me before you can even see them!'\n");
                 System.out.println("\nPrepare for battle, or run?");
                 System.out.println("1. Attack");
@@ -586,7 +587,7 @@ public class Event {
                 if (suitorFight == 1) {
                     System.out.print("\nLETS GO TO BATTLE!\n\n");
                     try {
-                        Thread.sleep(1500);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -594,7 +595,7 @@ public class Event {
                     battle(enemy);
                 } else if (suitorFight == 2) {
                     System.out.print("\n");
-                    Thread.sleep(1500);
+                    Thread.sleep(1000);
                     System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her");
                 }
             }

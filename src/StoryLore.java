@@ -26,9 +26,9 @@ public class StoryLore {
         Thread.sleep(1000);
         System.out.println("!!!");
         Thread.sleep(2000);
-        System.out.println("You make plan to get them flowers, a gem, and a book as they loved those when you guys were together");
+        System.out.println("You make a plan to get them flowers, a gem, and a book as they loved those when you guys were together");
         Thread.sleep(3000);
-        System.out.println("You are set on an adventure, shall we start?");
+        System.out.println("You're all set for your adventure, shall we start?");
         Thread.sleep(3000);
         Separator(5);
     }
