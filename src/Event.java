@@ -160,8 +160,14 @@ public class Event {
             BattleStats(enemy);
 
             if (player.getCurrentHealth() < 1) {
-                System.out.println("\nYou lost the fight!\nYou have died! Game over.");
-                System.exit(0);
+                Main.useHealthPotion(player);
+                if (player.getCurrentHealth() > 0) {
+                    System.out.println("You're too weak to continue the fight so you ran away!");
+                }
+                if (player.getCurrentHealth() <= 0) {
+                    System.out.println("\nYou lost the fight!\nYou have died! Game over.");
+                    System.exit(0);
+                }
             } else if (player.getCurrentHealth() > 0) {
                 System.out.println("\nDo you want to keep attacking the " + enemy.getEnemyName() + "?");
                 System.out.println("\n1. Attack\n2. Run");
@@ -210,8 +216,11 @@ public class Event {
                     BattleStats(enemy);
                     battle(enemy);
                     if (wonFight == true) {
-                        System.out.print("\n---Red Gemstone added to your inventory---\n");
                         Thread.sleep(1000);
+                        System.out.print("\nYou step over the slain fairy queen, and grab the gemstone from within the stump.\n");
+                        Thread.sleep(1000);
+                        System.out.print("\n---Red Gemstone added to your inventory---\n");
+                        Thread.sleep(2000);
                         player.getInventory().addItem("Red Gemstone","A bright red shining ruby.");
                         wonFight = false;
                         firstVisitFairyCircle = false;

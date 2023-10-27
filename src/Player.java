@@ -96,11 +96,7 @@ public class Player {
 
     // Method for healing the player with a health potion.
     public void healPlayer(int healthPotion) {
-        if (this.currentHealth + healthPotion > this.maxHealth) {
-            this.currentHealth = maxHealth;// Ensure the player's health doesn't exceed the maximum.
-        } else {
-            this.currentHealth += healthPotion;
-        }
+            this.currentHealth = maxHealth;// Heals player to max health
     }
 
     // Method for printing the player's inventory.
