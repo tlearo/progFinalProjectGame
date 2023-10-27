@@ -579,10 +579,15 @@ public class Event {
                     }
                     BattleStats(enemy);
                     battle(enemy);
+                    if (wonFight == true) {
+                        defeatSuitor = true;
+                        wonFight = false;
+                    }
                 } else if (suitorFight == 2) {
                     System.out.print("\n");
                     Thread.sleep(1000);
                     System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her");
+                    break;
                 }
             } else if (suitorIntro == 2) {
                 System.out.print("\n'That's a lie! You are here for the dragon!'");
@@ -601,10 +606,15 @@ public class Event {
                     }
                     BattleStats(enemy);
                     battle(enemy);
+                    if (wonFight == true) {
+                        defeatSuitor = true;
+                        wonFight = false;
+                    }
                 } else if (suitorFight == 2) {
                     System.out.print("\n");
                     Thread.sleep(1000);
                     System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her");
+                    break;
                 }
             }
         }
