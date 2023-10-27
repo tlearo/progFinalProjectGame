@@ -66,9 +66,6 @@ public class Main {
         // Creating a character
         Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2, playerClass, 50);
         Event event = new Event(player);
-        // Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0, inventory);
-        // Player suitor = new Player("Suitor", 80, 80, 5, 3, 4, inventory);
-        // Player troll = new Player("Troll", 200, 200, 8, 4, 1, inventory);
 
 
         // Moving switch statement
@@ -223,16 +220,5 @@ public class Main {
 
         return choice;
     }
-    
-//    public static void displayPlayerInfo(Player player) {
-//        gameMap gameMap = new gameMap(); // Initializing gameMap
-//        System.out.println("");
-//        System.out.println("Name: " + player.getPlayerName());
-//        Display.playerClass(player);
-//        Display.health(player);
-//        Display.attack(player);
-//        Display.location(player);
-//        player.printInventory();
-//    }
 }
 
