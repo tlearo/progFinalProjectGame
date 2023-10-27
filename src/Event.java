@@ -127,6 +127,7 @@ public class Event {
         Display.health(enemy);
     }
 
+    public boolean wonFight = false;
     public void battle(Enemy enemy) throws InterruptedException {
         System.out.println("\nYou attacked the " + enemy.getEnemyName() + " and did " + player.getAttackDamage() + " damage!");
 
@@ -136,7 +137,6 @@ public class Event {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
         if (enemy.getCurrentHealth() < 1) {
             System.out.println("\nThe " + enemy.getEnemyName() + " fell to its knees as you attack them in one big blow");
             System.out.println("\nAfter all your valiant efforts, you have won the battle!");
@@ -145,6 +145,7 @@ public class Event {
             Thread.sleep(1000);
             player.addGold(100);
             displayPlayerInfo(player);
+            wonFight = true;
         }
         if (enemy.getCurrentHealth() > 0) {
             int EnemyDamage;
@@ -206,8 +207,12 @@ public class Event {
                 }
                 BattleStats(enemy);
                 battle(enemy);
-
-                player.getInventory().addItem("Red Gemstone","A bright red shining ruby.");
+                if (wonFight == true) {
+                    System.out.print("\n---Red Gemstone added to your inventory---\n");
+                    Thread.sleep(1000);
+                    player.getInventory().addItem("Red Gemstone","A bright red shining ruby.");
+                    wonFight = false;
+                }
             } else if (fairyFight == 2) {
                 System.out.print("\nYou run away from this horrifying fairy queen!");
             } else if (enterCircle == 2) {
@@ -500,6 +505,7 @@ public class Event {
                 break;
             } else if (bookAnswer == 2) {
                 System.out.println("\nYou leave the book alone, feeling a sense of sadness wash over you.\nThe book would help win the Dragon's heart over...");
+                break;
             } else if (bookAnswer == 3) {
                 StoryLore.Separator(5);
                 System.out.println("\nAs you look closer into the podium, you realise the book is on top of a pressure plate.\nIf you had lifted the book, it would trigger a trap!");
