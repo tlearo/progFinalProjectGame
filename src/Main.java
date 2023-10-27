@@ -11,7 +11,7 @@ public class Main {
         boolean classSet = false;
 
         // Start Introduction
-//         StoryLore.Introduction();
+         StoryLore.Introduction();
 
         // Getting player name
         String playerName;
@@ -64,7 +64,7 @@ public class Main {
         StoryLore.Separator(5);
 
         // Creating a character
-        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2, playerClass, 100);
+        Player player = new Player(playerName, maxHealth, currentHealth, attackDamage, 1, 2, playerClass, 50);
         Event event = new Event(player);
         // Player evilFairy = new Player("Evil Fairy", 150, 150, 8, 0, 0, inventory);
         // Player suitor = new Player("Suitor", 80, 80, 5, 3, 4, inventory);
