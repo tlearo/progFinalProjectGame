@@ -1,16 +1,16 @@
 //Creating the Game Map
 class gameMap{
-        private char[][]map;
-        private char[][]gameMap;
-        static int mapSize = 5;
+        private char[][]map;// The main map, containing event symbols.
+        private char[][]gameMap;// The game map, specifying events at specific coordinates.
+        static int mapSize = 5;// The size of the map
 
-        //Creating and printing Map
+        // Constructor: Creating and initializing the map.
         public gameMap(){
-            map = new char[mapSize][mapSize];
-            gameMap = new char[mapSize][mapSize];
+            map = new char[mapSize][mapSize];// Initialize the main map.
+            gameMap = new char[mapSize][mapSize]; // Initialize the game map
             for(int i=0;i<mapSize; i++){
                 for(int j=0;j<mapSize; j++){
-                map[i][j]= '-';
+                map[i][j]= '-';// Initialize the main map with '-' symbols.
                 }
             }
             //Events at specific coordinates
@@ -45,22 +45,23 @@ class gameMap{
             gameMap[4][4] = 'D'; //Dragon's Castle (North direction blocked)
 
         }
+        // Method to get the event symbol at a specific map location.
         public char getEventSymbol(int x, int y) {
             if (x >= 0 && x < mapSize && y >= 0 && y < mapSize) {
-                return gameMap[x][y];
+                return gameMap[x][y];// Return the event symbol at the specified coordinates.
             }
             return '-';
         }
 
 
-        //Positioning player on the Map
+        // Method to print the map, including the player's position.
         public void printMap(Player Player){
             for(int i=0;i<mapSize; i++){
                 for(int j=0;j<mapSize; j++){
                     if(i==Player.getXLocation()&&j==Player.getYLocation()){
-                    System.out.print("O  ");
+                    System.out.print("O  ");// Display the player symbol at their position.
                 } else {
-                    System.out.print(map[i][j]+ "  ");
+                    System.out.print(map[i][j]+ "  "); // Display the map symbol at other positions.
                     }
                 }
             System.out.println();
