@@ -731,7 +731,6 @@ public class Event {
         boolean hasRuinedBook = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Ruined Book"));
         boolean hasFlowerBouquet = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Flower Bouquet"));
         if (hasRedGemstone && hasRuinedBook && hasFlowerBouquet) {
-            System.out.println("HELLO LOVER");
             StoryLore.OUTRO();
         } else {
             System.out.println("You didnt get me anything, I am not interested </3");

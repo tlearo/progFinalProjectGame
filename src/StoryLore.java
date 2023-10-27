@@ -9,8 +9,14 @@ public class StoryLore {
 
 //INTRO LORE
     public static void Introduction() throws InterruptedException {
+        System.out.println("The journey to the Dragons heart\n------------------");
+        System.out.println("Final Project");
+        System.out.println("Made by Millie, Monica, and Tamara");
+        System.out.println("s3934065, s4014843, sDO TAMARA STUDENT NUMBER");
+        Thread.sleep(7000);//wait
         Main.clearScreen();
-        System.out.println("BEGINNING");
+        System.out.println("BEGINNING \n------------------");
+
         Separator(5);//prints 5 lines
         System.out.println("As you walk through the forest, you see a poster claiming that a dragon is in need of help");
         Thread.sleep(2000);//wait
