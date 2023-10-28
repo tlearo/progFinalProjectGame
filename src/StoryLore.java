@@ -12,7 +12,7 @@ public class StoryLore {
         System.out.println("The journey to the Dragon's heart\n------------------");
         System.out.println("Final Project");
         System.out.println("Made by Millie, Monica, and Tamara");
-        System.out.println("s3934065, s4014843, sDO TAMARA STUDENT NUMBER");
+        System.out.println("s3934065, s4014843, s4009144");
         Thread.sleep(1000);//wait
         Main.clearScreen();
         System.out.println("BEGINNING \n------------------");
