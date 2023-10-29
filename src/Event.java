@@ -560,7 +560,7 @@ public class Event {
                         Thread.sleep(1000);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("\nInvalid input. Please enter a valid item number or 0 to exit.\n");
+                    System.out.println("\nInvalid input. Please enter a valid item number or 4 to exit.\n");
                     Thread.sleep(1000);
                 }
             }
@@ -568,39 +568,53 @@ public class Event {
     }
 
     //Ogre event
+    public Boolean defeatOgre = false;
     private void handleOgre(Player player) throws InterruptedException {
         //create enemy
         int attackPower = RandomNumber();
         Enemy enemy = new Enemy("Ogre", 200, 200, attackPower);
-        StoryLore.Separator(5);
-        System.out.println("\nYou step into a dusty clearing, the wind whips the dirt up around you momentarily obscuring your vision." +
-                "\nAfter the dust settles you see an enormous green Ogre standing before you. It towers over you, and it's eyes gleam with bloodlust.");
-        Thread.sleep(1000);
-        System.out.println("A greedy smile creeps across it's face, and then it lets out a bellowing roar!" +
-                "\n\nPrepare for battle, or run!");
-        Thread.sleep(500);
-        //prompt user
-        System.out.println("1. Attack");
-        System.out.println("2. Run");
-        int ogreFight = Main.readInt("", 1, 2);
-        if (ogreFight == 1) {
-            //battle system
+        while (defeatOgre == false) {
             StoryLore.Separator(5);
-            System.out.print("\nLETS GO TO BATTLE!\n\n");
-            try {
+            System.out.println("\nYou step into a dusty clearing, the wind whips the dirt up around you momentarily obscuring your vision." +
+                    "\nAfter the dust settles you see an enormous green Ogre standing before you. It towers over you, and it's eyes gleam with bloodlust.");
+            Thread.sleep(1000);
+            System.out.println("A greedy smile creeps across it's face, and then it lets out a bellowing roar!" +
+                    "\n\nPrepare for battle, or run!");
+            Thread.sleep(500);
+            //prompt user
+            System.out.println("1. Attack");
+            System.out.println("2. Run");
+            int ogreFight = Main.readInt("", 1, 2);
+            if (ogreFight == 1) {
+                //battle system
+                StoryLore.Separator(5);
+                System.out.print("\nLETS GO TO BATTLE!\n\n");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                BattleStats(enemy);
+                battle(enemy);
+                if (wonFight == true) {
+                    defeatOgre = true;
+                    wonFight = false;
+                }
+                //else run
+            } else if (ogreFight == 2) {
+                StoryLore.Separator(5);
+                System.out.print("\nHis roar gave you a fright and you decided not to take the fight this time...");
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.print("\nYou shall return when you are ready!");
+                Thread.sleep(1000);
             }
-            BattleStats(enemy);
-            battle(enemy);
-            //else run
-        } else if (ogreFight == 2) {
-            StoryLore.Separator(5);
-            System.out.print("\nHis roar gave you a fright and you decided not to take the fight this time...");
-            Thread.sleep(1000);
-            System.out.print("\nYou shall return when you are ready!");
-            Thread.sleep(1000);
+            //when they come back
+            if (defeatOgre == true)
+            {
+                StoryLore.Separator(5);
+                System.out.println("\nA stench reaches into your nose as you walk past the slain Ogre \nYou continue walking through the desert.");
+                Thread.sleep(1000);
+            }
         }
     }
 
