@@ -11,7 +11,7 @@ public class Main {
         boolean classSet = false;
 
         // Start Introduction
-         StoryLore.Introduction();
+//         StoryLore.Introduction();
 
         // Getting player name
         String playerName;
@@ -204,7 +204,7 @@ public class Main {
                 //prompt user
                 System.out.println("\nYou drop to your knees, on the verge of death. You remember that you have a health potion in your bag.");
                 Thread.sleep(1000);
-                System.out.println("Do you want to drink it?\");");
+                System.out.println("Do you want to drink it?");
                 System.out.println("1. Yes");
                 System.out.println("2. No");
                 int potionConfirm = readInt("", 1, 2);

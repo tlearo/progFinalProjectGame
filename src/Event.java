@@ -279,7 +279,7 @@ public class Event {
             //not the first visit
         } else if (!firstVisitFairyCircle) {
             StoryLore.Separator(5);
-            System.out.println("The slain body of the fairy queen lays before you, her sparkling");
+            System.out.println("The slain body of the fairy queen lays before you, her sparkling blood staining the ground inside of the mushroom circle");
             Thread.sleep(1000);
             displayPlayerInfo(player);
         }
@@ -397,6 +397,8 @@ public class Event {
                 Thread.sleep(1000);
                 System.out.println("You tumble downwards into a pit of sharpened spikes and take 20 damage!\n");
                 player.setCurrentHealth(player.getCurrentHealth() - 20); //dmg 20 to player health
+                enteredSpikeTrap = true;
+                firstVisitSpikeTrap = false;
                 Thread.sleep(1000);
                 displayPlayerInfo(player);
                 //when player is dead
@@ -416,25 +418,23 @@ public class Event {
                         System.out.println("\nYou have died! Game over.");
                         System.exit(0);
                     }
-                    //they make is safe
-                } else if (spikeTrapAnswer == 2) {
-                    StoryLore.Separator(5);
-                    displayPlayerInfo(player);
-                    System.out.println("Upon inspection you notice the debris is covering a spike trap!\n");
-                    Thread.sleep(500);
-                    System.out.println("You carefully sidle past it; it would've been embarrassing if you had fallen into it.\n");
-                    Thread.sleep(1000);
                 }
+            } else if (spikeTrapAnswer == 2) {
+                StoryLore.Separator(5);
+                displayPlayerInfo(player);
+                System.out.println("Upon inspection you notice the debris is covering a spike trap!\n");
+                Thread.sleep(500);
+                System.out.println("You carefully sidle past it; it would've been embarrassing if you had fallen into it.\n");
+                Thread.sleep(1000);
                 enteredSpikeTrap = true;
                 firstVisitSpikeTrap = false;
-                //not first visit
-            } else if (!firstVisitSpikeTrap) {
-                StoryLore.Separator(5);
-                System.out.println("\nBefore you is a dangerous spike trap. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
-                Thread.sleep(500);
             }
+        // for subsequent visits to the square
+        } else if (!firstVisitSpikeTrap) {
+            StoryLore.Separator(5);
+            System.out.println("\nBefore you is a dangerous spike trap. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
+            Thread.sleep(500);
         }
-
     }
 
     //Petalling forest event
@@ -646,7 +646,7 @@ public class Event {
 
     private void handleCavern(Player player) throws InterruptedException {
         gameMap gameMap = new gameMap(); // Initializing gameMap
-        while (haveBook == false) {
+        if (haveBook == false) {
             StoryLore.Separator(5);
             System.out.println("\nYou walk towards the dark dingy cave and stumble upon a library, illuminated by flowing wisps.");
             Thread.sleep(1000);
@@ -672,20 +672,39 @@ public class Event {
                 Thread.sleep(1000);
                 System.out.println("OOF!");
                 Thread.sleep(500);
-                System.out.println("You have been hit with a hidden arrow and taken 20 damage\nThrough the pain, you have obtained the book!");
-                Thread.sleep(1500);
-                player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship"); //add book to inventory
-                displayPlayerInfo(player);
-                System.out.println("---Ruined Book was added to your inventory---");
+                System.out.println("You have been hit with a hidden arrow and taken 20 damage\nThrough the pain, you have obtained the book!\n");
+                player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship"); //add to book to inventory
                 Thread.sleep(1000);
+                System.out.println("---Ruined Book was added to your inventory---");
+                Thread.sleep(1500);
+                if (player.getCurrentHealth() < 1) {
+                    //ability to use health potion
+                    Main.useHealthPotion(player);
+                    if (player.getCurrentHealth() > 0) {
+                        StoryLore.Separator(5);
+                        System.out.println("As you drink the health potion, you start to feel yourself become alive again!\n");
+                        Thread.sleep(2000);
+                    }
+                    //else die if no health potion
+                    if (player.getCurrentHealth() <= 0) {
+                        StoryLore.Separator(5);
+                        System.out.println("\nThe arrow shot right at your heart and you lost consciousness");
+                        Thread.sleep(1000);
+                        System.out.println("\nYou have died! Game over.");
+                        System.exit(0);
+                        player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship"); //add book to inventory
+                        displayPlayerInfo(player);
+                        System.out.println("---Ruined Book was added to your inventory---");
+                        Thread.sleep(1000);
+                        //they walk away
+                    }
+                }
                 haveBook = true;
-                break;
-                //they walk away
-            } else if (bookAnswer == 2) {
+            }else if (bookAnswer == 2) {
                 StoryLore.Separator(5);
                 System.out.println("\nYou leave the book alone, feeling a sense of sadness wash over you.\nThe book would help win the Dragon's heart over...");
                 Thread.sleep(1000);
-                break;
+                displayPlayerInfo(player);
                 //inspect
             } else if (bookAnswer == 3) {
                 StoryLore.Separator(5);
@@ -708,11 +727,10 @@ public class Event {
                     System.out.println("It worked and you have obtained the book!");
                     Thread.sleep(1500);
                     player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship"); //add to book to inventory
-                    displayPlayerInfo(player);
                     System.out.println("---Ruined Book was added to your inventory---");
+                    displayPlayerInfo(player);
                     Thread.sleep(1000);
                     haveBook = true;
-                    break;
                     //get book and dmg
                 } else if (bookTrapAnswer == 2) {
                     StoryLore.Separator(5);
@@ -722,13 +740,30 @@ public class Event {
                     System.out.println("OUCH!");
                     //take damage
                     player.setCurrentHealth(player.getCurrentHealth() - 20);
+                    //when player is dead
+                    if (player.getCurrentHealth() < 1) {
+                        //ability to use health potion
+                        Main.useHealthPotion(player);
+                        if (player.getCurrentHealth() > 0) {
+                            StoryLore.Separator(5);
+                            System.out.println("As you drink the health potion, you start to feel yourself become alive again!\n");
+                            Thread.sleep(2000);
+                        }
+                        //else die if no health potion
+                        if (player.getCurrentHealth() <= 0) {
+                            StoryLore.Separator(5);
+                            System.out.println("\nThe arrow shot right at your heart and you lost consciousness");
+                            Thread.sleep(1000);
+                            System.out.println("\nYou have died! Game over.");
+                            System.exit(0);
+                        }
+                    }
                     System.out.println("The trigger went off and a hidden arrow had shot you... \nAt least you've obtained the book!");
                     Thread.sleep(1500);
                     player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship"); //add book to inventory
                     System.out.println("---Ruined Book was added to your inventory---");
                     Thread.sleep(1000);
                     haveBook = true;
-                    break;
                 }
             }
         }
@@ -736,10 +771,8 @@ public class Event {
         if (haveBook == true) {
             StoryLore.Separator(5);
             System.out.println("\nYou walk past the dingy cave that you got the ruined book from, and continue to struggle up the mountain");
-            Thread.sleep(1000);
-        }
+            Thread.sleep(1000);}
     }
-
 
     public Boolean defeatSuitor = false;
 
@@ -885,6 +918,8 @@ public class Event {
                 displayPlayerInfo(player);
                 System.out.println("The quicksand crushes your body as you do so, and you take 20 damage.\n");
                 Thread.sleep(1000);
+                enteredQuickSand = true;
+                firstVisitQuickSand = false;
                 player.setCurrentHealth(player.getCurrentHealth() - 20); //-20 from play current health
                 //when player is dead
                 if (player.getCurrentHealth() < 1) {
@@ -903,21 +938,21 @@ public class Event {
                         System.out.println("\nYou have died! Game over.");
                         System.exit(0);
                     }
-                    //safe
-                } else if (quickSandAnswer == 2) {
-                    StoryLore.Separator(5);
-                    displayPlayerInfo(player);
-                    System.out.println("You carefully crawl across the surface of the quicksand and escape, avoiding any bodily harm.\n");
-                    Thread.sleep(1000);
                 }
+            //safe
+            } else if (quickSandAnswer == 2) {
+                StoryLore.Separator(5);
+                displayPlayerInfo(player);
+                System.out.println("You carefully crawl across the surface of the quicksand and escape, avoiding any bodily harm.\n");
                 enteredQuickSand = true;
                 firstVisitQuickSand = false;
-                //not first visit
-            } else if (!firstVisitQuickSand) {
-                StoryLore.Separator(5);
-                System.out.println("\nBefore you is a dangerous pit of quicksand. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
                 Thread.sleep(1000);
             }
+        //not first visit
+        } else if (!firstVisitQuickSand) {
+            StoryLore.Separator(5);
+            System.out.println("\nBefore you is a dangerous pit of quicksand. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
+            Thread.sleep(1000);
         }
     }
 
