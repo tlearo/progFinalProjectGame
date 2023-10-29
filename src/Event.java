@@ -3,20 +3,20 @@ import java.util.Scanner;
 
 //Event Squares
 public class Event {
-    Scanner userInput = new Scanner(System.in); //implement scanner input
-    private Player player; //assigning relationship to classes
-    private Enemy enemy;
-    private Inventory inventory; //constructor
+    Scanner userInput = new Scanner(System.in);  // Initialize a Scanner object for user input
+    private Player player; // Declare a private instance variable for the Player class
+    private Enemy enemy; // Declare a private instance variable for the Enemy class
+    private Inventory inventory; // Declare a private instance variable for the Inventory class
 
-    public boolean hasBoat;
-    gameMap gameMap = new gameMap(); // Initializing gameMap
+    public boolean hasBoat; // Declare a boolean variable to track whether the player has a boat
+    gameMap gameMap = new gameMap(); // Initialize a gameMap object
 
     public Event(Player player) {
-        this.player = player;
+        this.player = player; // Initialize the Event object with a Player instance
         this.inventory = player.getInventory(); // Assign the player's inventory to the Event's inventory
     } //creating an instance of player for event
 
-    //cases for gameMap
+    // Handle different events on the game map based on event symbols
     public void handleEvent(char eventSymbol) throws InterruptedException {
         switch (eventSymbol) {
             case 'F':
@@ -94,7 +94,7 @@ public class Event {
         }
     }
 
-    //Method to display stuff
+    // Method to display player information
     public static void displayPlayerInfo(Player player) {
         gameMap gameMap = new gameMap();
         gameMap.printMap(player);
@@ -107,9 +107,9 @@ public class Event {
         player.printInventory();
     }
 
-    public int randomAttackPower;
+    public int randomAttackPower; // Declare a variable to store random attack power
 
-    //Random Number Generator method
+    // Random Number Generator method
     public int RandomNumber() {
         int minDamage = 0;
         int maxDamage = 30;
@@ -127,6 +127,7 @@ public class Event {
         Display.health(enemy);
     }
 
+    // Method to handle a battle with an enemy
     public boolean wonFight = false;
     public void battle(Enemy enemy) throws InterruptedException {
         System.out.println("\nYou attacked the " + enemy.getEnemyName() + " and did " + player.getAttackDamage() + " damage!");
@@ -199,6 +200,7 @@ public class Event {
         int attackPower = RandomNumber();
         if (firstVisitFairyCircle) {
             StoryLore.Separator(5);
+            // Create an enemy for the fairy queen
             Enemy enemy = new Enemy("Evil Fairy", 100, 100, attackPower);
             System.out.println("\nYou emerge out of the scrub into a grassy clearing.\n" +
                     "You see a large circle of red and white spotted mushrooms surrounding a small tree stump.");
