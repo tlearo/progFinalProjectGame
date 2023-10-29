@@ -97,6 +97,7 @@ public class Main {
                     // Handle the player's movement and events, cannot go north
                     if (eventSymbol == 'D' || eventSymbol == 'E') {
                         System.out.println("\nYou can't go that way!\n");
+                        Thread.sleep(1500);
                         break;
                     }
                     if (player.getXLocation() > 0) {
@@ -104,6 +105,7 @@ public class Main {
                     } else {
                         invalidMove = true;
                         System.out.println("\nThe path is too treacherous that way...\n");
+                        Thread.sleep(1500);
                     }
                     break;
                     //WEST
@@ -111,6 +113,7 @@ public class Main {
                     // Handle the player's movement and events, cannot go west, & river logic
                     if (eventSymbol == '7' || eventSymbol == '@' || ((eventSymbol == '~' && !event.hasBoat) || (eventSymbol == '&' && !event.hasBoat))) {
                         System.out.println("\nYou can't go that way!\n");
+                        Thread.sleep(1500);
                         break;
                     }
                     if (player.getYLocation() > 0) {
@@ -118,6 +121,7 @@ public class Main {
                     } else {
                         invalidMove = true;
                         System.out.println("\nThe path is too treacherous that way...\n");
+                        Thread.sleep(1500);
                     }
                     break;
                     //SOUTH
@@ -125,6 +129,7 @@ public class Main {
                     // Handle the player's movement and events, cannot go south, & river logic
                     if ((eventSymbol == '~' && !event.hasBoat) || (eventSymbol == '&' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '9') {
                         System.out.println("\nYou can't go that way!\n");
+                        Thread.sleep(1500);
                         break;
                     }
                     if (eventSymbol != '~' && eventSymbol != '&') {
@@ -133,6 +138,7 @@ public class Main {
                         } else {
                             invalidMove = true;
                             System.out.println("\nThe path is too treacherous that way...\n");
+                            Thread.sleep(1500);
                         }
                         break;
                     } else if ((eventSymbol != '&' || eventSymbol != '~') && event.hasBoat && player.getXLocation() > 0) {
@@ -145,6 +151,7 @@ public class Main {
                     } else {
                         invalidMove = true;
                         System.out.println("\nThe path is too treacherous that way...\n");
+                        Thread.sleep(1500);
                     }
                     break;
                     //EAST
@@ -153,8 +160,10 @@ public class Main {
                     if ((eventSymbol == '~' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '4' || eventSymbol == '&' || (eventSymbol == '@' && !event.defeatSuitor)) {
                         if ((eventSymbol == '@' && !event.defeatSuitor)) {
                             System.out.println("\nYou need to defeat the suitor before you go this way!\n");
+                            Thread.sleep(1500);
                         } else {
                             System.out.println("\nYou can't go that way!\n");
+                            Thread.sleep(1500);
                         }
                         break;
                     }
@@ -163,6 +172,7 @@ public class Main {
                     } else {
                         invalidMove = true;
                         System.out.println("\nThe path is too treacherous that way...\n");
+                        Thread.sleep(1500);
                     }
                     break;
                     //quit
@@ -172,6 +182,7 @@ public class Main {
                 default:
                     if (player.getCurrentHealth() > 0) {
                         System.out.println("\nThe atmosphere must be getting to you! You can only enter W/A/S/D, or Q to quit!\n");
+                        Thread.sleep(1500);
                     }
             }
             //call player inventory
@@ -180,7 +191,7 @@ public class Main {
     }
 
     // Define a method for using a health potion
-    public static void useHealthPotion(Player player) {
+    public static void useHealthPotion(Player player) throws InterruptedException {
         // Check if the player has a health potion and if they want to use it
         Inventory playerInventory = player.getInventory();
         boolean hasHealthPotion = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Potion")); //need potion in inventory
@@ -191,7 +202,9 @@ public class Main {
             //has health potion
             if (hasHealthPotion) {
                 //prompt user
-                System.out.println("\nYou drop to your knees, on the verge of death. You remember that you have a health potion in your bag. Do you want to drink it?");
+                System.out.println("\nYou drop to your knees, on the verge of death. You remember that you have a health potion in your bag.");
+                Thread.sleep(1000);
+                System.out.println("Do you want to drink it?\");");
                 System.out.println("1. Yes");
                 System.out.println("2. No");
                 int potionConfirm = readInt("", 1, 2);
@@ -209,6 +222,7 @@ public class Main {
                     //no
                 } else {
                     System.out.println("You have died! Game over.");
+                    Thread.sleep(1500);
                     System.exit(0);
                 }
             }
@@ -222,7 +236,7 @@ public class Main {
     }
 
     // Define a method to read an integer input within a specified range
-    public static int readInt(String prompt, int min, int max) {
+    public static int readInt(String prompt, int min, int max) throws InterruptedException {
         // Read an integer input from the user within the specified range
         Scanner input = new Scanner(System.in);
         int choice = 0;
@@ -236,10 +250,12 @@ public class Main {
                     isValid = true;
                 } else {
                     System.out.println("Invalid option. Please enter a valid choice.");
+                    Thread.sleep(1500);
                 }
             } else {
                 input.next(); // Clear the invalid input
                 System.out.println("Invalid input. Please enter a number.");
+                Thread.sleep(1500);
             }
         } while (!isValid);
 

@@ -505,12 +505,13 @@ public class Event {
 
         while (inShop) {
             //prompt user
-            System.out.println("Enter the item number you want to buy: ");
+            System.out.println("What item number would you like to buy? 1/2/3 (Press 4 to leave the shop): ");
             Thread.sleep(1000);
             String choiceInput = userInput.next();
 
             //when they leave
             if (choiceInput.equals("4")) {
+                Thread.sleep(500);
                 System.out.println("\nThank you for visiting Geoffrey's Genuine Goods! Come on back any time!\n");
                 Thread.sleep(1000);
                 displayPlayerInfo(player);
@@ -805,10 +806,12 @@ public class Event {
         boolean hasFlowerBouquet = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Flower Bouquet"));
         if (hasRedGemstone && hasRuinedBook && hasFlowerBouquet) {
             //when all is done, put outro
-            StoryLore.OUTRO();
+            StoryLore.Outro();
         } else {
             //else
-            System.out.println("You didnt get me anything, I am not interested </3");
+            StoryLore.NotComplete();
+
+
         }
     }
 
@@ -856,7 +859,7 @@ public class Event {
         StoryLore.Separator(5);
         System.out.println("\nYou stumble into a swampy marshland.");
         Thread.sleep(1000);
-        System.out.println("\nThe sounds of far-off birds and other chittering creatures surround you, and the smell of rotten wood and decay fills the air." +
+        System.out.println("The sounds of far-off birds and other chittering creatures surround you, and the smell of rotten wood and decay fills the air." +
                 "\nYour feet sink several inches into the ground with each step.\n");
         Thread.sleep(1000);
     }
@@ -866,7 +869,7 @@ public class Event {
         StoryLore.Separator(5);
         System.out.println("\nYou find yourself in the Silverglade Woods.");
         Thread.sleep(1000);
-        System.out.println("\nSilvery-grey coloured trunks of all sizes shoot upwards, and a thick canopy blocks out most of the sky." +
+        System.out.println("Silvery-grey coloured trunks of all sizes shoot upwards, and a thick canopy blocks out most of the sky." +
                 "\nThin beams of golden light break through the foliage and speckle the ground like tiny gemstones, making for a beautiful and enchanting sight.\n");
         Thread.sleep(1000);
     }
