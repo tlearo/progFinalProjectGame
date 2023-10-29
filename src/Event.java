@@ -724,13 +724,14 @@ public class Event {
         }
     }
 
+
     public Boolean defeatSuitor = false;
 
     private void handleSuitor(Player player) throws InterruptedException {
         //create suitor enemy
         int attackPower = RandomNumber();
         Enemy enemy = new Enemy("Suitor", 150, 150, attackPower);
-        while (defeatSuitor == false) {
+        if (defeatSuitor == false) {
             StoryLore.Separator(5);
             System.out.println("\nAs you trek up on the mountain you see a young lady with a sword in hand watching over the horizon" +
                     "\nYou call out to her and she looks back, showing off her sharp teeth and hissing at you.");
@@ -764,6 +765,11 @@ public class Event {
                     BattleStats(enemy);
                     battle(enemy);
                     if (wonFight == true) {
+                        StoryLore.Separator(5);
+                        displayPlayerInfo(player);
+                        System.out.print("\nThinking of your dragon lover, you attack the suitor once and for all!");
+                        Thread.sleep(1000);
+                        System.out.print("Turned into pieces, you have finally defeated the Suitor! You may now rescue the dragon!");
                         defeatSuitor = true;
                         wonFight = false;
                     }
@@ -772,7 +778,7 @@ public class Event {
                     StoryLore.Separator(5);
                     System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her...");
                     Thread.sleep(1000);
-                    break;
+                    displayPlayerInfo(player);
                 }
                 //no
             } else if (suitorIntro == 2) {
@@ -798,6 +804,11 @@ public class Event {
                     BattleStats(enemy);
                     battle(enemy);
                     if (wonFight == true) {
+                        StoryLore.Separator(5);
+                        displayPlayerInfo(player);
+                        System.out.print("\nThinking of your dragon lover, you attack the suitor once and for all!");
+                        Thread.sleep(1000);
+                        System.out.print("Turned into pieces, you have finally defeated the Suitor! You may now rescue the dragon!");
                         defeatSuitor = true;
                         wonFight = false;
                     }
@@ -806,7 +817,7 @@ public class Event {
                     StoryLore.Separator(5);
                     System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her");
                     Thread.sleep(1000);
-                    break;
+                    displayPlayerInfo(player);
                 }
             }
         }
@@ -834,6 +845,8 @@ public class Event {
             StoryLore.NotComplete();
         }
     }
+
+
 
     //Quicksand event
     public boolean enteredQuickSand = false;
