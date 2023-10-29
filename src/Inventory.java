@@ -22,21 +22,17 @@ public class Inventory {
             this.description = description;
         }
 
-        public int getHp() {
-            return hp; // Get the item's hit points value.
-        }
+        // Get the item's hit points value.
+        public int getHp() { return hp; }
 
-        public String getName() {
-            return name;// Get the item's name.
-        }
+        // Get the item's name.
+        public String getName() { return name; }
 
-        public String getDescription() {
-            return description;// Get the item's description.
-        }
+        // Get the item's description.
+        public String getDescription() { return description; }
 
-        public int getCost() {
-            return cost;// Get the item's cost or value.
-        }
+        // Get the item's cost or value.
+        public int getCost() { return cost; }
     }
 
     private List<Item> items;// A list to store items in the inventory.

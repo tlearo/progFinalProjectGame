@@ -4,6 +4,8 @@ public class Enemy {
     private String enemyName;
     private int attackDamage;
 
+    //getters and setters for enemy properties
+
     public int getCurrentHealth() {
         return currentHealth;
     }
@@ -36,6 +38,7 @@ public class Enemy {
         this.attackDamage = attackDamage;
     }
 
+    //Enemy constructor
     public Enemy(String enemyName, int maxHealth, int currentHealth, int attackDamage) {
         this.enemyName = enemyName;
         this.maxHealth = maxHealth;

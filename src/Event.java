@@ -130,6 +130,7 @@ public class Event {
     // Method to handle a battle with an enemy
     public boolean wonFight = false;
     public void battle(Enemy enemy) throws InterruptedException {
+        //Attack enemy and what play damage applied
         System.out.println("\nYou attacked the " + enemy.getEnemyName() + " and did " + player.getAttackDamage() + " damage!");
 
         enemy.setCurrentHealth(enemy.getCurrentHealth() - player.getAttackDamage());
@@ -138,6 +139,7 @@ public class Event {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        //when enemy is dead
         if (enemy.getCurrentHealth() < 1) {
             StoryLore.Separator(5);
             displayPlayerInfo(player);
@@ -147,10 +149,13 @@ public class Event {
             System.out.println("\nYou scour their body and find 100 gold!");
             Thread.sleep(1000);
             player.addGold(100);
+            //winning fight becomes true
             wonFight = true;
         }
+        // when enemy is alive
         if (enemy.getCurrentHealth() > 0) {
             int EnemyDamage;
+            //enemy damage with a bound of 10
             EnemyDamage = (enemy.getAttackDamage() + (new java.util.Random().nextInt(10)));
             System.out.println("\nThe " + enemy.getEnemyName() + " attacked for " + EnemyDamage + " damage!\n");
             player.setCurrentHealth(player.getCurrentHealth() - EnemyDamage);
@@ -161,13 +166,16 @@ public class Event {
             }
             BattleStats(enemy);
 
+            //when player is dead
             if (player.getCurrentHealth() < 1) {
+                //ability to use health potion
                 Main.useHealthPotion(player);
                 if (player.getCurrentHealth() > 0) {
                     StoryLore.Separator(5);
                     System.out.println("\nYou're too weak to continue the fight so you ran away!");
                     Thread.sleep(2000);
                 }
+                //else die if no health potion
                 if (player.getCurrentHealth() <= 0) {
                     StoryLore.Separator(5);
                     System.out.println("\nYou lost the fight!");
@@ -175,14 +183,15 @@ public class Event {
                     System.out.println("\nYou have died! Game over.");
                     System.exit(0);
                 }
+                //when player is alive
             } else if (player.getCurrentHealth() > 0) {
                 System.out.println("\nDo you want to keep attacking the " + enemy.getEnemyName() + "?");
                 Thread.sleep(500);
                 System.out.println("\n1. Attack\n2. Run");
                 int ContinueFight = Main.readInt("", 1, 2);
-                if (ContinueFight == 1) {
+                if (ContinueFight == 1) { //repeat
                     battle(enemy);
-                } else if (ContinueFight == 2) {
+                } else if (ContinueFight == 2) { //run
                     StoryLore.Separator(5);
                     System.out.print("\nAs you continue to fight the " + enemy.getEnemyName() + ", you find yourself getting restless...");
                     Thread.sleep(1000);
@@ -210,9 +219,11 @@ public class Event {
             Thread.sleep(1000);
             System.out.println("Do you enter the mushroom circle to take it?\n");
             Thread.sleep(500);
+            //prompt user
             System.out.println("1. Enter");
             System.out.println("2. Leave");
             int enterCircle = Main.readInt("", 1, 2);
+            //Enter circle, choice 1
             if (enterCircle == 1) {
                 StoryLore.Separator(5);
                 System.out.print("\nYou step over the line of mushrooms, but as soon as your foot touches \n" +
@@ -220,9 +231,11 @@ public class Event {
                 System.out.println("When the air clears, you see a beautiful fairy queen standing before you.\n" +
                         "'How dare you enter my circle without my permission! Leave or you shall die!'\n");
                 Thread.sleep(500);
+                //prompt user
                 System.out.println("1. Attack");
                 System.out.println("2. Run");
                 int fairyFight = Main.readInt("", 1, 2);
+                //enter fairy fight
                 if (fairyFight == 1) {
                     StoryLore.Separator(5);
                     System.out.print("\nLETS GO TO BATTLE!\n\n");
@@ -231,8 +244,10 @@ public class Event {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+                    //call Battle system
                     BattleStats(enemy);
                     battle(enemy);
+                    //when enemy die
                     if (wonFight == true) {
                         Thread.sleep(1000);
                         StoryLore.Separator(5);
@@ -241,22 +256,26 @@ public class Event {
                         Thread.sleep(1000);
                         System.out.print("\n---Red Gemstone added to your inventory---\n");
                         Thread.sleep(2000);
-                        player.getInventory().addItem("Red Gemstone","A bright red shining ruby.");
+                        player.getInventory().addItem("Red Gemstone","A bright red shining ruby."); //add gem to inventory
+                        //make false again
                         wonFight = false;
                         firstVisitFairyCircle = false;
                     }
+                    //run away from fight
                 } else if (fairyFight == 2) {
                     StoryLore.Separator(5);
                     System.out.print("\nYou run away from this horrifying fairy queen!");
                     Thread.sleep(1000);
                     displayPlayerInfo(player);
                 }
+                //run away from entering
             } else if (enterCircle == 2) {
                 StoryLore.Separator(5);
                 System.out.print("\nYou decide to give the mushroom circle a wide berth...\n");
                 Thread.sleep(1000);
                 displayPlayerInfo(player);
             }
+            //not the first visit
         } else if (!firstVisitFairyCircle) {
             StoryLore.Separator(5);
             System.out.println("The slain body of the fairy queen lays before you, her sparkling");
@@ -275,20 +294,23 @@ public class Event {
             Thread.sleep(1000);
             System.out.println("Would you like to pull it out?");
             Thread.sleep(500);
+            //prompt user
             System.out.println("1. Yes");
             System.out.println("2. No");
             int swordAnswer = Main.readInt("", 1, 2);
+            //when they take sword, add to inventory
             if (swordAnswer == 1) {
                 StoryLore.Separator(5);
                 displayPlayerInfo(player);
                 System.out.println("\nWith one swift, strong motion you free the sword from it's stone!");
                 Thread.sleep(1000);
                 System.out.println("---Elven Sword was added to your inventory---");
-                player.addItemToInventory("Elven Sword", "A sharp and shiny sword of excellent quality");
+                player.addItemToInventory("Elven Sword", "A sharp and shiny sword of excellent quality"); //add sword to inventory
                 Thread.sleep(500);
                 haveSword = true;
                 player.setAttackDamage(player.getAttackDamage() + 10);
                 break;
+                //when they dont
             } else if (swordAnswer == 2) {
                 StoryLore.Separator(5);
                 displayPlayerInfo(player);
@@ -297,6 +319,7 @@ public class Event {
                 break;
             }
         }
+        //when you have sword
         if (haveSword == true) {
             StoryLore.Separator(5);
             System.out.println("\nBefore you stands the large boulder from whence you removed the sword.");
@@ -306,7 +329,7 @@ public class Event {
 
     //Crossing river event
     private void handleRiver(Player player) throws InterruptedException {
-        hasBoat = inventory.getItems().stream().anyMatch(item -> item.getName().equals("Boat"));
+        hasBoat = inventory.getItems().stream().anyMatch(item -> item.getName().equals("Boat")); //need boat to be in inventory
         if (hasBoat) {
             StoryLore.Separator(5);
             System.out.println("\nA swiftly flowing river surges in front of you...");
@@ -329,15 +352,18 @@ public class Event {
         Thread.sleep(1000);
         System.out.println("\nWould you like to rest?");
         Thread.sleep(500);
+        //prompt user
         System.out.println("1. Yes");
         System.out.println("2. No");
         int cottageAnswer = Main.readInt("", 1, 2);
+        //user want to rest, fill max health
         if (cottageAnswer == 1) {
             StoryLore.Separator(5);
-            player.setCurrentHealth(player.getMaxHealth());
+            player.setCurrentHealth(player.getMaxHealth()); //setting player to max health
             displayPlayerInfo(player);
             System.out.println("\n---You are fully healed---");
             Thread.sleep(1000);
+            //user doesnt
         } else if (cottageAnswer == 2) {
             StoryLore.Separator(5);
             displayPlayerInfo(player);
@@ -357,10 +383,11 @@ public class Event {
             Thread.sleep(1000);
             System.out.println("\nWhat do you do?\n");
             Thread.sleep(500);
+            //prompt user
             System.out.println("1. Confidently walk across the debris");
             System.out.println("2. Avoid the debris");
             int spikeTrapAnswer = Main.readInt("", 1, 2);
-
+            //they get hurt 20 dmg
             if (spikeTrapAnswer == 1) {
                 StoryLore.Separator(5);
                 System.out.println("\nYou stride across the debris without a care in the world.\n" +
@@ -368,9 +395,10 @@ public class Event {
                 Thread.sleep(1000);
                 System.out.println("You tumble downwards into a pit of sharpened spikes and take 20 damage!\n" +
                         "You manage to crawl out of the pit having learned your lesson regarding reckless behaviour.\n");
-                player.setCurrentHealth(player.getCurrentHealth() - 20);
+                player.setCurrentHealth(player.getCurrentHealth() - 20); //dmg 20 to player health
                 Thread.sleep(1000);
                 displayPlayerInfo(player);
+                //they make is safe
             } else if (spikeTrapAnswer == 2) {
                 StoryLore.Separator(5);
                 displayPlayerInfo(player);
@@ -381,6 +409,7 @@ public class Event {
             }
             enteredSpikeTrap = true;
             firstVisitSpikeTrap = false;
+            //not first visit
         } else if (!firstVisitSpikeTrap) {
             StoryLore.Separator(5);
             System.out.println("\nBefore you is a dangerous spike trap. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
@@ -402,20 +431,23 @@ public class Event {
             Thread.sleep(1000);
             System.out.println("Would you like to make a flower bouquet for your lover?");
             Thread.sleep(500);
+            //prompt user
             System.out.println("1. Yes");
             System.out.println("2. No");
-            int swordAnswer = Main.readInt("", 1, 2);
-            if (swordAnswer == 1) {
+            int flowerAnswer = Main.readInt("", 1, 2);
+            //get flower bouquet, put in inventory
+            if (flowerAnswer == 1) {
                 StoryLore.Separator(5);
                 displayPlayerInfo(player);
                 System.out.println("\nYou carefully gather all her favourite flowers into a gorgeous bouquet");
                 Thread.sleep(1000);
                 System.out.println("---Flower Bouquet was added to your inventory---");
-                player.addItemToInventory("Flower Bouquet", "Handpicked bouquet of the Dragons favourite flowers");
+                player.addItemToInventory("Flower Bouquet", "Handpicked bouquet of the Dragons favourite flowers"); //add flower to inventory
                 Thread.sleep(500);
                 haveFlower = true;
                 break;
-            } else if (swordAnswer == 2) {
+                //dont get flower
+            } else if (flowerAnswer == 2) {
                 StoryLore.Separator(5);
                 displayPlayerInfo(player);
                 System.out.println("\nYou leave the flowers untouched, reminding yourself that you need to make one in order to win their heart back...");
@@ -423,6 +455,7 @@ public class Event {
                 break;
             }
         }
+        //when they have already visited
         if (haveFlower == true) {
             StoryLore.Separator(5);
             System.out.println("\nYou carefully walk along the flower field, bouquet in hand, reminiscing the good old days...");
@@ -461,6 +494,7 @@ public class Event {
         System.out.println("\nHere's what's available for purchase:");
         Thread.sleep(500);
 
+        //FOR loop for the menu prompt
         for (int i = 0; i < shopItems.size(); i++) {
             Inventory.Item item = shopItems.get(i);
             System.out.println((i + 1) + ". " + item.getName() + " - " + item.getDescription() + " (Cost: " + item.getCost() + " gold)");
@@ -470,10 +504,12 @@ public class Event {
         boolean inShop = true; // Flag to track if the player is in the shop
 
         while (inShop) {
+            //prompt user
             System.out.println("Enter the item number you want to buy: ");
             Thread.sleep(1000);
             String choiceInput = userInput.next();
 
+            //when they leave
             if (choiceInput.equals("4")) {
                 System.out.println("\nThank you for visiting Geoffrey's Genuine Goods! Come on back any time!\n");
                 Thread.sleep(1000);
@@ -531,6 +567,7 @@ public class Event {
 
     //Ogre event
     private void handleOgre(Player player) throws InterruptedException {
+        //create enemy
         int attackPower = RandomNumber();
         Enemy enemy = new Enemy("Ogre", 200, 200, attackPower);
         StoryLore.Separator(5);
@@ -540,10 +577,12 @@ public class Event {
         System.out.println("A greedy smile creeps across it's face, and then it lets out a bellowing roar!" +
                 "\n\nPrepare for battle, or run!");
         Thread.sleep(500);
+        //prompt user
         System.out.println("1. Attack");
         System.out.println("2. Run");
         int ogreFight = Main.readInt("", 1, 2);
         if (ogreFight == 1) {
+            //battle system
             StoryLore.Separator(5);
             System.out.print("\nLETS GO TO BATTLE!\n\n");
             try {
@@ -553,6 +592,7 @@ public class Event {
             }
             BattleStats(enemy);
             battle(enemy);
+            //else run
         } else if (ogreFight == 2) {
             StoryLore.Separator(5);
             System.out.print("\nHis roar gave you a fright and you decided not to take the fight this time...");
@@ -579,31 +619,35 @@ public class Event {
             Thread.sleep(1000);
             System.out.println("\nWould you like to reach for the book?");
             Thread.sleep(500);
+            //prompt user
             System.out.println("1. Yes");
             System.out.println("2. No");
             System.out.println("3. Inspect the podium");
             int bookAnswer = Main.readInt("", 1, 3);
+            //take book and dmg 20
             if (bookAnswer == 1) {
                 StoryLore.Separator(5);
                 System.out.println("\nYou grab the book off the podium and hear a trigger!");
-                //take damage
+                //take damage 20 from current health
                 player.setCurrentHealth(player.getCurrentHealth() - 20);
                 Thread.sleep(1000);
                 System.out.println("OOF!");
                 Thread.sleep(500);
                 System.out.println("You have been hit with a hidden arrow and taken 20 damage\nThrough the pain, you have obtained the book!");
                 Thread.sleep(1500);
-                player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship");
+                player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship"); //add book to inventory
                 displayPlayerInfo(player);
                 System.out.println("---Ruined Book was added to your inventory---");
                 Thread.sleep(1000);
                 haveBook = true;
                 break;
+                //they walk away
             } else if (bookAnswer == 2) {
                 StoryLore.Separator(5);
                 System.out.println("\nYou leave the book alone, feeling a sense of sadness wash over you.\nThe book would help win the Dragon's heart over...");
                 Thread.sleep(1000);
                 break;
+                //inspect
             } else if (bookAnswer == 3) {
                 StoryLore.Separator(5);
                 System.out.println("\nAs you look closer into the podium, you realise the book is on top of a pressure plate.\nIf you had lifted the book, it would trigger a trap!");
@@ -612,22 +656,25 @@ public class Event {
                 Thread.sleep(1000);
                 System.out.println("\nWhich do you choose to replace the book with?");
                 Thread.sleep(500);
+                //prompt user
                 System.out.println("1. A slab of rock");
                 System.out.println("2. A pile of dirt");
                 Thread.sleep(2000);
                 int bookTrapAnswer = Main.readInt("", 1, 2);
+                //rock gets book
                 if (bookTrapAnswer == 1) {
                     StoryLore.Separator(5);
                     System.out.println("You grab the slab of rock and quickly lift the book to swiftly put the rock in replacement");
                     Thread.sleep(1000);
                     System.out.println("It worked and you have obtained the book!");
                     Thread.sleep(1500);
-                    player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship");
+                    player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship"); //add to book to inventory
                     displayPlayerInfo(player);
                     System.out.println("---Ruined Book was added to your inventory---");
                     Thread.sleep(1000);
                     haveBook = true;
                     break;
+                    //get book and dmg
                 } else if (bookTrapAnswer == 2) {
                     StoryLore.Separator(5);
                     displayPlayerInfo(player);
@@ -638,7 +685,7 @@ public class Event {
                     player.setCurrentHealth(player.getCurrentHealth() - 20);
                     System.out.println("The trigger went off and a hidden arrow had shot you... \nAt least you've obtained the book!");
                     Thread.sleep(1500);
-                    player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship");
+                    player.addItemToInventory("Ruined Book", "The book that reminds you of your past relationship"); //add book to inventory
                     System.out.println("---Ruined Book was added to your inventory---");
                     Thread.sleep(1000);
                     haveBook = true;
@@ -646,6 +693,7 @@ public class Event {
                 }
             }
         }
+        //when they return
         if (haveBook == true) {
             StoryLore.Separator(5);
             System.out.println("\nYou walk past the dingy cave that you got the ruined book from, and continue to struggle up the mountain");
@@ -656,6 +704,7 @@ public class Event {
     public Boolean defeatSuitor = false;
 
     private void handleSuitor(Player player) throws InterruptedException {
+        //create suitor enemy
         int attackPower = RandomNumber();
         Enemy enemy = new Enemy("Suitor", 150, 150, attackPower);
         while (defeatSuitor == false) {
@@ -665,18 +714,22 @@ public class Event {
             Thread.sleep(1000);
             System.out.println("'Are you here for the dragon?' she says...\n");
             Thread.sleep(500);
+            //prompt user
             System.out.println("\n1. Yes, I am here for the dragon");
             System.out.println("2. No, Im just lost");
             int suitorIntro = Main.readInt("", 1, 2);
+            //yes
             if (suitorIntro == 1) {
                 StoryLore.Separator(5);
                 System.out.println("\n\n'That dragon is mine! You must defeat me before you can even see them!'");
                 Thread.sleep(1000);
                 System.out.println("\nPrepare for battle, or run?");
                 Thread.sleep(500);
+                //prompt user
                 System.out.println("1. Attack");
                 System.out.println("2. Run");
                 int suitorFight = Main.readInt("", 1, 2);
+                //battle system
                 if (suitorFight == 1) {
                     StoryLore.Separator(5);
                     System.out.print("\nLETS GO TO BATTLE!\n\n");
@@ -691,12 +744,14 @@ public class Event {
                         defeatSuitor = true;
                         wonFight = false;
                     }
+                    //run
                 } else if (suitorFight == 2) {
                     StoryLore.Separator(5);
                     System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her...");
                     Thread.sleep(1000);
                     break;
                 }
+                //no
             } else if (suitorIntro == 2) {
                 StoryLore.Separator(5);
                 System.out.print("\n'That's a lie! You are here for the dragon!'");
@@ -704,9 +759,11 @@ public class Event {
                 System.out.println("'You must defeat me before you can even see them!'\n");
                 System.out.println("\nPrepare for battle, or run?");
                 Thread.sleep(500);
+                //prompt user
                 System.out.println("1. Attack");
                 System.out.println("2. Run");
                 int suitorFight = Main.readInt("", 1, 2);
+                //battle system
                 if (suitorFight == 1) {
                     StoryLore.Separator(5);
                     System.out.print("\nLETS GO TO BATTLE!\n\n");
@@ -721,6 +778,7 @@ public class Event {
                         defeatSuitor = true;
                         wonFight = false;
                     }
+                    //run
                 } else if (suitorFight == 2) {
                     StoryLore.Separator(5);
                     System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her");
@@ -729,6 +787,7 @@ public class Event {
                 }
             }
         }
+        //when suitor already slain
         if (defeatSuitor == true) {
             StoryLore.Separator(5);
             System.out.println("\nYou walk past the suitor that you have slain, and continue to trek along the mountain...");
@@ -738,13 +797,17 @@ public class Event {
 
     //Dragon lover event
     private void handleDragon(Player player) throws InterruptedException {
+        //call player inventory
         Inventory playerInventory = player.getInventory();
+        //to check if player has the required items in the inventory
         boolean hasRedGemstone = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Red Gemstone"));
         boolean hasRuinedBook = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Ruined Book"));
         boolean hasFlowerBouquet = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Flower Bouquet"));
         if (hasRedGemstone && hasRuinedBook && hasFlowerBouquet) {
+            //when all is done, put outro
             StoryLore.OUTRO();
         } else {
+            //else
             System.out.println("You didnt get me anything, I am not interested </3");
         }
     }
@@ -760,16 +823,18 @@ public class Event {
             Thread.sleep(1000);
             System.out.println("How do you want to react?\n");
             Thread.sleep(500);
+            //prompt user
             System.out.println("1. Muscle your way out of it");
             System.out.println("2. Slowly crawl across the surface");
             int quickSandAnswer = Main.readInt("", 1, 2);
-
+            //muscle, take 20 dmg
             if (quickSandAnswer == 1) {
                 StoryLore.Separator(5);
                 displayPlayerInfo(player);
                 System.out.println("You manage to push through and escape, but the quicksand crushes your body as you do so, and you take 20 damage.\n");
                 Thread.sleep(1000);
-                player.setCurrentHealth(player.getCurrentHealth() - 20);
+                player.setCurrentHealth(player.getCurrentHealth() - 20); //-20 from play current health
+                //safe
             } else if (quickSandAnswer == 2) {
                 StoryLore.Separator(5);
                 displayPlayerInfo(player);
@@ -778,6 +843,7 @@ public class Event {
             }
             enteredQuickSand = true;
             firstVisitQuickSand = false;
+            //not first visit
         } else if (!firstVisitQuickSand) {
             StoryLore.Separator(5);
             System.out.println("\nBefore you is a dangerous pit of quicksand. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
