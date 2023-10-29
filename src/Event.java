@@ -815,7 +815,7 @@ public class Event {
                     //run
                 } else if (suitorFight == 2) {
                     StoryLore.Separator(5);
-                    System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her");
+                    System.out.print("\nBefore she thrashes her sword around, you turn back and run down the hill! Away from her\n");
                     Thread.sleep(1000);
                     displayPlayerInfo(player);
                 }
