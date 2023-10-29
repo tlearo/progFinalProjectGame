@@ -11,7 +11,7 @@ public class Main {
         boolean classSet = false;
 
         // Start Introduction
-         StoryLore.Introduction();
+//         StoryLore.Introduction();
 
         // Getting player name
         String playerName;
@@ -175,29 +175,27 @@ public class Main {
 
         if (player.getCurrentHealth() <= 0) {
             if (hasHealthPotion) {
-                System.out.println("You have zero health and you have a health potion. Do you want to drink it? (yes/no)");
-                String response = userInput.next();
-
-                if (response.equalsIgnoreCase("yes")) {
-                    // Player chooses to drink the health potion
+                System.out.println("\nYou drop to your knees, on the verge of death. You remember that you have a health potion in your bag. Do you want to drink it?");
+                System.out.println("1. Yes");
+                System.out.println("2. No");
+                int potionConfirm = readInt("", 1, 2);
+                if (potionConfirm == 1) {
                     List<Inventory.Item> items = playerInventory.getItems();
                     for (Inventory.Item item : items) {
                         if (item.getName().equals("Potion")) {
                             player.healPlayer(item.getHp());
                             playerInventory.removeItem(item);
-                            System.out.println("You drank the health potion and gained " + item.getHp() + " health points. Your current health is " + player.getCurrentHealth() + ".");
+                            System.out.println("\nYou drank the health potion and gained " + item.getHp() + " health points. Your health was restored to " + player.getCurrentHealth() + "/" + player.getMaxHealth());
                             break; // You should exit the loop here
                         }
                     }
+                } else {
+                    System.out.println("You have died! Game over.");
+                    System.exit(0);
                 }
-            } else {
-
-                System.out.println("You have died! Game over.");
-                System.exit(0);
             }
         }
     }
-
     // Define a method to clear the screen
     static void clearScreen() {
         for (int i = 1; i <= 10; i++) {
