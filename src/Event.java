@@ -305,6 +305,7 @@ public class Event {
                 System.out.println("\nWith one swift, strong motion you free the sword from it's stone!");
                 Thread.sleep(1000);
                 System.out.println("---Elven Sword was added to your inventory---");
+                System.out.println("Your attack damage has increased by 10 points");
                 player.addItemToInventory("Elven Sword", "A sharp and shiny sword of excellent quality"); //add sword to inventory
                 Thread.sleep(500);
                 haveSword = true;
