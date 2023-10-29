@@ -442,33 +442,38 @@ public class Event {
     public void handleShop(Player player) throws InterruptedException {
         // Add items to the shop's inventory with costs (you can do this once at initialization)
         if (shopInventory.getItems().isEmpty()) {
-            shopInventory.addItem("Potion", "Heals you fully when your health is 0", 50, player.getMaxHealth()); // Set cost and max health here
-            shopInventory.addItem("Armor", "Boosts your max health (+50)", 50, 50);
+            shopInventory.addItem("Potion", "Heals you fully when your health drops to 0", 50, player.getMaxHealth()); // Set cost and max health here
+            shopInventory.addItem("Armor", "Boosts your max health by 50 points", 50, 50);
             shopInventory.addItem("Boat", "Can be used to cross a flowing river", 100, 0);
         }
 
         // Display the shop's inventory
         StoryLore.Separator(5);
         List<Inventory.Item> shopItems = shopInventory.getItems();
-        System.out.println("\nWelcome to the shop!");
+        System.out.println("\nYou see a quaint little wooden building with a sign above the entrance which reads 'Geoffrey's Genuine Goods!'");
+        Thread.sleep(1000);//wait
+        System.out.println("You step through the doorway and a short man with a large grin on his face beckons you over to him.");
+        Thread.sleep(1000);//wait
+        System.out.println("'Welcome to my store adventurer! We have a number of excellent products for sale here, take a look to see if anything strikes your fancy!'");
         Thread.sleep(1000);
-        System.out.println("Here's what's available for purchase:");
+        System.out.println("\nHere's what's available for purchase:");
         Thread.sleep(500);
 
         for (int i = 0; i < shopItems.size(); i++) {
             Inventory.Item item = shopItems.get(i);
             System.out.println((i + 1) + ". " + item.getName() + " - " + item.getDescription() + " (Cost: " + item.getCost() + " gold)");
         }
+        System.out.println("4. Leave the store");
 
         boolean inShop = true; // Flag to track if the player is in the shop
 
         while (inShop) {
-            System.out.println("Enter the item number you want to buy (or 0 to exit): ");
+            System.out.println("Enter the item number you want to buy: ");
             Thread.sleep(1000);
             String choiceInput = userInput.next();
 
-            if (choiceInput.equals("0")) {
-                System.out.println("\nThank you for visiting the shop!\n");
+            if (choiceInput.equals("4")) {
+                System.out.println("\nThank you for visiting Geoffrey's Genuine Goods! Come on back any time!\n");
                 Thread.sleep(1000);
                 displayPlayerInfo(player);
                 inShop = false; // Exit the shop loop
@@ -490,7 +495,10 @@ public class Event {
                                 player.setMaxHealth(player.getMaxHealth() + hpGranted);
                                 player.getInventory().addItem(selectedItem.getName(), selectedItem.getDescription(), cost, hpGranted);
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
-                                System.out.println("\nYour health is increased by " + hpGranted + " HP.\n");
+                                Thread.sleep(500);
+                                System.out.println("---"+selectedItem.getName()+" added to your inventory---");
+                                Thread.sleep(500);
+                                System.out.println("\nYour maximum health is increased by " + hpGranted + " HP.\n");
                                 Thread.sleep(1000);
                                 Display.health(player);
                                 Display.gold(player);
@@ -498,6 +506,8 @@ public class Event {
                                 // Add the purchased item to the player's inventory (e.g., Potion or Boat)
                                 player.getInventory().addItem(selectedItem.getName(), selectedItem.getDescription(), cost, hpGranted);
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
+                                Thread.sleep(500);
+                                System.out.println("---"+selectedItem.getName()+" added to your inventory---");
                                 Thread.sleep(1000);
                                 Display.gold(player);
                             }
