@@ -86,6 +86,7 @@ public class Main {
             boolean invalidMove = false;
             switch (move) {
                 case "w":
+                    // Handle the player's movement and events
                     if (eventSymbol == 'D' || eventSymbol == 'E') {
                         System.out.println("\nYou can't go that way!\n");
                         break;
@@ -98,6 +99,7 @@ public class Main {
                     }
                     break;
                 case "a":
+                    // Handle the player's movement and events
                     if (eventSymbol == '7' || eventSymbol == '@' || ((eventSymbol == '~' && !event.hasBoat) || (eventSymbol == '&' && !event.hasBoat))) {
                         System.out.println("\nYou can't go that way!\n");
                         break;
@@ -111,6 +113,7 @@ public class Main {
                     break;
 
                 case "s":
+                    // Handle the player's movement and events
                     if ((eventSymbol == '~' && !event.hasBoat) || (eventSymbol == '&' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '9') {
                         System.out.println("\nYou can't go that way!\n");
                         break;
@@ -136,6 +139,7 @@ public class Main {
                     }
                     break;
                 case "d":
+                    // Handle the player's movement and events
                     if ((eventSymbol == '~' && !event.hasBoat) || eventSymbol == 'E' || eventSymbol == '4' || eventSymbol == '&' || (eventSymbol == '@' && !event.defeatSuitor)) {
                         if ((eventSymbol == '@' && !event.defeatSuitor)) {
                             System.out.println("\nYou need to defeat the suitor before you go this way!\n");
@@ -162,7 +166,9 @@ public class Main {
         }
     }
 
+    // Define a method for using a health potion
     public static void useHealthPotion(Player player) {
+        // Check if the player has a health potion and if they want to use it
         Inventory playerInventory = player.getInventory();
         boolean hasHealthPotion = playerInventory.getItems().stream().anyMatch(item -> item.getName().equals("Potion"));
         Scanner userInput = new Scanner(System.in); // Implementing a new scanner
@@ -192,13 +198,16 @@ public class Main {
         }
     }
 
+    // Define a method to clear the screen
     static void clearScreen() {
         for (int i = 1; i <= 10; i++) {
             System.out.println("");
         }
     }
 
+    // Define a method to read an integer input within a specified range
     public static int readInt(String prompt, int min, int max) {
+        // Read an integer input from the user within the specified range
         Scanner input = new Scanner(System.in);
         int choice = 0;
         boolean isValid = false;
