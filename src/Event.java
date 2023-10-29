@@ -129,6 +129,7 @@ public class Event {
 
     // Method to handle a battle with an enemy
     public boolean wonFight = false;
+
     public void battle(Enemy enemy) throws InterruptedException {
         //Attack enemy and what play damage applied
         System.out.println("\nYou attacked the " + enemy.getEnemyName() + " and did " + player.getAttackDamage() + " damage!");
@@ -195,7 +196,7 @@ public class Event {
                     StoryLore.Separator(5);
                     System.out.print("\nAs you continue to fight the " + enemy.getEnemyName() + ", you find yourself getting restless...");
                     Thread.sleep(1000);
-                    System.out.print("\nYou decide its best not to continue fighting this " + enemy.getEnemyName() +" and you shall return when you are ready!\n");
+                    System.out.print("\nYou decide its best not to continue fighting this " + enemy.getEnemyName() + " and you shall return when you are ready!\n");
                     Thread.sleep(1000);
                     displayPlayerInfo(player);
                 }
@@ -205,6 +206,7 @@ public class Event {
 
     //Fairy circle event
     public boolean firstVisitFairyCircle = true;
+
     private void handleFairyCircle(Player player) throws InterruptedException {
         int attackPower = RandomNumber();
         if (firstVisitFairyCircle) {
@@ -256,7 +258,7 @@ public class Event {
                         Thread.sleep(1000);
                         System.out.print("\n---Red Gemstone added to your inventory---\n");
                         Thread.sleep(2000);
-                        player.getInventory().addItem("Red Gemstone","A bright red shining ruby."); //add gem to inventory
+                        player.getInventory().addItem("Red Gemstone", "A bright red shining ruby."); //add gem to inventory
                         //make false again
                         wonFight = false;
                         firstVisitFairyCircle = false;
@@ -304,8 +306,8 @@ public class Event {
                 displayPlayerInfo(player);
                 System.out.println("\nWith one swift, strong motion you free the sword from it's stone!");
                 Thread.sleep(1000);
-                System.out.println("---Elven Sword was added to your inventory---");
-                System.out.println("Your attack damage has increased by 10 points");
+                System.out.println("\n---Elven Sword was added to your inventory---");
+                System.out.println("\nYour attack damage has increased by 10 points");
                 player.addItemToInventory("Elven Sword", "A sharp and shiny sword of excellent quality"); //add sword to inventory
                 Thread.sleep(500);
                 haveSword = true;
@@ -536,7 +538,7 @@ public class Event {
                                 player.getInventory().addItem(selectedItem.getName(), selectedItem.getDescription(), cost, hpGranted);
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
                                 Thread.sleep(500);
-                                System.out.println("---"+selectedItem.getName()+" added to your inventory---");
+                                System.out.println("---" + selectedItem.getName() + " added to your inventory---");
                                 Thread.sleep(500);
                                 System.out.println("\nYour maximum health is increased by " + hpGranted + " HP.\n");
                                 Thread.sleep(1000);
@@ -547,7 +549,7 @@ public class Event {
                                 player.getInventory().addItem(selectedItem.getName(), selectedItem.getDescription(), cost, hpGranted);
                                 System.out.println("\nYou bought " + selectedItem.getName() + " for " + cost + " gold.\n");
                                 Thread.sleep(500);
-                                System.out.println("---"+selectedItem.getName()+" added to your inventory---");
+                                System.out.println("---" + selectedItem.getName() + " added to your inventory---");
                                 Thread.sleep(1000);
                                 Display.gold(player);
                             }
@@ -568,12 +570,13 @@ public class Event {
     }
 
     //Ogre event
-    public Boolean defeatOgre = false;
+    public boolean firstVisitOgre = true;
+
     private void handleOgre(Player player) throws InterruptedException {
         //create enemy
         int attackPower = RandomNumber();
-        Enemy enemy = new Enemy("Ogre", 200, 200, attackPower);
-        while (defeatOgre == false) {
+        if (firstVisitOgre = true) {
+            Enemy enemy = new Enemy("Ogre", 200, 200, attackPower);
             StoryLore.Separator(5);
             System.out.println("\nYou step into a dusty clearing, the wind whips the dirt up around you momentarily obscuring your vision." +
                     "\nAfter the dust settles you see an enormous green Ogre standing before you. It towers over you, and it's eyes gleam with bloodlust.");
@@ -597,24 +600,28 @@ public class Event {
                 BattleStats(enemy);
                 battle(enemy);
                 if (wonFight == true) {
-                    defeatOgre = true;
+                    StoryLore.Separator(5);
+                    displayPlayerInfo(player);
+                    System.out.print("\nWith all your might, you run towards the Ogre and slay him once and for all!");
+                    Thread.sleep(1000);
+                    System.out.print("Indenting the desert, the Ogre fell into the sand");
+                    firstVisitOgre = false;
                     wonFight = false;
-                }
-                //else run
+                }//else run
             } else if (ogreFight == 2) {
                 StoryLore.Separator(5);
                 System.out.print("\nHis roar gave you a fright and you decided not to take the fight this time...");
                 Thread.sleep(1000);
                 System.out.print("\nYou shall return when you are ready!");
                 Thread.sleep(1000);
+                displayPlayerInfo(player);
             }
-            //when they come back
-            if (defeatOgre == true)
-            {
-                StoryLore.Separator(5);
-                System.out.println("\nA stench reaches into your nose as you walk past the slain Ogre \nYou continue walking through the desert.");
-                Thread.sleep(1000);
-            }
+        }
+        //when they come back
+        if(!firstVisitOgre) {
+            StoryLore.Separator(5);
+            System.out.println("\nA stench reaches into your nose as you walk past the slain Ogre \nYou continue walking through the desert.");
+            Thread.sleep(1000);
         }
     }
 
@@ -825,8 +832,6 @@ public class Event {
         } else {
             //else
             StoryLore.NotComplete();
-
-
         }
     }
 
