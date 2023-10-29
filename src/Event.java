@@ -142,9 +142,9 @@ public class Event {
             StoryLore.Separator(5);
             displayPlayerInfo(player);
             System.out.println("\nThe " + enemy.getEnemyName() + " fell to its knees as you attack them in one big blow");
-            System.out.println("\nAfter all your valiant efforts, you have won the battle!");
+            System.out.println("\nAfter your valiant efforts, you have won the battle!");
             Thread.sleep(1000);
-            System.out.println("\nYou scour around their body and find 100 gold!");
+            System.out.println("\nYou scour their body and find 100 gold!");
             Thread.sleep(1000);
             player.addGold(100);
             wonFight = true;
@@ -165,14 +165,14 @@ public class Event {
                 Main.useHealthPotion(player);
                 if (player.getCurrentHealth() > 0) {
                     StoryLore.Separator(5);
-                    System.out.println("You're too weak to continue the fight so you ran away!");
+                    System.out.println("\nYou're too weak to continue the fight so you ran away!");
                     Thread.sleep(2000);
                 }
                 if (player.getCurrentHealth() <= 0) {
                     StoryLore.Separator(5);
                     System.out.println("\nYou lost the fight!");
                     Thread.sleep(1000);
-                    System.out.println("You have died! Game over.");
+                    System.out.println("\nYou have died! Game over.");
                     System.exit(0);
                 }
             } else if (player.getCurrentHealth() > 0) {
@@ -186,7 +186,7 @@ public class Event {
                     StoryLore.Separator(5);
                     System.out.print("\nAs you continue to fight the " + enemy.getEnemyName() + ", you find yourself getting restless...");
                     Thread.sleep(1000);
-                    System.out.print("\nYou decide its best not to continue fighting this" + enemy.getEnemyName() +" and you shall return when you are ready!");
+                    System.out.print("\nYou decide its best not to continue fighting this " + enemy.getEnemyName() +" and you shall return when you are ready!\n");
                     Thread.sleep(1000);
                     displayPlayerInfo(player);
                 }
