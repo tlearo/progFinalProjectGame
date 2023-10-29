@@ -166,7 +166,6 @@ public class Event {
                 throw new RuntimeException(e);
             }
             BattleStats(enemy);
-
             //when player is dead
             if (player.getCurrentHealth() < 1) {
                 //ability to use health potion
@@ -396,27 +395,44 @@ public class Event {
                 System.out.println("\nYou stride across the debris without a care in the world.\n" +
                         "Suddenly, the ground below you gives out!");
                 Thread.sleep(1000);
-                System.out.println("You tumble downwards into a pit of sharpened spikes and take 20 damage!\n" +
-                        "You manage to crawl out of the pit having learned your lesson regarding reckless behaviour.\n");
+                System.out.println("You tumble downwards into a pit of sharpened spikes and take 20 damage!\n");
                 player.setCurrentHealth(player.getCurrentHealth() - 20); //dmg 20 to player health
                 Thread.sleep(1000);
                 displayPlayerInfo(player);
-                //they make is safe
-            } else if (spikeTrapAnswer == 2) {
+                //when player is dead
+                if (player.getCurrentHealth() < 1) {
+                    //ability to use health potion
+                    Main.useHealthPotion(player);
+                    if (player.getCurrentHealth() > 0) {
+                        StoryLore.Separator(5);
+                        System.out.println("You manage to crawl out of the pit having learned your lesson regarding reckless behaviour.\n");
+                        Thread.sleep(2000);
+                    }
+                    //else die if no health potion
+                    if (player.getCurrentHealth() <= 0) {
+                        StoryLore.Separator(5);
+                        System.out.println("\nThe spikes were too sharp!");
+                        Thread.sleep(1000);
+                        System.out.println("\nYou have died! Game over.");
+                        System.exit(0);
+                    }
+                    //they make is safe
+                } else if (spikeTrapAnswer == 2) {
+                    StoryLore.Separator(5);
+                    displayPlayerInfo(player);
+                    System.out.println("Upon inspection you notice the debris is covering a spike trap!\n");
+                    Thread.sleep(500);
+                    System.out.println("You carefully sidle past it; it would've been embarrassing if you had fallen into it.\n");
+                    Thread.sleep(1000);
+                }
+                enteredSpikeTrap = true;
+                firstVisitSpikeTrap = false;
+                //not first visit
+            } else if (!firstVisitSpikeTrap) {
                 StoryLore.Separator(5);
-                displayPlayerInfo(player);
-                System.out.println("Upon inspection you notice the debris is covering a spike trap!\n");
+                System.out.println("\nBefore you is a dangerous spike trap. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
                 Thread.sleep(500);
-                System.out.println("You carefully sidle past it; it would've been embarrassing if you had fallen into it.\n");
-                Thread.sleep(1000);
             }
-            enteredSpikeTrap = true;
-            firstVisitSpikeTrap = false;
-            //not first visit
-        } else if (!firstVisitSpikeTrap) {
-            StoryLore.Separator(5);
-            System.out.println("\nBefore you is a dangerous spike trap. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
-            Thread.sleep(500);
         }
 
     }
@@ -867,23 +883,41 @@ public class Event {
             if (quickSandAnswer == 1) {
                 StoryLore.Separator(5);
                 displayPlayerInfo(player);
-                System.out.println("You manage to push through and escape, but the quicksand crushes your body as you do so, and you take 20 damage.\n");
+                System.out.println("The quicksand crushes your body as you do so, and you take 20 damage.\n");
                 Thread.sleep(1000);
                 player.setCurrentHealth(player.getCurrentHealth() - 20); //-20 from play current health
-                //safe
-            } else if (quickSandAnswer == 2) {
+                //when player is dead
+                if (player.getCurrentHealth() < 1) {
+                    //ability to use health potion
+                    Main.useHealthPotion(player);
+                    if (player.getCurrentHealth() > 0) {
+                        StoryLore.Separator(5);
+                        System.out.println("You manage to push through and escape\n");
+                        Thread.sleep(2000);
+                    }
+                    //else die if no health potion
+                    if (player.getCurrentHealth() <= 0) {
+                        StoryLore.Separator(5);
+                        System.out.println("\nThe pressure of the quicksand was far too much for your frail body!");
+                        Thread.sleep(1000);
+                        System.out.println("\nYou have died! Game over.");
+                        System.exit(0);
+                    }
+                    //safe
+                } else if (quickSandAnswer == 2) {
+                    StoryLore.Separator(5);
+                    displayPlayerInfo(player);
+                    System.out.println("You carefully crawl across the surface of the quicksand and escape, avoiding any bodily harm.\n");
+                    Thread.sleep(1000);
+                }
+                enteredQuickSand = true;
+                firstVisitQuickSand = false;
+                //not first visit
+            } else if (!firstVisitQuickSand) {
                 StoryLore.Separator(5);
-                displayPlayerInfo(player);
-                System.out.println("You carefully crawl across the surface of the quicksand and escape, avoiding any bodily harm.\n");
+                System.out.println("\nBefore you is a dangerous pit of quicksand. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
                 Thread.sleep(1000);
             }
-            enteredQuickSand = true;
-            firstVisitQuickSand = false;
-            //not first visit
-        } else if (!firstVisitQuickSand) {
-            StoryLore.Separator(5);
-            System.out.println("\nBefore you is a dangerous pit of quicksand. You've dealt with this hazard before, so you carefully maneuver around it, avoiding harm.\n");
-            Thread.sleep(1000);
         }
     }
 
